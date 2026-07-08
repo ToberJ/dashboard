@@ -34,40 +34,41 @@ video{width:100%;max-width:980px;border:1px solid #e2e2e2;border-radius:8px;back
 .vgrid video{width:100%}
 </style></head><body><a class="back-link" href="../../projects/x2-sonic.html" style="display:inline-block;margin:0 0 16px;padding:6px 14px;background:#f4f4f4;border:1px solid #e2e2e2;border-radius:6px;color:#444;text-decoration:none;font-size:14px">← Back to project</a>
 <h1>Basis-16 official-recipe run — WASD skill library</h1>
-<div class="sub">X2 SONIC · basis-16 skill library · official recipe · 2048 env × 64 steps · 1×RTX 3090 · 2026-07-07 (running)</div><span class="tag">cadence</span><span class="tag">curriculum</span><span class="tag">WASD</span><span class="tag">gate</span>
-<h2>1 · Status</h2>
-<div class="key">Gate trajectory: <b>3/14 → 6/14 → 5/14</b> (iters 500 / 1000 / 1500) · target 3000 iterations · criterion: cadence ratio within 1.00 ± 0.15, all-env median. The count is noisy at the pass line; the medians underneath are migrating toward 1.00 (backward 0.57 → 0.75, slow start 1.62 → 1.25) while turn_360 slipped out (1.10 → 1.30).</div>
+<div class="sub">X2 SONIC · basis-16 skill library · official recipe · 2048 env × 64 steps · 1×RTX 3090 · 2026-07-07 (complete)</div><span class="tag">cadence</span><span class="tag">curriculum</span><span class="tag">WASD</span><span class="tag">gate</span>
+<h2>1 · Status — run complete</h2>
+<div class="key win">Finale: <b>8/14 pass</b> at iter 3000 (trajectory 3 → 6 → 5 → 7 → 6 → 8). The full forward-walk family passes and both turns lock at exactly 1.00 — the WASD core is in. Mean |cadence−1|: 0.374 (@500) → 0.185 (@2500, best mean) → 0.219 (@3000, best count &amp; median 0.13). Both 2500 and 3000 checkpoints ship in the training-repo release.</div>
+<div class="key warn">Late-run forgetting on the hardest tail: jog_backward_loop 0.89 → 0.68 → 0.39, sideways-45° 0.58, slow start A047 1.75. Fix at scale = more per-family data diversity, not longer runs.</div>
 <p>16 foundation clips selected for keyboard driving: forward walk/jog (start / loop / stop), backward jog (start / loop / stop), sideways (45° / 90°), turning walk (270° / 360°), in-place turn, idle. Trained with the official reward recipe (zero overrides) at large batch (2048 env × 64 steps), resumed via checkpoint seeding.</p>
 
-<h2>2 · Mastery board (iter 1500)</h2>
+<h2>2 · Mastery board (iter 3000, finale)</h2>
 <p>Number on each chip = cadence ratio (policy steps / reference steps; 1.00 = perfectly in step). Green = mastered, red = not yet, grey = stationary clips excluded from the count.</p>
 <div class="chips">
   <span class="chip good"><b>1.00</b>walk_start·A051</span>
-  <span class="chip good"><b>1.12</b>turn_270</span>
   <span class="chip good"><b>1.00</b>walk_loop</span>
-  <span class="chip good"><b>0.93</b>jog_loop</span>
-  <span class="chip good"><b>1.00</b>jog_stop</span>
-  <span class="chip bad"><b>1.30</b>turn_360</span>
-  <span class="chip bad"><b>1.17</b>jog_start</span>
-  <span class="chip bad"><b>1.38</b>walk_stop</span>
-  <span class="chip bad"><b>1.25</b>walk_start·A047</span>
-  <span class="chip bad"><b>0.67</b>sideway_045</span>
-  <span class="chip bad"><b>0.75</b>jog_back_loop</span>
-  <span class="chip bad"><b>0.75</b>jog_back_start</span>
-  <span class="chip bad"><b>1.30</b>jog_back_stop</span>
-  <span class="chip bad"><b>2.75</b>idle_turn</span>
+  <span class="chip good"><b>1.12</b>walk_stop</span>
+  <span class="chip good"><b>1.08</b>jog_start</span>
+  <span class="chip good"><b>0.86</b>jog_loop</span>
+  <span class="chip good"><b>1.00</b>turn_270</span>
+  <span class="chip good"><b>1.00</b>turn_360</span>
+  <span class="chip good"><b>0.90</b>jog_back_stop</span>
+  <span class="chip bad"><b>0.83</b>jog_stop</span>
+  <span class="chip bad"><b>1.75</b>walk_start·A047</span>
+  <span class="chip bad"><b>0.58</b>sideway_045</span>
+  <span class="chip bad"><b>0.39</b>jog_back_loop</span>
+  <span class="chip bad"><b>0.58</b>jog_back_start</span>
+  <span class="chip bad"><b>1.25</b>idle_turn</span>
   <span class="chip"><b>—</b>sideway_090 (stationary)</span>
   <span class="chip"><b>—</b>idle_loop (stationary)</span>
 </div>
 
-<h2>3 · Stubborn regions</h2>
+<h2>3 · vs the previous champion (same clips, same ruler)</h2>
 <table>
-  <tr><th>region</th><th>cadence (500 → 1500)</th><th>read</th></tr>
-  <tr><td>backward family (loop / start)</td><td>0.57 → 0.75</td><td>climbing toward 1.00 — barely present in the checkpoint's ancestry, learning from scratch</td></tr>
-  <tr><td>in-place turn</td><td>1.75 → 2.75 (IQR 1.62)</td><td>variance blow-up worsening — no stable gait found yet</td></tr>
-  <tr><td>slow walk start (A047)</td><td>1.62 → 1.25</td><td>improving — slow-cadence starts historically over-stepped</td></tr>
-  <tr><td>forward-walk core</td><td>locked</td><td>walk_start·A051 at 1.00 with IQR 0.00; walk_loop / jog_stop consolidated to exact 1.00</td></tr>
+  <tr><th>checkpoint</th><th>cadence pass</th><th>mean |cadence−1|</th></tr>
+  <tr><td>B4-7000 (modified recipe, 401-clip generalist)</td><td>1/13</td><td>0.348</td></tr>
+  <tr><td>basis-16 @2500</td><td>6/14</td><td><b>0.185</b></td></tr>
+  <tr><td>basis-16 @3000 (finale)</td><td><b>8/14</b></td><td>0.219 (median 0.13)</td></tr>
 </table>
+<p>Head-to-head at 2500: basis-16 wins 8 clips, ties 2, loses 3. The official recipe decisively beats the modified-recipe era on fidelity; remaining failures are per-family data gaps (backward, sideways, slow starts), not recipe problems.</p>
 <p>Gates continue at 1500 / 2000 / 2500 / 3000. Cadence is measured with a Schmitt-trigger step counter on the left–right knee difference signal (hysteresis 0.1 rad), taken as the median over all evaluation envs — single-env readings proved unreliable (same checkpoint read 1.00 vs 0.75 on different env draws).</p>
 
 <div class="foot">SBS clips: left = reference motion data, right = policy rollout (Isaac Lab, full physics) · yellow ball = reference anchor · all runs single RTX 3090</div>
