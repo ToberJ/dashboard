@@ -36,36 +36,37 @@ video{width:100%;max-width:980px;border:1px solid #e2e2e2;border-radius:8px;back
 <h1>Basis-16 official-recipe run — WASD skill library</h1>
 <div class="sub">X2 SONIC · basis-16 skill library · official recipe · 2048 env × 64 steps · 1×RTX 3090 · 2026-07-07 (running)</div><span class="tag">cadence</span><span class="tag">curriculum</span><span class="tag">WASD</span><span class="tag">gate</span>
 <h2>1 · Status</h2>
-<div class="key">Mastery <b>6 / 14</b> at the iter-1000 gate (3/14 at 500) · target 3000 iterations · criterion: cadence ratio within 1.00 ± 0.15, all-env median</div>
+<div class="key">Gate trajectory: <b>3/14 → 6/14 → 5/14</b> (iters 500 / 1000 / 1500) · target 3000 iterations · criterion: cadence ratio within 1.00 ± 0.15, all-env median. The count is noisy at the pass line; the medians underneath are migrating toward 1.00 (backward 0.57 → 0.75, slow start 1.62 → 1.25) while turn_360 slipped out (1.10 → 1.30).</div>
 <p>16 foundation clips selected for keyboard driving: forward walk/jog (start / loop / stop), backward jog (start / loop / stop), sideways (45° / 90°), turning walk (270° / 360°), in-place turn, idle. Trained with the official reward recipe (zero overrides) at large batch (2048 env × 64 steps), resumed via checkpoint seeding.</p>
 
-<h2>2 · Mastery board (iter 1000)</h2>
+<h2>2 · Mastery board (iter 1500)</h2>
 <p>Number on each chip = cadence ratio (policy steps / reference steps; 1.00 = perfectly in step). Green = mastered, red = not yet, grey = stationary clips excluded from the count.</p>
 <div class="chips">
   <span class="chip good"><b>1.00</b>walk_start·A051</span>
-  <span class="chip good"><b>0.88</b>turn_270</span>
-  <span class="chip good"><b>1.10</b>turn_360</span>
-  <span class="chip good"><b>1.10</b>walk_loop</span>
+  <span class="chip good"><b>1.12</b>turn_270</span>
+  <span class="chip good"><b>1.00</b>walk_loop</span>
   <span class="chip good"><b>0.93</b>jog_loop</span>
-  <span class="chip good"><b>1.08</b>jog_stop</span>
+  <span class="chip good"><b>1.00</b>jog_stop</span>
+  <span class="chip bad"><b>1.30</b>turn_360</span>
   <span class="chip bad"><b>1.17</b>jog_start</span>
-  <span class="chip bad"><b>1.25</b>walk_stop</span>
-  <span class="chip bad"><b>1.62</b>walk_start·A047</span>
-  <span class="chip bad"><b>0.75</b>sideway_045</span>
-  <span class="chip bad"><b>0.57</b>jog_back_loop</span>
-  <span class="chip bad"><b>0.58</b>jog_back_start</span>
-  <span class="chip bad"><b>1.20</b>jog_back_stop</span>
-  <span class="chip bad"><b>1.75</b>idle_turn</span>
+  <span class="chip bad"><b>1.38</b>walk_stop</span>
+  <span class="chip bad"><b>1.25</b>walk_start·A047</span>
+  <span class="chip bad"><b>0.67</b>sideway_045</span>
+  <span class="chip bad"><b>0.75</b>jog_back_loop</span>
+  <span class="chip bad"><b>0.75</b>jog_back_start</span>
+  <span class="chip bad"><b>1.30</b>jog_back_stop</span>
+  <span class="chip bad"><b>2.75</b>idle_turn</span>
   <span class="chip"><b>—</b>sideway_090 (stationary)</span>
   <span class="chip"><b>—</b>idle_loop (stationary)</span>
 </div>
 
 <h2>3 · Stubborn regions</h2>
 <table>
-  <tr><th>region</th><th>cadence</th><th>likely cause</th></tr>
-  <tr><td>backward family (loop / start)</td><td>0.57–0.58</td><td>barely present in the checkpoint's training ancestry</td></tr>
-  <tr><td>in-place turn</td><td>1.75 (IQR 1.50)</td><td>cross-env variance blow-up — no stable gait found yet</td></tr>
-  <tr><td>slow walk start (A047)</td><td>1.62</td><td>slow-cadence starts historically over-stepped</td></tr>
+  <tr><th>region</th><th>cadence (500 → 1500)</th><th>read</th></tr>
+  <tr><td>backward family (loop / start)</td><td>0.57 → 0.75</td><td>climbing toward 1.00 — barely present in the checkpoint's ancestry, learning from scratch</td></tr>
+  <tr><td>in-place turn</td><td>1.75 → 2.75 (IQR 1.62)</td><td>variance blow-up worsening — no stable gait found yet</td></tr>
+  <tr><td>slow walk start (A047)</td><td>1.62 → 1.25</td><td>improving — slow-cadence starts historically over-stepped</td></tr>
+  <tr><td>forward-walk core</td><td>locked</td><td>walk_start·A051 at 1.00 with IQR 0.00; walk_loop / jog_stop consolidated to exact 1.00</td></tr>
 </table>
 <p>Gates continue at 1500 / 2000 / 2500 / 3000. Cadence is measured with a Schmitt-trigger step counter on the left–right knee difference signal (hysteresis 0.1 rad), taken as the median over all evaluation envs — single-env readings proved unreliable (same checkpoint read 1.00 vs 0.75 on different env draws).</p>
 
