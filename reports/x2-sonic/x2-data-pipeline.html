@@ -29,6 +29,9 @@ video{width:100%;max-width:980px;border:1px solid #e2e2e2;border-radius:8px;back
 .bound .bk{font-size:13.5px;color:var(--mut)}
 .ruler{border:1px solid var(--bd);border-radius:8px;padding:16px 16px 6px;margin:16px 0;max-width:980px}
 .ruler svg{width:100%;height:auto;display:block}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin:16px 0}
+.vgrid figure{margin:0}
+.vgrid video{width:100%}
 </style></head><body><a class="back-link" href="../../projects/x2-sonic.html" style="display:inline-block;margin:0 0 16px;padding:6px 14px;background:#f4f4f4;border:1px solid #e2e2e2;border-radius:6px;color:#444;text-decoration:none;font-size:14px">← Back to project</a>
 <h1>X2 data pipeline: x2_native_v3 at official-grade smoothness</h1>
 <div class="sub">X2 SONIC · GMR retarget + wrist fix + 6 Hz smoothing · 2026-07-04</div><span class="tag">data</span><span class="tag">retargeting</span><span class="tag">jerk</span>
@@ -47,6 +50,23 @@ video{width:100%;max-width:980px;border:1px solid #e2e2e2;border-radius:8px;back
   <tr><td>foot skate / contact drift</td><td>contact-fix foot-lock (v3), root-only floor correction</td></tr>
 </table>
 <p>Passed visual review before adoption. Note: even the official dataset carries ~5 cm/s residual foot skate — that is the reference bar, not zero.</p>
+
+<h2>3 · Sample gallery — G1 official ↔ X2 canonical</h2>
+<p>Left = NVIDIA official G1 data, right = the same motion in the X2 dataset. Note the embodiment differences playing out: shorter legs (smaller stride), narrower shoulder range.</p>
+<div class="vgrid">
+  <figure><video controls loop muted playsinline preload="metadata" src="../../assets/videos/data_turn_v31.mp4"></video><figcaption>turning walk · v3.1 canonical</figcaption></figure>
+  <figure><video controls loop muted playsinline preload="metadata" src="../../assets/videos/data_two_v31.mp4"></video><figcaption>dynamic upper-body sequence · v3.1 canonical</figcaption></figure>
+  <figure><video controls loop muted playsinline preload="metadata" src="../../assets/videos/data_jump.mp4"></video><figcaption>jump · high-dynamic sample (07-03 build, pre-final smoothing)</figcaption></figure>
+</div>
+
+<h2>4 · Sample gallery — retarget stage (human source → X2)</h2>
+<p>The GMR stage of the pipeline: human mocap skeleton (left) driving the X2 body (right). These renders are from the retarget stage itself, before the final smoothing pass.</p>
+<div class="vgrid">
+  <figure><video controls loop muted playsinline preload="metadata" src="../../assets/videos/data_ret_jog.mp4"></video><figcaption>forward jog</figcaption></figure>
+  <figure><video controls loop muted playsinline preload="metadata" src="../../assets/videos/data_ret_walk360.mp4"></video><figcaption>walk loop 360°</figcaption></figure>
+  <figure><video controls loop muted playsinline preload="metadata" src="../../assets/videos/data_ret_sideway045.mp4"></video><figcaption>sideways walk 45°</figcaption></figure>
+  <figure><video controls loop muted playsinline preload="metadata" src="../../assets/videos/data_ret_jogback.mp4"></video><figcaption>backward jog</figcaption></figure>
+</div>
 
 <div class="foot">SBS clips: left = reference motion data, right = policy rollout (Isaac Lab, full physics) · yellow ball = reference anchor · all runs single RTX 3090</div>
 </body></html>
