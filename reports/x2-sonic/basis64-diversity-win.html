@@ -1,0 +1,70 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Basis-64: data diversity confirmed — 9/14, new champion</title>
+<style>
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e2e2e2;--ac:#d4571c;--gd:#0aa05a}
+*{box-sizing:border-box}
+body{font:16px/1.7 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);max-width:1040px;margin:0 auto;padding:48px 28px 120px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.5px}
+h2{font-size:22px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--ac)}
+.sub{color:var(--mut);font-size:15px;margin-bottom:8px}
+.tag{display:inline-block;background:#f4f4f4;border:1px solid var(--bd);border-radius:5px;padding:1px 9px;font-size:13px;color:#444;margin:2px 4px 2px 0}
+figure{margin:18px 0 26px;text-align:center}
+figcaption{color:var(--mut);font-size:13.5px;margin-top:8px;text-align:left}
+.key{background:#fff8f3;border-left:4px solid var(--ac);padding:12px 16px;margin:16px 0;border-radius:0 6px 6px 0}
+.win{background:#f1faf4;border-left:4px solid var(--gd)}.warn{background:#fbf7ec;border-left:4px solid #d9a300}
+ul{margin:8px 0}li{margin:5px 0}code{background:#f4f4f4;padding:1px 5px;border-radius:4px;font-size:13.5px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px}
+th,td{border:1px solid var(--bd);padding:7px 11px;text-align:left;vertical-align:top}th{background:#fafafa}
+.foot{margin-top:54px;color:var(--mut);font-size:13px;border-top:1px solid var(--bd);padding-top:14px}
+a{color:#c24f17}
+video{width:100%;max-width:980px;border:1px solid #e2e2e2;border-radius:8px;background:#000}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0;text-align:left}
+.chip{font-size:13px;padding:3px 10px;border-radius:5px;background:#f4f4f4;border:1px solid var(--bd);color:#777}
+.chip b{font-family:ui-monospace,Consolas,monospace;font-weight:600;margin-right:6px}
+.chip.good{background:#f1faf4;border-color:#bfe3cc;color:#0a7a46}
+.chip.bad{background:#fdeee9;border-color:#f0c8ba;color:#c0392b}
+.bounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.bound{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:14px 16px}
+.bound .bv{font-size:24px;font-weight:650}
+.bound .bk{font-size:13.5px;color:var(--mut)}
+.ruler{border:1px solid var(--bd);border-radius:8px;padding:16px 16px 6px;margin:16px 0;max-width:980px}
+.ruler svg{width:100%;height:auto;display:block}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin:16px 0}
+.vgrid figure{margin:0}
+.vgrid video{width:100%}
+</style></head><body><a class="back-link" href="../../projects/x2-sonic.html" style="display:inline-block;margin:0 0 16px;padding:6px 14px;background:#f4f4f4;border:1px solid #e2e2e2;border-radius:6px;color:#444;text-decoration:none;font-size:14px">← Back to project</a>
+<h1>Basis-64: data diversity confirmed — 9/14, new champion</h1>
+<div class="sub">X2 SONIC · basis-64 · official recipe · 1536 env × 64 steps · 1×RTX 3090 · 2026-07-08</div><span class="tag">data diversity</span><span class="tag">cadence</span><span class="tag">champion</span><span class="tag">WASD</span>
+<h2>1 · Result</h2>
+<div class="key win">Core-16 exam: <b>9/14 pass (all-time high)</b>, mean |cadence−1| <b>0.151 (all-time best)</b>. Headline: <b>jog_backward_start passes at exactly 1.00</b> — this clip never passed in any prior run; backward stop also exact 1.00. Data diversity is confirmed as the binding constraint.</div>
+<p>Overnight continuation from the basis-16 finale checkpoint (iter 3000 → 5000), same official recipe, data widened 16 → 64 clips from the same corpus: +10 sideways, +17 start/stop variants, +8 turns, +6 loops, and the backward family oversampled ×2. Examined on the unchanged core-16 ruler, so every number is directly comparable to the basis-16 campaign.</p>
+
+<table>
+  <tr><th>gate</th><th>pass /14</th><th>mean |cadence−1|</th></tr>
+  <tr><td>start = basis-16 @3000</td><td>8</td><td>0.219</td></tr>
+  <tr><td>basis-64 @3500</td><td>7</td><td>0.225</td></tr>
+  <tr><td>basis-64 @4000</td><td>6</td><td>0.194</td></tr>
+  <tr><td>basis-64 @4500</td><td>8</td><td>0.151</td></tr>
+  <tr><td><b>basis-64 @5000</b></td><td><b>9</b></td><td><b>0.151</b></td></tr>
+</table>
+
+<h2>2 · Clips</h2>
+<figure>
+  <video controls loop muted playsinline preload="metadata" src="../../assets/videos/b64_backstart.mp4"></video>
+  <figcaption>jog_backward_start · cadence 1.00 (IQR 0.08) — first pass ever for this clip, in any run. Left = reference, right = policy.</figcaption>
+</figure>
+<figure>
+  <video controls loop muted playsinline preload="metadata" src="../../assets/videos/b64_turn.mp4"></video>
+  <figcaption>turn_walk_270 · cadence 1.00 — same clip as the basis-16 finale QA set, for direct visual comparison.</figcaption>
+</figure>
+
+<h2>3 · What resisted, and notes</h2>
+<ul>
+  <li><b>sideways-45° (0.54)</b> did NOT respond to +10 sideways variants — suspect clip quality or embodiment, needs a dedicated look rather than more data.</li>
+  <li>jog_backward_loop oscillates (0.36 → 0.79 → 0.68); idle_turn 1.50; two start clips sit at the 1.25 line.</li>
+  <li>OOM note: 64 motions at 2048 env blew the 24 GB card at init; 1536 env × 64 steps runs at ~13 GB. Batch stayed ~16× the June-era runs.</li>
+  <li>Extrapolation: this is the single-GPU version of the scale-up thesis — official recipe + wider data keeps paying. The full-corpus multi-GPU run is the straight continuation.</li>
+</ul>
+
+<div class="foot">SBS clips: left = reference motion data, right = policy rollout (Isaac Lab, full physics) · yellow ball = reference anchor · all runs single RTX 3090</div>
+</body></html>
