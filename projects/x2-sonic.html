@@ -1,5 +1,5 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>X2 SONIC — 把 SONIC 完整搬上 AgiBot X2</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>X2 SONIC — Whole-Body Control on AgiBot X2</title>
 <style>
 :root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
 *{box-sizing:border-box}
@@ -18,29 +18,29 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 .contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
 .contrib code{background:#f0f0f0;padding:1px 5px;border-radius:4px}
 </style></head><body>
-<div class="crumb"><a href="../index.html">← all projects</a></div><h1>X2 SONIC — 把 SONIC 完整搬上 AgiBot X2</h1><div class="sub">7 item(s)</div>
+<div class="crumb"><a href="../index.html">← all projects</a></div><h1>X2 SONIC — Whole-Body Control on AgiBot X2</h1><div class="sub">7 item(s)</div>
 <div class="grid"><a class="card" href="../reports/x2-sonic/basis16-official-run.html" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">基底 16 官方炉 — WASD 技能库集训(训练中)</div><div class="m">为 WASD 键盘驱动备的 16 条基底动作,官方原味配方 + 大批次。1000 迭代关卡 6/14 掌握;顽固区:后退族、原地转、慢起步。</div>
-<div class="d">2026-07-07 · live 掌握清单</div></a>
+<div class="t">Basis-16 official-recipe run — WASD skill library</div><div class="m">16 foundation clips for keyboard driving (walk/jog start-loop-stop, backward, sideways, turns, idle). Official rewards + large batch. Mastery gate 6/14 at iter 1000; stubborn: backward family, in-place turn, slow start. Training.</div>
+<div class="d">2026-07-07 · live mastery board</div></a>
 <a class="card" href="../reports/x2-sonic/official-recipe-unlock.html" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">官方原味配方解锁:250 迭代锁定步频</div><div class="m">精读论文后回到零奖励覆盖 + 大批次:N=2 只用 250 迭代把 turn_walk 步频锁到 1.00 —— 魔改配方 6000 迭代未锁。含魔改 vs 论文值对照表。</div>
-<div class="d">2026-07-07 · video + 对照表</div></a>
+<div class="t">Official-recipe unlock: cadence locks in 250 iterations</div><div class="m">Dropping all reward overrides (back to paper values) + 8× batch: N=2 locks turn_walk cadence to 1.00 in 250 iters — the modified recipe never locked in 6000. With modified-vs-paper reward table.</div>
+<div class="d">2026-07-07 · video + table</div></a>
 <a class="card" href="../reports/x2-sonic/overfit-ceiling.html" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">Overfit 天花板:gap 0.071 m,还原度 ~75%</div><div class="m">单 clip overfit 给出 X2 本体上限:人球合一、无碎步,肉眼验收 ~70–80% 还原。证明配方可行,差距在训练方式而非本体。</div>
+<div class="t">Overfit ceiling: 0.071 m gap, ~75% fidelity</div><div class="m">Single-clip overfit sets the ceiling on X2: anchor gap 0.071 m, no micro-stepping, eyeball-verified ~70–80% fidelity. Proves the stack works — the fleet&#x27;s shortfall is training recipe, not the robot.</div>
 <div class="d">2026-07-07 · SBS video</div></a>
 <a class="card" href="../reports/x2-sonic/b4-champion.html" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">B4-7000 舰队冠军:黄球差距 0.87 → 0.307</div><div class="m">走路战役收官:401 clip 训练,全 9 考题 gap 0.307 m、零摔。还原度审计揭示舰队步频仅 5% 达标 —— 引出配方发现。</div>
+<div class="t">B4-7000 fleet champion: anchor gap 0.87 → 0.307 m</div><div class="m">Walking-campaign finale: 401-clip training, gap 0.307 m across all 9 probes, zero falls. Follow-up fidelity audit: only 5% of fleet clips pass cadence — the lead that exposed the recipe problem.</div>
 <div class="d">2026-07-06 · SBS video</div></a>
 <a class="card" href="../reports/x2-sonic/body-boundaries.html" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">X2 三条身体边界:高动态还原上限 ~75–85%</div><div class="m">对 URDF 与电机规格勘界:肩内收仅 3° / 腿短 20% / 腿部电机限速 11.9 rad/s(参考峰值 14.1)。本体硬约束,非训练问题。</div>
-<div class="d">2026-07-05 · 结论卡</div></a>
+<div class="t">Three X2 embodiment boundaries: high-dynamic ceiling ~75–85%</div><div class="m">From URDF + motor specs: 3° shoulder adduction, 20% shorter legs, 11.9 rad/s leg-motor speed cap vs 14.1 reference peak. Hard embodiment constraints — not training issues.</div>
+<div class="d">2026-07-05 · summary card</div></a>
 <a class="card" href="../reports/x2-sonic/x2-data-pipeline.html" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">X2 数据管线定版:x2_native_v3,官方级平滑度</div><div class="m">canonical 管线 = GMR 重定向 + 手腕修复 + 6 Hz 平滑 → 2,497 clips,jerk 7.0 ≈ NVIDIA 官方 6.9。此后所有 X2 训练数据统一走这条管线。</div>
+<div class="t">X2 data pipeline: x2_native_v3 at official-grade smoothness</div><div class="m">Canonical pipeline = GMR retarget + wrist fix + 6 Hz smoothing → 2,497 clips, jerk 7.0 ≈ NVIDIA official 6.9. All X2 training data now uses this pipeline.</div>
 <div class="d">2026-07-04 · SBS video</div></a>
 <a class="card" href="../reports/x2-sonic/wasd-roadmap.html" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">Roadmap:WASD + QE 键盘驱动</div><div class="m">按键 → clip 参考流生成器(起步/循环/刹车拼接 + yaw 重定基 + 切换混合)。终形态 = 键盘直接开着 X2 在场景里走。</div>
+<div class="t">Roadmap: WASD + QE keyboard driving</div><div class="m">Key presses → reference-motion stream (start/loop/stop stitching + yaw rebasing + transition blending); SONIC tracks the stream closed-loop. End state: drive X2 around with the keyboard.</div>
 <div class="d">roadmap</div></a></div><div class="contrib"><b>Add a report to this project</b>:<br>
-1. 写报告 body 片段到 <code>reports/x2-sonic/&lt;slug&gt;.html</code><br>
-2. 在 <code>build.py</code> 的 REPORTS 表加一行(slug / title / desc / date)<br>
+1. write a body fragment at <code>reports/x2-sonic/&lt;slug&gt;.html</code><br>
+2. add a row to <code>REPORTS</code> in <code>build.py</code> (slug / title / desc / date / sub / tags)<br>
 3. <code>python3 build.py</code><br>
 4. <code>cd site && git add -A && git commit -m "publish" && git push</code> → GitHub Pages redeploys.</div></body></html>

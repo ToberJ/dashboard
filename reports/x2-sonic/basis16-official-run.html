@@ -1,55 +1,43 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>基底 16 官方炉 — WASD 技能库集训(训练中)</title>
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Basis-16 official-recipe run — WASD skill library</title>
 <style>
-:root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e2e2e2;--ac:#d4571c;--gd:#0aa05a}
 *{box-sizing:border-box}
-body{font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;max-width:1000px;margin:0 auto;padding:40px 24px 90px}
-a{text-decoration:none;color:inherit}
-h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:28px;font-size:14px}
-.crumb{font-size:13px;color:#999;margin-bottom:18px} .crumb a{color:var(--bl)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.card{display:block;background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px 18px;transition:.15s}
-a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transform:translateY(-1px)}
-.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:5px;margin-bottom:8px}
-.badge.proj{background:#eef3ff;color:#2c6fd6}.badge.rep{background:#fdeee4;color:#c24f17}.badge.app{background:#e8f1ff;color:#2c6fd6}
-.t{font-size:16px;font-weight:600;margin-bottom:5px} .m{color:#555;font-size:13.5px;min-height:18px}
-.d{color:#999;font-size:12px;margin-top:8px}
-.open{display:inline-block;margin-top:8px;font-size:13px;color:var(--bl)} .empty{color:#999}
-.contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
-.contrib code{background:#f0f0f0;padding:1px 5px;border-radius:4px}
-
-.rmeta{color:#999;font-size:13px;margin-bottom:26px}
-h2{font-size:18px;margin:30px 0 10px}
-p{max-width:62em} p.lead{font-size:16.5px}
-.note{color:#777;font-size:14px}
-figure{margin:18px 0}
-video{width:100%;max-width:860px;display:block;background:#000;border:1px solid var(--bd);border-radius:8px}
-figcaption{font-size:12.5px;color:#888;margin-top:7px;max-width:60em}
-.tblwrap{overflow-x:auto;margin:10px 0}
-table{border-collapse:collapse;font-size:14px;min-width:520px;background:#fff;border:1px solid var(--bd);border-radius:8px}
-th,td{text-align:left;padding:8px 16px;border-bottom:1px solid #eee}
-tr:last-child td{border-bottom:none}
-th{font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;color:#999;background:#fcfcfc}
-td.num{font-family:ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
-td.ours{color:#c24f17} td.official{color:#2e7d32}
-.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
-.chip{font-size:12.5px;padding:3px 10px;border-radius:6px;background:#f0f0f0;color:#777}
+body{font:16px/1.7 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);max-width:1040px;margin:0 auto;padding:48px 28px 120px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.5px}
+h2{font-size:22px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--ac)}
+.sub{color:var(--mut);font-size:15px;margin-bottom:8px}
+.tag{display:inline-block;background:#f4f4f4;border:1px solid var(--bd);border-radius:5px;padding:1px 9px;font-size:13px;color:#444;margin:2px 4px 2px 0}
+figure{margin:18px 0 26px;text-align:center}
+figcaption{color:var(--mut);font-size:13.5px;margin-top:8px;text-align:left}
+.key{background:#fff8f3;border-left:4px solid var(--ac);padding:12px 16px;margin:16px 0;border-radius:0 6px 6px 0}
+.win{background:#f1faf4;border-left:4px solid var(--gd)}.warn{background:#fbf7ec;border-left:4px solid #d9a300}
+ul{margin:8px 0}li{margin:5px 0}code{background:#f4f4f4;padding:1px 5px;border-radius:4px;font-size:13.5px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px}
+th,td{border:1px solid var(--bd);padding:7px 11px;text-align:left;vertical-align:top}th{background:#fafafa}
+.foot{margin-top:54px;color:var(--mut);font-size:13px;border-top:1px solid var(--bd);padding-top:14px}
+a{color:#c24f17}
+video{width:100%;max-width:980px;border:1px solid #e2e2e2;border-radius:8px;background:#000}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0;text-align:left}
+.chip{font-size:13px;padding:3px 10px;border-radius:5px;background:#f4f4f4;border:1px solid var(--bd);color:#777}
 .chip b{font-family:ui-monospace,Consolas,monospace;font-weight:600;margin-right:6px}
-.chip.good{background:#e7f2eb;color:#2e7d32}
-.chip.bad{background:#fbeae7;color:#c0392b}
+.chip.good{background:#f1faf4;border-color:#bfe3cc;color:#0a7a46}
+.chip.bad{background:#fdeee9;border-color:#f0c8ba;color:#c0392b}
 .bounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
-.bound{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.bound{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:14px 16px}
 .bound .bv{font-size:24px;font-weight:650}
-.bound .bk{font-size:13px;color:#777}
-.ruler{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 16px 6px;margin:16px 0;max-width:860px}
+.bound .bk{font-size:13.5px;color:var(--mut)}
+.ruler{border:1px solid var(--bd);border-radius:8px;padding:16px 16px 6px;margin:16px 0;max-width:980px}
 .ruler svg{width:100%;height:auto;display:block}
-</style></head><body>
-<div class="crumb"><a href="../../projects/x2-sonic.html">← X2 SONIC — 把 SONIC 完整搬上 AgiBot X2</a></div>
-<h1>基底 16 官方炉 — WASD 技能库集训(训练中)</h1><div class="rmeta">2026-07-07 · live 掌握清单 · X2 SONIC</div>
-<p class="lead">为键盘驱动(WASD + QE)备的 16 条基底动作:走/跑的起步—循环—刹车、后退、侧移、转弯、原地转、站立。官方原味配方 + 大批次(2048 env × 64 步),目标 3000 迭代,训练中。</p>
+</style></head><body><a class="back-link" href="../../projects/x2-sonic.html" style="display:inline-block;margin:0 0 16px;padding:6px 14px;background:#f4f4f4;border:1px solid #e2e2e2;border-radius:6px;color:#444;text-decoration:none;font-size:14px">← Back to project</a>
+<h1>Basis-16 official-recipe run — WASD skill library</h1>
+<div class="sub">X2 SONIC · basis-16 skill library · official recipe · 2048 env × 64 steps · 1×RTX 3090 · 2026-07-07 (running)</div><span class="tag">cadence</span><span class="tag">curriculum</span><span class="tag">WASD</span><span class="tag">gate</span>
+<h2>1 · Status</h2>
+<div class="key">Mastery <b>6 / 14</b> at the iter-1000 gate (3/14 at 500) · target 3000 iterations · criterion: cadence ratio within 1.00 ± 0.15, all-env median</div>
+<p>16 foundation clips selected for keyboard driving: forward walk/jog (start / loop / stop), backward jog (start / loop / stop), sideways (45° / 90°), turning walk (270° / 360°), in-place turn, idle. Trained with the official reward recipe (zero overrides) at large batch (2048 env × 64 steps), resumed via checkpoint seeding.</p>
 
-<h2>1000 迭代关卡:6 / 14 掌握</h2>
-<p class="note">口径:步频比中位数落在 1.00 ± 0.15(左右膝差分 Schmitt 计步,全 env 中位数)。芯片上的数字 = 步频比(1.00 = 与参考完全同频)。</p>
+<h2>2 · Mastery board (iter 1000)</h2>
+<p>Number on each chip = cadence ratio (policy steps / reference steps; 1.00 = perfectly in step). Green = mastered, red = not yet, grey = stationary clips excluded from the count.</p>
 <div class="chips">
   <span class="chip good"><b>1.00</b>walk_start·A051</span>
   <span class="chip good"><b>0.88</b>turn_270</span>
@@ -65,11 +53,18 @@ td.ours{color:#c24f17} td.official{color:#2e7d32}
   <span class="chip bad"><b>0.58</b>jog_back_start</span>
   <span class="chip bad"><b>1.20</b>jog_back_stop</span>
   <span class="chip bad"><b>1.75</b>idle_turn</span>
-  <span class="chip"><b>—</b>sideway_090(静止类)</span>
-  <span class="chip"><b>—</b>idle_loop(静止类)</span>
+  <span class="chip"><b>—</b>sideway_090 (stationary)</span>
+  <span class="chip"><b>—</b>idle_loop (stationary)</span>
 </div>
 
-<h2>顽固区</h2>
-<p>后退族(步频比 0.57–0.58,血统里几乎没练过)、原地转(方差爆炸)、慢起步(1.62)。500 → 1000 迭代掌握数 3 → 6,继续观察 1500 / 2000 / 2500 / 3000 关卡。</p>
+<h2>3 · Stubborn regions</h2>
+<table>
+  <tr><th>region</th><th>cadence</th><th>likely cause</th></tr>
+  <tr><td>backward family (loop / start)</td><td>0.57–0.58</td><td>barely present in the checkpoint's training ancestry</td></tr>
+  <tr><td>in-place turn</td><td>1.75 (IQR 1.50)</td><td>cross-env variance blow-up — no stable gait found yet</td></tr>
+  <tr><td>slow walk start (A047)</td><td>1.62</td><td>slow-cadence starts historically over-stepped</td></tr>
+</table>
+<p>Gates continue at 1500 / 2000 / 2500 / 3000. Cadence is measured with a Schmitt-trigger step counter on the left–right knee difference signal (hysteresis 0.1 rad), taken as the median over all evaluation envs — single-env readings proved unreliable (same checkpoint read 1.00 vs 0.75 on different env draws).</p>
 
+<div class="foot">SBS clips: left = reference motion data, right = policy rollout (Isaac Lab, full physics) · yellow ball = reference anchor · all runs single RTX 3090</div>
 </body></html>
