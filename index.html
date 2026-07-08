@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visualization Hub · Tober</title>
+</head>
+<body>
+<style>
+  :root{
+    --bg:#F5F4EF; --panel:#FFFFFF; --line:#E3E1D6; --ink:#1E2530; --mut:#68727F;
+    --ball:#F2C41D; --acctext:#8A6A00;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0E141C; --panel:#161E29; --line:#26303E; --ink:#E9EDF3; --mut:#93A0B1;
+           --ball:#F2C41D; --acctext:#F2C41D; }
+  }
+  :root[data-theme="light"]{ --bg:#F5F4EF; --panel:#FFFFFF; --line:#E3E1D6; --ink:#1E2530;
+    --mut:#68727F; --ball:#F2C41D; --acctext:#8A6A00; }
+  :root[data-theme="dark"]{ --bg:#0E141C; --panel:#161E29; --line:#26303E; --ink:#E9EDF3;
+    --mut:#93A0B1; --ball:#F2C41D; --acctext:#F2C41D; }
+  html{background:var(--bg)}
+  body{background:var(--bg); color:var(--ink); margin:0; font-size:15px; line-height:1.7;
+    font-family:system-ui,-apple-system,"PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif}
+  .disp{font-family:"Bahnschrift","Avenir Next Condensed","Roboto Condensed","Arial Narrow",system-ui,sans-serif}
+  .mono{font-family:ui-monospace,"SF Mono",Consolas,Menlo,monospace; font-variant-numeric:tabular-nums}
+  .wrap{max-width:960px; margin:0 auto; padding:52px 22px 80px}
+  .eyebrow{display:flex; align-items:center; gap:10px; color:var(--mut);
+    font-size:12px; letter-spacing:.18em; text-transform:uppercase}
+  .eyebrow .dot{width:11px;height:11px;border-radius:50%;background:var(--ball);flex:none}
+  h1{font-size:clamp(30px,5vw,46px); line-height:1.12; margin:14px 0 10px; font-weight:650; text-wrap:balance}
+  .sub{color:var(--mut); max-width:44em; margin:0}
+  .statline{display:flex; flex-wrap:wrap; gap:8px 26px; margin-top:20px; color:var(--mut); font-size:13px}
+  .statline b{color:var(--ink); font-weight:600}
+  h2{font-size:13px; letter-spacing:.2em; text-transform:uppercase; color:var(--mut);
+     margin:52px 0 16px; font-weight:600; display:flex; align-items:center; gap:12px}
+  h2::after{content:""; flex:1; height:1px; background:var(--line)}
+  .cards{display:flex; flex-direction:column; gap:14px}
+  a.card{display:block; text-decoration:none; color:inherit; background:var(--panel);
+    border:1px solid var(--line); padding:24px 26px; transition:border-color .15s}
+  a.card:hover{border-color:var(--ball)}
+  a.card:focus-visible{outline:2px solid var(--ball); outline-offset:2px}
+  .card .meta{display:flex; flex-wrap:wrap; align-items:center; gap:10px; font-size:12px;
+    color:var(--mut); letter-spacing:.14em; text-transform:uppercase}
+  .pill{display:inline-block; padding:1px 9px; border-radius:2px; font-size:11px; letter-spacing:.1em;
+        border:1px solid var(--line); color:var(--mut); text-transform:uppercase}
+  .pill.live{background:var(--ball); color:#1E2530; border-color:transparent; font-weight:600}
+  .card h3{font-size:22px; margin:10px 0 6px; font-weight:650; text-wrap:balance}
+  .card p{margin:4px 0 12px; color:var(--mut); max-width:56em}
+  .card .foot{display:flex; flex-wrap:wrap; align-items:center; gap:8px 24px; font-size:13px; color:var(--mut)}
+  .card .foot b{color:var(--ink); font-weight:600}
+  .card .open{margin-left:auto; color:var(--acctext); font-weight:600}
+  .card.soon{background:transparent; cursor:default}
+  .card.soon:hover{border-color:var(--line)}
+  .card.soon h3{color:var(--mut)}
+  footer{margin-top:60px; padding-top:18px; border-top:1px solid var(--line);
+         font-size:12.5px; color:var(--mut)}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow disp"><span class="dot"></span>TOBER · AI RESEARCH</div>
+    <h1>Visualization Hub</h1>
+    <p class="sub">机器人研究项目的可视化主页 —— 每个项目一页:数据、训练战报、关键发现与 policy 实跑样片。</p>
+    <div class="statline mono">
+      <span>项目 <b>2</b></span><span>报告 <b>7</b></span><span>更新 <b>2026-07-07</b></span>
+    </div>
+  </header>
+
+  <h2 class="disp">Projects</h2>
+  <div class="cards">
+
+    <a class="card" href="projects/x2-sonic/">
+      <div class="meta disp"><span>Project</span><span class="pill live">进行中</span></div>
+      <h3>X2 SONIC —— 把 SONIC 完整搬上 AgiBot X2</h3>
+      <p>G1 whole-body tracker 跨本体迁移:canonical 数据管线、走路战役(黄球差距 0.87 → 0.307)、官方配方发现、overfit 天花板与 WASD 键盘驱动路线。</p>
+      <div class="foot mono">
+        <span>报告 <b>7</b></span><span>样片 <b>4</b></span><span>数据 <b>2,497 clips</b></span>
+        <span class="open disp">打开 →</span>
+      </div>
+    </a>
+
+    <div class="card soon" style="border:1px solid var(--line); padding:24px 26px">
+      <div class="meta disp"><span>Project</span><span class="pill">整理中</span></div>
+      <h3>G1 Dual-Skill Catch —— SONIC 走位 × BeyondMimic 接球</h3>
+      <p>G1 反应式走位追接空中球:双技能状态机、真物理 SONIC 行走 + BM 接球,3–7 m 全方位数据采集。报告页整理中。</p>
+      <div class="foot mono"><span>里程碑 <b>v6-dual-skill-complete</b></span></div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>样片均为 SBS 分屏:左 = 参考运动数据,右 = policy 实跑(Isaac 真物理),黄球 = 参考锚点。</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
