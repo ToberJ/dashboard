@@ -1,0 +1,69 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>官方原味配方解锁:250 迭代锁定步频</title>
+<style>
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
+*{box-sizing:border-box}
+body{font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;max-width:1000px;margin:0 auto;padding:40px 24px 90px}
+a{text-decoration:none;color:inherit}
+h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:28px;font-size:14px}
+.crumb{font-size:13px;color:#999;margin-bottom:18px} .crumb a{color:var(--bl)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px 18px;transition:.15s}
+a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transform:translateY(-1px)}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:5px;margin-bottom:8px}
+.badge.proj{background:#eef3ff;color:#2c6fd6}.badge.rep{background:#fdeee4;color:#c24f17}.badge.app{background:#e8f1ff;color:#2c6fd6}
+.t{font-size:16px;font-weight:600;margin-bottom:5px} .m{color:#555;font-size:13.5px;min-height:18px}
+.d{color:#999;font-size:12px;margin-top:8px}
+.open{display:inline-block;margin-top:8px;font-size:13px;color:var(--bl)} .empty{color:#999}
+.contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
+.contrib code{background:#f0f0f0;padding:1px 5px;border-radius:4px}
+
+.rmeta{color:#999;font-size:13px;margin-bottom:26px}
+h2{font-size:18px;margin:30px 0 10px}
+p{max-width:62em} p.lead{font-size:16.5px}
+.note{color:#777;font-size:14px}
+figure{margin:18px 0}
+video{width:100%;max-width:860px;display:block;background:#000;border:1px solid var(--bd);border-radius:8px}
+figcaption{font-size:12.5px;color:#888;margin-top:7px;max-width:60em}
+.tblwrap{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;font-size:14px;min-width:520px;background:#fff;border:1px solid var(--bd);border-radius:8px}
+th,td{text-align:left;padding:8px 16px;border-bottom:1px solid #eee}
+tr:last-child td{border-bottom:none}
+th{font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;color:#999;background:#fcfcfc}
+td.num{font-family:ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
+td.ours{color:#c24f17} td.official{color:#2e7d32}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+.chip{font-size:12.5px;padding:3px 10px;border-radius:6px;background:#f0f0f0;color:#777}
+.chip b{font-family:ui-monospace,Consolas,monospace;font-weight:600;margin-right:6px}
+.chip.good{background:#e7f2eb;color:#2e7d32}
+.chip.bad{background:#fbeae7;color:#c0392b}
+.bounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.bound{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.bound .bv{font-size:24px;font-weight:650}
+.bound .bk{font-size:13px;color:#777}
+.ruler{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 16px 6px;margin:16px 0;max-width:860px}
+.ruler svg{width:100%;height:auto;display:block}
+</style></head><body>
+<div class="crumb"><a href="../../projects/x2-sonic.html">← X2 SONIC — 把 SONIC 完整搬上 AgiBot X2</a></div>
+<h1>官方原味配方解锁:250 迭代锁定步频</h1><div class="rmeta">2026-07-07 · video + 对照表 · X2 SONIC</div>
+<p class="lead">精读 SONIC 论文训练细节后发现:六月以来所有炉都带着一组奖励覆盖(当年为治「跟不上」下的对症药),把 tracking 权重推离论文值 2–4 倍。回到<b>零覆盖 + 大批次</b>后,N=2 只用 250 迭代就把 turn_walk 步频锁到 1.00 —— 魔改配方跑 6000 迭代、24 万 episodes 都没锁住。</p>
+
+<figure>
+  <video controls loop muted playsinline preload="metadata" src="../../assets/videos/official.mp4"></video>
+  <figcaption>turn_walk_270 · 官方配方第 250 迭代。左 = 参考数据,右 = policy(黄球为参考锚点)。步频比 1.00,无碎步。</figcaption>
+</figure>
+
+<h2>魔改 vs 论文值</h2>
+<div class="tblwrap"><table>
+  <thead><tr><th>奖励项</th><th>魔改值(6 月起)</th><th>论文 / 官方默认</th></tr></thead>
+  <tbody>
+    <tr><td>tracking_body_linvel</td><td class="num ours">w 4.0 / std 0.4</td><td class="num official">w 1.0 / std 1.0</td></tr>
+    <tr><td>tracking_anchor_pos</td><td class="num ours">w 2.0 / std 0.5</td><td class="num official">w 0.5 / std 0.3</td></tr>
+    <tr><td>rel_body_pos / ori</td><td class="num ours">w 2.5</td><td class="num official">w 1.0</td></tr>
+    <tr><td>vr_5point</td><td class="num ours">w 4.0 / std 0.1</td><td class="num official">论文未单列</td></tr>
+  </tbody>
+</table></div>
+
+<p class="note">官方哲学:不重压全局位置 —— 位置纠偏交给上层参考流闭环,底层 tracker 专心还原动作本身。批次对齐:官方 524,288 并行 env、每次更新 1,260 万样本(128 GPU × 3 天);我们把单卡批次从 256 env × 24 步提到 2048 env × 96 步(8 倍),配合官方奖励立刻见效。</p>
+
+</body></html>

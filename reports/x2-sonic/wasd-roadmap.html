@@ -1,0 +1,57 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Roadmap:WASD + QE 键盘驱动</title>
+<style>
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
+*{box-sizing:border-box}
+body{font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;max-width:1000px;margin:0 auto;padding:40px 24px 90px}
+a{text-decoration:none;color:inherit}
+h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:28px;font-size:14px}
+.crumb{font-size:13px;color:#999;margin-bottom:18px} .crumb a{color:var(--bl)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px 18px;transition:.15s}
+a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transform:translateY(-1px)}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:5px;margin-bottom:8px}
+.badge.proj{background:#eef3ff;color:#2c6fd6}.badge.rep{background:#fdeee4;color:#c24f17}.badge.app{background:#e8f1ff;color:#2c6fd6}
+.t{font-size:16px;font-weight:600;margin-bottom:5px} .m{color:#555;font-size:13.5px;min-height:18px}
+.d{color:#999;font-size:12px;margin-top:8px}
+.open{display:inline-block;margin-top:8px;font-size:13px;color:var(--bl)} .empty{color:#999}
+.contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
+.contrib code{background:#f0f0f0;padding:1px 5px;border-radius:4px}
+
+.rmeta{color:#999;font-size:13px;margin-bottom:26px}
+h2{font-size:18px;margin:30px 0 10px}
+p{max-width:62em} p.lead{font-size:16.5px}
+.note{color:#777;font-size:14px}
+figure{margin:18px 0}
+video{width:100%;max-width:860px;display:block;background:#000;border:1px solid var(--bd);border-radius:8px}
+figcaption{font-size:12.5px;color:#888;margin-top:7px;max-width:60em}
+.tblwrap{overflow-x:auto;margin:10px 0}
+table{border-collapse:collapse;font-size:14px;min-width:520px;background:#fff;border:1px solid var(--bd);border-radius:8px}
+th,td{text-align:left;padding:8px 16px;border-bottom:1px solid #eee}
+tr:last-child td{border-bottom:none}
+th{font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;color:#999;background:#fcfcfc}
+td.num{font-family:ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums}
+td.ours{color:#c24f17} td.official{color:#2e7d32}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+.chip{font-size:12.5px;padding:3px 10px;border-radius:6px;background:#f0f0f0;color:#777}
+.chip b{font-family:ui-monospace,Consolas,monospace;font-weight:600;margin-right:6px}
+.chip.good{background:#e7f2eb;color:#2e7d32}
+.chip.bad{background:#fbeae7;color:#c0392b}
+.bounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.bound{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.bound .bv{font-size:24px;font-weight:650}
+.bound .bk{font-size:13px;color:#777}
+.ruler{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px 16px 6px;margin:16px 0;max-width:860px}
+.ruler svg{width:100%;height:auto;display:block}
+</style></head><body>
+<div class="crumb"><a href="../../projects/x2-sonic.html">← X2 SONIC — 把 SONIC 完整搬上 AgiBot X2</a></div>
+<h1>Roadmap:WASD + QE 键盘驱动</h1><div class="rmeta">roadmap · X2 SONIC</div>
+<p class="lead">终形态:键盘直接开着 X2 在场景里走 —— W/A/S/D 平移 + Q/E 转向。</p>
+
+<h2>方案</h2>
+<p>按键 → clip 参考流生成器:从基底 16 技能库里取对应动作(起步 / 循环 / 刹车 / 侧移 / 转弯 / 原地转 / 站立),做拼接 + yaw 重定基 + 切换混合,SONIC tracker 闭环追这条流。思路移植自 G1 V6 的参考流设计。</p>
+
+<h2>前置条件</h2>
+<p>基底 16 官方炉毕业(16 条基底动作步频全达标)。当前 1000 迭代关卡 6/14,后退族与原地转是主要缺口。</p>
+
+</body></html>
