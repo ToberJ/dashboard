@@ -16,10 +16,30 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 .d{color:#999;font-size:12px;margin-top:8px}
 .contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
 .contrib code{background:#f0f0f0;padding:1px 5px;border-radius:4px}
+.lb{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3e3e3;border-radius:10px;overflow:hidden;font-size:13.5px;margin-bottom:26px}
+.lb th{background:#f4f4f4;text-align:left;padding:8px 10px;font-size:12px;letter-spacing:.4px;color:#666}
+.lb td{padding:8px 10px;border-top:1px solid #eee;font-variant-numeric:tabular-nums}
+.lb tr.gold td{background:#fdf6e9}.lb tr.dim td{color:#999}
+.lb .medal{font-size:15px}.lb a{color:var(--bl)}
+.lbwrap{overflow-x:auto}
 </style></head><body>
 <div class="crumb"><a href="../index.html">← all projects</a></div>
 <h1>Box Catch — G1 Cradle Carry Campaign (a100-1)</h1>
 <div class="sub">12 item(s) · overnight campaign 2026-07-12: stance + 3-point SOLVED, rate 72.7% peak · migrated from 3090 2026-07-12 · target: photo-pose cradle catch at 90%+ per-throw</div>
+
+<h2 style="font-size:18px;margin:6px 0 10px">🏆 Leaderboard <span style="font-weight:400;font-size:13px;color:#888">姿态闸(dev≤0.40 · gbx∈(−0.65,0.15] · 站姿)优先,同闸比 32-env 费率 · 自动更新</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>#</th><th>ckpt</th><th>费率</th><th>foot</th><th>dev</th><th>strict</th><th>chest</th><th>备注</th><th>视频</th></tr>
+<tr class="gold"><td class="medal">🥇</td><td>v23e @500 <b>(LIVE↗)</b></td><td><b>68.3%</b></td><td><b>0.31</b></td><td>0.28</td><td>16/16</td><td>✓</td><td>三目标同框 · DR考卷 · 还在涨</td><td><a href="../assets/box-catch/v23e_i500_sm.mp4">▶</a></td></tr>
+<tr><td class="medal">🥈</td><td>v23d @2999</td><td>65.2%</td><td>0.42</td><td>0.27</td><td>16/16</td><td>100%</td><td>站姿里程碑(1.2→0.42)</td><td><a href="../assets/box-catch/v23d_i2999_sm.mp4">▶</a></td></tr>
+<tr><td class="medal">🥉</td><td>v23a @500</td><td>64.3%</td><td>1.22</td><td>0.28</td><td>16/16</td><td>棱蹭</td><td>三点式首战</td><td><a href="../assets/box-catch/v23a_i500_sm.mp4">▶</a></td></tr>
+<tr><td>4</td><td>v23c @2999</td><td>61.3%</td><td>0.33</td><td><b>0.18</b></td><td>16/16</td><td>100%</td><td>dev 全场最优</td><td>—</td></tr>
+<tr><td>5</td><td>v22n @2999</td><td>59.2%</td><td>1.20</td><td>0.19</td><td>16/16</td><td>—</td><td>唯一完全垂直(gbx +0.04)</td><td><a href="../assets/box-catch/v22n_i2999_fixedcam_vlc.mp4">▶</a></td></tr>
+<tr><td>6</td><td>v22k @1500</td><td>56.9%</td><td>1.23</td><td>0.34</td><td>15/16</td><td>—</td><td>用户终审血统峰值</td><td><a href="../assets/box-catch/v22k_i1500_sm.mp4">▶</a></td></tr>
+<tr><td>7</td><td>v22m @2999</td><td>56.0%</td><td>0.32</td><td>0.38</td><td>16/16</td><td>—</td><td>元祖自然站姿</td><td><a href="../assets/box-catch/v22m_i2999_sm.mp4">▶</a></td></tr>
+<tr class="dim"><td>*</td><td>v23c @1000</td><td>72.7%</td><td>1.18</td><td>0.33</td><td>16/16</td><td>100%</td><td>裸费率纪录,但弓步(闸外参考)</td><td>—</td></tr>
+<tr class="dim"><td>*</td><td>v22l @2999</td><td>63.0%</td><td>1.04</td><td>0.96❌</td><td>15/16</td><td>—</td><td>FALSIFIED:夹抱</td><td><a href="../assets/box-catch/v22l_i2999_sm.mp4">▶</a></td></tr>
+</table></div>
 <div class="grid">
 
 <a class="card" href="../assets/box-catch/v23d_i2999_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
