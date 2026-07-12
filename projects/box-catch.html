@@ -1,0 +1,67 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Box Catch — G1 Cradle Carry Campaign (a100-1)</title>
+<style>
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
+*{box-sizing:border-box}
+body{font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;max-width:1000px;margin:0 auto;padding:40px 24px 90px}
+a{text-decoration:none;color:inherit}
+h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:28px;font-size:14px}
+.crumb{font-size:13px;color:#999;margin-bottom:18px} .crumb a{color:var(--bl)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px 18px;transition:.15s}
+a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transform:translateY(-1px)}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:5px;margin-bottom:8px}
+.badge.rep{background:#fdeee4;color:#c24f17}.badge.live{background:#e9f7ee;color:#1d7a3e}.badge.dead{background:#f6e7e7;color:#a33}
+.t{font-size:16px;font-weight:600;margin-bottom:5px} .m{color:#555;font-size:13.5px;min-height:18px}
+.d{color:#999;font-size:12px;margin-top:8px}
+.contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
+.contrib code{background:#f0f0f0;padding:1px 5px;border-radius:4px}
+</style></head><body>
+<div class="crumb"><a href="../index.html">← all projects</a></div>
+<h1>Box Catch — G1 Cradle Carry Campaign (a100-1)</h1>
+<div class="sub">10 item(s) · migrated from 3090 2026-07-12 · target: photo-pose cradle catch at 90%+ per-throw</div>
+<div class="grid">
+
+<a class="card" href="../assets/box-catch/v23a_i500_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
+<div class="t">v23a 3-point carry: 64.3% — campaign record at iter 500</div><div class="m">Elbow-only scoop authority (1 DoF/arm) + bed-gated chest-delivery income + tighter hold-init. Rate 39.6% → 64.3% in one knob, strict 16/16 fp0. User eyeball found the flaw: box grazes the chest by an edge, face leans away — fixed in v23c.</div>
+<div class="d">2026-07-12 10:0x · video</div></a>
+
+<a class="card" href="../assets/box-catch/v23b_i500_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
+<div class="t">v23b phase stance: vertical hold, feet-gather pending</div><div class="m">v23a + income-only feet-gather bonus after 0.6 s of settled hold (lunge at catch stays free). 59.4% at 500, torso gbx +0.01 (fully vertical). Stance verdict at the 1000 station.</div>
+<div class="d">2026-07-12 10:1x · video</div></a>
+
+<a class="card" href="../assets/box-catch/v22n_i2999_fixedcam_vlc.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v23c-DDP4: real-contact contract + tilt-in + sloped bed — 3.79× throughput</div><div class="m">Chest income now pays ONLY at true contact (gap ≤ 5 mm, box top leaning INTO chest) + BOX_ELBOW_SCOOP slopes the bed toward the torso. First AMP-DDP production run: 4×8192 envs, 149.8k steps/s, discriminator param hashes bit-identical across ranks.</div>
+<div class="d">2026-07-12 10:4x · running on GPUs 3-6</div></a>
+
+<a class="card" href="../assets/box-catch/v22n_i2999_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v22n soft-bed: pose+rate winner of the v22 ladder — 59.2%, 16/16, vertical</div><div class="m">Arms pinned at the corrected CRADLE_POSE (±0.02 rad wiggle), stock PD = compliant receiving bed; legs + waist do the catching. Only run in campaign history with a fully vertical hold. Fixed-camera video.</div>
+<div class="d">2026-07-12 05:37 · video + station table</div></a>
+
+<a class="card" href="../assets/box-catch/v22m_i2999_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v22m arm-scale 0.10: stance champion — foot split 0.32, 56.0%</div><div class="m">Slow learner that came alive late: 4.3% at 500 → 56.0% at 2999 with 16/16 strict, and the only natural (non-lunge) stance in the fleet. Existence proof for the phase-stance goal.</div>
+<div class="d">2026-07-12 05:20 · video</div></a>
+
+<a class="card" href="../assets/box-catch/v22k_i500_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v22k arm-scale 0.25 @500 — USER-RATIFIED pose, held-dev basin broken</div><div class="m">The actuator-constraint bet that ended three generations of price-signal failure: held dev 1.04 → 0.27, upright cradle hold. User verdict on the video: "exactly就是我想要的效果". Peaked 56.9% at 1500.</div>
+<div class="d">2026-07-12 02:20 · ratified station video</div></a>
+
+<a class="card" href="../assets/box-catch/v22l_i2999_sm.mp4" target="_blank"><div class="badge dead">FALSIFIED</div>
+<div class="t">v22l hold-init clamp: 63% rate bought with the wrong pose</div><div class="m">Kinematic arm lock for the first 50 steps of hold-practice episodes. Post-release the policy snaps back to the clamp-hug (held dev 0.96-1.02 through 3000 iters) — conditioned-reflex diagnosis confirmed ×4. Autopsy video.</div>
+<div class="d">2026-07-12 06:27 · autopsy</div></a>
+
+<a class="card" href="../assets/box-catch/v22k_i1500_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v22k trajectory: 41.9 → 50.8 → 56.9% (500/1000/1500)</div><div class="m">Rate recovery at ~9pp/500 iters after the actuator change, posture tightening in parallel (gbx −0.19 → −0.14). Drifted after 1500; peak checkpoint archived.</div>
+<div class="d">2026-07-12 03:39 · 3-station series</div></a>
+
+<a class="card" href="https://github.com/ToberJ/box_campaign_h100/blob/a100-v22k-ckpts/migration/ddp_validation_report.md" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">AMP-DDP engineering: discriminator sync validated GO on 4×A100</div><div class="m">rsl_rl 3.0.1 native multi-GPU path + env-gated discriminator broadcast/all-reduce/skip-gate MIN-reduce. 200-iter validation: param sums bit-identical on all ranks, curve matches single-GPU, ckpt saved once. Full report in repo.</div>
+<div class="d">2026-07-12 09:5x · validation report</div></a>
+
+<a class="card" href="https://github.com/ToberJ/box_campaign_h100/tree/a100-v22k-ckpts/renders_gallery" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">Video gallery + training timeline (GitHub)</div><div class="m">All station videos with metrics tables and the mermaid gantt timeline (run start/end times, milestones). Checkpoints and params archived on the same branch.</div>
+<div class="d">updated every station</div></a>
+
+</div>
+<div class="contrib"><b>Campaign facts</b>: box 0.34×0.26×0.22 m / 0.18 kg, drag k=0.85, throws 3–4.2 m at 5–7.6 m/s ±15°, hover-surprise launch · ruler = Active Reward Terms + gbx/dev/gap probes · every 500-iter station: render + strict 16 + probes + 32-env per-throw · videos are 72 h litterbox mirrors, permanent copies in the repo.</div>
+</body></html>
