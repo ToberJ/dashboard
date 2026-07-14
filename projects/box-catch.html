@@ -44,14 +44,15 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 
 <h2 style="font-size:18px;margin:6px 0 10px">📡 Detector 噪声鲁棒性 (2026-07-14 过夜) <span style="font-weight:400;font-size:13px;color:#888">冠军 ArmA_1499 零样本 · box obs 加噪+延迟 · 回答"detector 要做多准" · 基线 ~88%</span></h2>
 <div class="lbwrap"><table class="lb">
-<tr><th>位置噪声 σ</th><th>速度噪声 σ</th><th>延迟</th><th>接住率</th><th>vs 基线</th><th>判读</th></tr>
-<tr class="gold"><td>2 cm</td><td>0.10 m/s</td><td>0</td><td><b>89.5%</b></td><td>±0</td><td>零损 — 立体/深度相机 3-5m 精度轻松达标</td></tr>
-<tr><td>5 cm</td><td>0.25 m/s</td><td>0</td><td>85.0%</td><td>−3pp</td><td>轻损可接受</td></tr>
-<tr><td>5 cm</td><td>0.25 m/s</td><td>40 ms</td><td>83.8%</td><td>−4pp</td><td>延迟 ≤40ms 无痛</td></tr>
-<tr><td>5 cm</td><td>0.25 m/s</td><td>100 ms</td><td>78.3%</td><td>−10pp</td><td>延迟是主要敌人 — 感知管线预算 &lt;50ms</td></tr>
-<tr class="dim"><td>10 cm</td><td>0.50 m/s</td><td>0</td><td>73.8%</td><td>−14pp</td><td>粗检测器代价显著</td></tr>
+<tr><th>位置噪声 σ</th><th>速度噪声 σ</th><th>延迟</th><th>接住率(两轮合并)</th><th>样本</th><th>判读</th></tr>
+<tr class="gold"><td>0(同口径基线)</td><td>0</td><td>0</td><td><b>94.9%</b></td><td>39</td><td>基线家族 87-95%(小样本波动 ±8-12pp)</td></tr>
+<tr class="gold"><td>2 cm</td><td>0.10 m/s</td><td>0</td><td>82.3%</td><td>79</td><td rowspan="3">σ≤5cm / 延迟≤40ms: 与基线统计不可分(CI内) — 现实检测器精度无痛区</td></tr>
+<tr><td>5 cm</td><td>0.25 m/s</td><td>0</td><td>86.3%</td><td>80</td></tr>
+<tr><td>5 cm</td><td>0.25 m/s</td><td>40 ms</td><td>85.3%</td><td>75</td></tr>
+<tr><td>5 cm</td><td>0.25 m/s</td><td>100 ms</td><td>76.0%</td><td>96</td><td>明确退化 −12pp — 感知管线延迟预算 &lt;50ms</td></tr>
+<tr class="dim"><td>10 cm</td><td>0.50 m/s</td><td>0</td><td>65.9%</td><td>82</td><td>明确退化 −22pp — 粗检测器需噪声 DR finetune</td></tr>
 </table></div>
-<div style="font-size:13px;color:#888;margin:-14px 0 22px">结论: 从未见过 obs 噪声的 state 冠军<b>零样本已具备 detector 级鲁棒性</b>(σ≤5cm/延迟≤40ms 区间损失 ≤4pp) — package delivery 感知段风险低; 若上粗检测器再做噪声 DR finetune 即可。每臂 ~40 抛。</div>
+<div style="font-size:13px;color:#888;margin:-14px 0 22px">结论(两轮合并后修正): 从未见过 obs 噪声的 state 冠军, 在 <b>σ≤5cm + 延迟≤40ms</b> 区间零样本无可检测退化; 硬红线是<b>延迟(100ms −12pp)</b>和粗定位(10cm −22pp)。单轮 40 抛读数波动 ±12pp — 永远看合并样本。</div>
 
 <h2 style="font-size:18px;margin:6px 0 10px">🤖 SONIC 携行零样本 — 判死, 需 finetune (2026-07-14 过夜) <span style="font-weight:400;font-size:13px;color:#888">SONIC 复活于 A100(冒烟走 1.62m/参考 1.68m 零摔) · 死臂锁抱姿 + 箱上前臂床</span></h2>
 <div class="lbwrap"><table class="lb">
