@@ -42,6 +42,17 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 <div class="card"><div class="badge rep">CONTRAST</div><div class="t">v25b_500 贴胸刀·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/v25b_side.mp4" type="video/mp4"></video></div>
 </div>
 
+<h2 style="font-size:18px;margin:6px 0 10px">📡 Detector 噪声鲁棒性 (2026-07-14 过夜) <span style="font-weight:400;font-size:13px;color:#888">冠军 ArmA_1499 零样本 · box obs 加噪+延迟 · 回答"detector 要做多准" · 基线 ~88%</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>位置噪声 σ</th><th>速度噪声 σ</th><th>延迟</th><th>接住率</th><th>vs 基线</th><th>判读</th></tr>
+<tr class="gold"><td>2 cm</td><td>0.10 m/s</td><td>0</td><td><b>89.5%</b></td><td>±0</td><td>零损 — 立体/深度相机 3-5m 精度轻松达标</td></tr>
+<tr><td>5 cm</td><td>0.25 m/s</td><td>0</td><td>85.0%</td><td>−3pp</td><td>轻损可接受</td></tr>
+<tr><td>5 cm</td><td>0.25 m/s</td><td>40 ms</td><td>83.8%</td><td>−4pp</td><td>延迟 ≤40ms 无痛</td></tr>
+<tr><td>5 cm</td><td>0.25 m/s</td><td>100 ms</td><td>78.3%</td><td>−10pp</td><td>延迟是主要敌人 — 感知管线预算 &lt;50ms</td></tr>
+<tr class="dim"><td>10 cm</td><td>0.50 m/s</td><td>0</td><td>73.8%</td><td>−14pp</td><td>粗检测器代价显著</td></tr>
+</table></div>
+<div style="font-size:13px;color:#888;margin:-14px 0 22px">结论: 从未见过 obs 噪声的 state 冠军<b>零样本已具备 detector 级鲁棒性</b>(σ≤5cm/延迟≤40ms 区间损失 ≤4pp) — package delivery 感知段风险低; 若上粗检测器再做噪声 DR finetune 即可。每臂 ~40 抛。</div>
+
 <h2 style="font-size:18px;margin:6px 0 10px">🏆 Leaderboard <span style="font-weight:400;font-size:13px;color:#888">姿态闸(dev≤0.40 · gbx∈(−0.65,0.15] · 站姿)优先,同闸比 32-env 费率 · 自动更新</span></h2>
 <div class="lbwrap"><table class="lb">
 <tr><th>#</th><th>ckpt</th><th>费率</th><th>foot</th><th>dev</th><th>strict</th><th>chest</th><th>备注</th><th>视频</th></tr>
