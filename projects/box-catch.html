@@ -25,7 +25,22 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 </style></head><body>
 <div class="crumb"><a href="../index.html">← all projects</a></div>
 <h1>Box Catch — G1 Cradle Carry Campaign (a100-1)</h1>
-<div class="sub">day-2 sprint 2026-07-13: v23g upright-gate LIVE (gbx −0.12, 60.2%@250) + v23h2 intercept W=0.3 LIVE · stance + 3-point SOLVED, 72.7% raw peak · target: 80%+ catch & visible curl-to-chest</div>
+<div class="sub">2026-07-14: <b>carry-walk 零样本突破 — 冠军接箱后携箱走 1.7m 成功率 100%(31/31, 不锁臂)</b> · v24b 考卷冠军 ArmA_1499 床托 88.6% / 三点 9.0% · v25 经济学双刀判决:贴胸峰值@500 漂移型,碎步罚伤步态(携行摔 7/32) · 下一步: 探零样本塌点 vs 直奔走-到-点 demo</div>
+
+<h2 style="font-size:18px;margin:6px 0 10px">🚶 Carry-walk 零样本 (2026-07-14) <span style="font-weight:400;font-size:13px;color:#888">clip: 站9s接箱 → 走1.7m@0.7m/s → 站5s · 32 env · 掉箱判据 rel&lt;0.65m</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>#</th><th>策略</th><th>接住</th><th>走完仍抱</th><th>携行成功率</th><th>机器人摔倒</th><th>备注</th></tr>
+<tr class="gold"><td class="medal">🥇</td><td>冠军 ArmA_1499(不锁臂)</td><td>31/32</td><td>31</td><td><b>100%</b></td><td>0</td><td>参考摆臂拽不掉箱子(arm scale 0.02 的功劳);床托质量走路中 0.78 全场最高</td></tr>
+<tr><td class="medal">🥈</td><td>v25b_500 贴胸刀(锁臂)</td><td>32/32</td><td>31</td><td>96.9%</td><td>1</td><td>chest 0.53 并未带来携行优势 → 贴胸在此速度/距离下非硬前置</td></tr>
+<tr><td class="medal">🥉</td><td>冠军 ArmA_1499(锁臂)</td><td>32/32</td><td>30</td><td>93.8%</td><td>1</td><td>锁臂反而略差:锁死的手臂 Cartesian 参考轻微干扰平衡</td></tr>
+<tr class="dim"><td>4</td><td>v25a_1499 碎步罚(锁臂)</td><td>32/32</td><td>32→23</td><td>71.9%</td><td><b>7</b></td><td>被罚出的"钉脚"习惯直接损害步态 → 碎步是负重平衡本能,罚掉要付走路能力的代价;v25a 淘汰</td></tr>
+</table></div>
+<div class="grid" style="margin-bottom:26px">
+<div class="card"><div class="badge live">100% CARRY</div><div class="t">冠军·不锁臂·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/champ_nolock.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge rep">LOCK-ARM</div><div class="t">冠军·锁臂·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/champ_side.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge rep">LOCK-ARM</div><div class="t">冠军·锁臂·正面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/champ_front.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge rep">CONTRAST</div><div class="t">v25b_500 贴胸刀·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/v25b_side.mp4" type="video/mp4"></video></div>
+</div>
 
 <h2 style="font-size:18px;margin:6px 0 10px">🏆 Leaderboard <span style="font-weight:400;font-size:13px;color:#888">姿态闸(dev≤0.40 · gbx∈(−0.65,0.15] · 站姿)优先,同闸比 32-env 费率 · 自动更新</span></h2>
 <div class="lbwrap"><table class="lb">
