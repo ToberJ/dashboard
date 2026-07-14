@@ -53,6 +53,17 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 </table></div>
 <div style="font-size:13px;color:#888;margin:-14px 0 22px">结论: 从未见过 obs 噪声的 state 冠军<b>零样本已具备 detector 级鲁棒性</b>(σ≤5cm/延迟≤40ms 区间损失 ≤4pp) — package delivery 感知段风险低; 若上粗检测器再做噪声 DR finetune 即可。每臂 ~40 抛。</div>
 
+<h2 style="font-size:18px;margin:6px 0 10px">🤖 SONIC 携行零样本 — 判死, 需 finetune (2026-07-14 过夜) <span style="font-weight:400;font-size:13px;color:#888">SONIC 复活于 A100(冒烟走 1.62m/参考 1.68m 零摔) · 死臂锁抱姿 + 箱上前臂床</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>轮</th><th>配置</th><th>静态托箱</th><th>携行(走完)</th><th>死因</th></tr>
+<tr class="dim"><td>r2</td><td>动作层锁臂 + pelvis 定高放箱</td><td>0/4(放高33cm弹走)</td><td>—</td><td>①几何: 床高应实测 ②对照组无箱也弓腰0.34 → 动作层 override 经 last_action 历史污染 SONIC obs</td></tr>
+<tr><td>r6</td><td>apply层钉臂(obs净) + 实测床高 + kp40</td><td><b>4/4 ✓</b></td><td>0/4(掉在步134-327)</td><td>步态振荡甩箱; 钉臂仍经本体感知致蹲身(位移1.62→0.73m)</td></tr>
+<tr><td>r7</td><td>+掌上腕∓1.57+腕唇0.40+慢走0.67×</td><td>4/4 ✓</td><td>0/4</td><td>钉臂→深蹲前倾→床变下坡→箱越唇前滑(帧检因果链)</td></tr>
+</table></div>
+<div class="grid" style="margin-bottom:26px">
+<div class="card"><div class="badge dead">FALSIFIED ×3</div><div class="t">SONIC 死臂携行 r7(掌上床+慢走)</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r7.mp4" type="video/mp4"></video><div class="m" style="margin-top:6px">静态托稳 → 起步深蹲前倾 → 箱前滑脱床。判决: 零样本便宜牌打完, SONIC 携行须 finetune(钉臂+负箱课程), 或改教 catch 冠军走路 — 架构分叉等用户裁决。</div></div>
+</div>
+
 <h2 style="font-size:18px;margin:6px 0 10px">🏆 Leaderboard <span style="font-weight:400;font-size:13px;color:#888">姿态闸(dev≤0.40 · gbx∈(−0.65,0.15] · 站姿)优先,同闸比 32-env 费率 · 自动更新</span></h2>
 <div class="lbwrap"><table class="lb">
 <tr><th>#</th><th>ckpt</th><th>费率</th><th>foot</th><th>dev</th><th>strict</th><th>chest</th><th>备注</th><th>视频</th></tr>
