@@ -48,8 +48,8 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 <tr class="dim"><td>原版冠军 v4_3point</td><td>85.4%</td><td>21.2%</td><td>基线: 检测器噪声下崩(=M5 51%的sim镜像)</td></tr>
 <tr class="dim"><td>dr1(逐帧差分vel, 噪声5×超配)</td><td>62.9→40.4</td><td>32.9→49.5</td><td>❌噪声量级超配→放弃box obs</td></tr>
 <tr class="dim"><td>dr2(5帧差分, 量级贴档案)</td><td>29.8</td><td>58.7</td><td>❌结构性时滞→分布搬家(噪>清29pp)</td></tr>
-<tr class="gold"><td><b>dr3@1500(+50/50混合锚)</b></td><td><b>84.1% ✅门</b></td><td>61.3%</td><td>平衡冠军 (<a href="media/carrywalk/v25dr3_1500_demo.mp4">▶视频</a>)</td></tr>
-<tr class="gold"><td><b>dr3@1999</b></td><td>65.3%</td><td><b>79.8% ✅破70</b></td><td>噪王(晚期迁移产物); tp 4.2%=腐蚀下三点持稳</td></tr>
+<tr class="gold"><td><b>dr3@1500(+50/50混合锚)</b></td><td><b>77.9%</b>(长评317抛)</td><td><b>61.3%</b></td><td><b>全场冠军</b>: 噪+40pp/清−7.5pp (<a href="media/carrywalk/v25dr3_1500_demo.mp4">▶视频</a>)</td></tr>
+<tr class="dim"><td>dr3@1999</td><td>65.3%</td><td>56.9%(合并823抛)</td><td>⚠️站点79.8为不可复现异常(两次5200步长评55.9/57.9定音)——被@1500双轴支配, "噪王"撤销</td></tr>
 <tr><td>dr3@1750</td><td>80.1%</td><td>57.6%</td><td>前沿中点</td></tr>
 <tr class="dim"><td>dr5(0.65混合)@500</td><td>80.0%</td><td>44.3%</td><td>❌腐蚀信号被稀释</td></tr>
 <tr><td>dr4 POSLAG(跑着)</td><td>—</td><td>—</td><td>速度通道连根拔(3维换5帧前位置): 攻双门的现役方案</td></tr>
