@@ -61,6 +61,8 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 <tr><td>r6</td><td>apply层钉臂(obs净) + 实测床高 + kp40</td><td><b>4/4 ✓</b></td><td>0/4(掉在步134-327)</td><td>步态振荡甩箱; 钉臂仍经本体感知致蹲身(位移1.62→0.73m)</td></tr>
 <tr><td>r7</td><td>+掌上腕∓1.57+腕唇0.40+慢走0.67×</td><td>4/4 ✓</td><td>0/4</td><td>钉臂→深蹲前倾→床变下坡→箱越唇前滑(帧检因果链)</td></tr>
 <tr class="gold"><td class="medal">🥇 r8</td><td><b>抱姿写进参考动作, 零钉臂</b>(用户提案: 手臂 ref←cradle 常值, SONIC 主动跟踪)</td><td>4/4 ✓</td><td><b>4/4 ✓ 零训练</b></td><td>三通道(命令/动作/本体感知)一致 → 蹲身消失(pitch 0.24)、真实迈步(位移1.35m)、直立携行全程不掉。SONIC 携行 finetune 免了</td></tr>
+<tr class="gold"><td>r9a</td><td>加压: <b>正常速度</b>(1.0×)</td><td>4/4 ✓</td><td><b>4/4 ✓ 零瞬掉</b></td><td>比慢走更干净(pitch 0.20 最佳)——SONIC 在原生速度上跟踪最好, demo 用正速 (<a href="media/carrywalk/sonic_carry_r9a_fullspeed.mp4">▶视频</a>)</td></tr>
+<tr><td>r9b</td><td>加压: <b>5m 三段停走停</b>(0.67×3)</td><td>4/4 ✓</td><td>3/4</td><td>掉箱发生在段间起停接缝(step 467/665)——续接缝是弱点; motionbricks 连续参考天然规避 (<a href="media/carrywalk/sonic_carry_r9b_5m.mp4">▶视频</a>)</td></tr>
 </table></div>
 <div class="grid" style="margin-bottom:26px">
 <div class="card"><div class="badge live">🥇 BREAKTHROUGH</div><div class="t">r8: SONIC 携箱走路成功 — 零训练 4/4</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r8_OK.mp4" type="video/mp4"></video><div class="m" style="margin-top:6px">用户提案: 把抱姿直接写进参考动作的手臂列(planner 后处理一行), SONIC 原生跟踪"端着手走路"——不钉臂, 三通道一致。直立、真迈步、全程抱稳。package delivery 携行段零训练打通。</div></div>
