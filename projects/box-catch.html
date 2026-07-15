@@ -60,9 +60,11 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 <tr class="dim"><td>r2</td><td>动作层锁臂 + pelvis 定高放箱</td><td>0/4(放高33cm弹走)</td><td>—</td><td>①几何: 床高应实测 ②对照组无箱也弓腰0.34 → 动作层 override 经 last_action 历史污染 SONIC obs</td></tr>
 <tr><td>r6</td><td>apply层钉臂(obs净) + 实测床高 + kp40</td><td><b>4/4 ✓</b></td><td>0/4(掉在步134-327)</td><td>步态振荡甩箱; 钉臂仍经本体感知致蹲身(位移1.62→0.73m)</td></tr>
 <tr><td>r7</td><td>+掌上腕∓1.57+腕唇0.40+慢走0.67×</td><td>4/4 ✓</td><td>0/4</td><td>钉臂→深蹲前倾→床变下坡→箱越唇前滑(帧检因果链)</td></tr>
+<tr class="gold"><td class="medal">🥇 r8</td><td><b>抱姿写进参考动作, 零钉臂</b>(用户提案: 手臂 ref←cradle 常值, SONIC 主动跟踪)</td><td>4/4 ✓</td><td><b>4/4 ✓ 零训练</b></td><td>三通道(命令/动作/本体感知)一致 → 蹲身消失(pitch 0.24)、真实迈步(位移1.35m)、直立携行全程不掉。SONIC 携行 finetune 免了</td></tr>
 </table></div>
 <div class="grid" style="margin-bottom:26px">
-<div class="card"><div class="badge dead">FALSIFIED ×3</div><div class="t">SONIC 死臂携行 r7(掌上床+慢走)</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r7.mp4" type="video/mp4"></video><div class="m" style="margin-top:6px">静态托稳 → 起步深蹲前倾 → 箱前滑脱床。判决: 零样本便宜牌打完, SONIC 携行须 finetune(钉臂+负箱课程), 或改教 catch 冠军走路 — 架构分叉等用户裁决。</div></div>
+<div class="card"><div class="badge live">🥇 BREAKTHROUGH</div><div class="t">r8: SONIC 携箱走路成功 — 零训练 4/4</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r8_OK.mp4" type="video/mp4"></video><div class="m" style="margin-top:6px">用户提案: 把抱姿直接写进参考动作的手臂列(planner 后处理一行), SONIC 原生跟踪"端着手走路"——不钉臂, 三通道一致。直立、真迈步、全程抱稳。package delivery 携行段零训练打通。</div></div>
+<div class="card"><div class="badge dead">FALSIFIED ×3</div><div class="t">对照: 死臂钉法 r7(掌上床+慢走)</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r7.mp4" type="video/mp4"></video><div class="m" style="margin-top:6px">静态托稳 → 起步深蹲前倾 → 箱前滑脱床。教训: 手臂 override 与 SONIC 的命令/本体感知打架, 正解是改参考不改物理。</div></div>
 </div>
 
 <h2 style="font-size:18px;margin:6px 0 10px">🏆 Leaderboard <span style="font-weight:400;font-size:13px;color:#888">姿态闸(dev≤0.40 · gbx∈(−0.65,0.15] · 站姿)优先,同闸比 32-env 费率 · 自动更新</span></h2>
