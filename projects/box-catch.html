@@ -1,11 +1,13 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Box Catch — G1 Cradle Carry Campaign (a100-1)</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Box Catch — G1 Package-Delivery Campaign (a100-1)</title>
 <style>
 :root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
 *{box-sizing:border-box}
 body{font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;max-width:1000px;margin:0 auto;padding:40px 24px 90px}
 a{text-decoration:none;color:inherit}
-h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:28px;font-size:14px}
+h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:20px;font-size:14px}
+h2{font-size:18px;margin:6px 0 10px}
+h2 .hint{font-weight:400;font-size:13px;color:#888}
 .crumb{font-size:13px;color:#999;margin-bottom:18px} .crumb a{color:var(--bl)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
 .card{display:block;background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px 18px;transition:.15s}
@@ -22,156 +24,159 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 .lb tr.gold td{background:#fdf6e9}.lb tr.dim td{color:#999}
 .lb .medal{font-size:15px}.lb a{color:var(--bl)}
 .lbwrap{overflow-x:auto}
+.note{font-size:13px;color:#888;margin:-14px 0 22px}
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:0 0 8px}
+.stage{background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:10px 14px;font-size:13px}
+.stage b{display:block;font-size:14px}
+.stage .st{font-size:12px;font-weight:700}
+.st.ok{color:#1d7a3e}.st.run{color:#c24f17}.st.todo{color:#999}
+details{margin-bottom:26px}
+details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding:8px 0}
+/* ---- tabbed sub-windows ---- */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;border-bottom:2px solid var(--bd);padding-bottom:0}
+.tab{cursor:pointer;padding:9px 16px;font-size:14.5px;font-weight:600;color:#666;background:#f0f0f0;border:1px solid var(--bd);border-bottom:none;border-radius:9px 9px 0 0}
+.tab.on{background:#fff;color:var(--ac);border-color:var(--ac);position:relative;top:2px;padding-bottom:11px}
+.pane{display:none;background:#fff;border:1px solid var(--bd);border-top:none;border-radius:0 0 10px 10px;padding:20px 18px 8px;margin-bottom:26px}
+.pane.on{display:block}
+.pane .lb{border:1px solid #eee}
 </style></head><body>
 <div class="crumb"><a href="../index.html">← all projects</a></div>
-<h1>Box Catch — G1 Cradle Carry Campaign (a100-1)</h1>
-<div class="sub">2026-07-14: <b>carry-walk 零样本突破 — 冠军接箱后携箱走 1.7m 成功率 100%(31/31, 不锁臂)</b> · v24b 考卷冠军 ArmA_1499 床托 88.6% / 三点 9.0% · v25 经济学双刀判决:贴胸峰值@500 漂移型,碎步罚伤步态(携行摔 7/32) · 下一步: 探零样本塌点 vs 直奔走-到-点 demo</div>
+<h1>Box Catch — G1 Package-Delivery Campaign (a100-1)</h1>
+<div class="sub">2026-07-15: <b>现役 = v25-DR 检测器降噪 finetune</b>(dr3@1500 冠军 清77.9/伪噪61.3 已推分支, dr4 POSLAG 在训) · 终局架构 = detector→state接箱→SONIC携行→放箱(不蒸馏) · vision-based 目标 80%</div>
 
-<h2 style="font-size:18px;margin:6px 0 10px">🚶 Carry-walk 零样本 (2026-07-14) <span style="font-weight:400;font-size:13px;color:#888">clip: 站9s接箱 → 走1.7m@0.7m/s → 站5s · 32 env · 掉箱判据 rel&lt;0.65m</span></h2>
-<div class="lbwrap"><table class="lb">
-<tr><th>#</th><th>策略</th><th>接住</th><th>走完仍抱</th><th>携行成功率</th><th>机器人摔倒</th><th>备注</th></tr>
-<tr class="gold"><td class="medal">🥇</td><td>冠军 ArmA_1499(不锁臂)</td><td>31/32</td><td>31</td><td><b>100%</b></td><td>0</td><td>参考摆臂拽不掉箱子(arm scale 0.02 的功劳);床托质量走路中 0.78 全场最高</td></tr>
-<tr><td class="medal">🥈</td><td>v25b_500 贴胸刀(锁臂)</td><td>32/32</td><td>31</td><td>96.9%</td><td>1</td><td>chest 0.53 并未带来携行优势 → 贴胸在此速度/距离下非硬前置</td></tr>
-<tr><td class="medal">🥉</td><td>冠军 ArmA_1499(锁臂)</td><td>32/32</td><td>30</td><td>93.8%</td><td>1</td><td>锁臂反而略差:锁死的手臂 Cartesian 参考轻微干扰平衡</td></tr>
-<tr class="dim"><td>4</td><td>v25a_1499 碎步罚(锁臂)</td><td>32/32</td><td>32→23</td><td>71.9%</td><td><b>7</b></td><td>被罚出的"钉脚"习惯直接损害步态 → 碎步是负重平衡本能,罚掉要付走路能力的代价;v25a 淘汰</td></tr>
-</table></div>
-<div class="grid" style="margin-bottom:26px">
-<div class="card"><div class="badge live">100% CARRY</div><div class="t">冠军·不锁臂·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/champ_nolock.mp4" type="video/mp4"></video></div>
-<div class="card"><div class="badge rep">LOCK-ARM</div><div class="t">冠军·锁臂·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/champ_side.mp4" type="video/mp4"></video></div>
-<div class="card"><div class="badge rep">LOCK-ARM</div><div class="t">冠军·锁臂·正面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/champ_front.mp4" type="video/mp4"></video></div>
-<div class="card"><div class="badge rep">CONTRAST</div><div class="t">v25b_500 贴胸刀·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/v25b_side.mp4" type="video/mp4"></video></div>
+<!-- ============ 管线总览(常驻) ============ -->
+<div class="pipe">
+<div class="stage"><b>① 感知 detector</b><span class="st run">3090 侧 · M5 51%→校准中</span>OAK-D+RF-DETR+KF; 只需箱子位置(+差分速度)</div>
+<div class="stage"><b>② 接箱 state policy</b><span class="st run">A100 现役 · v25-DR</span>GT尺 85% / 伪噪尺 61%(dr3@1500); 目标: 噪≥70</div>
+<div class="stage"><b>③ 携行 SONIC</b><span class="st ok">零训练已打通</span>抱姿写进参考, 正速 4/4; 任意导航等 motionbricks 权重</div>
+<div class="stage"><b>④ 放箱 release</b><span class="st todo">未开工</span>balloon 时代 release tracker 有底子</div>
+</div>
+<div class="note">catch→carry 全链拼装(chain v2): 接箱✓ 走路✓ 站稳✓, 箱子交接瞬间未通(5轮), 待 SONIC 携箱轻量 finetune 或更优交接。</div>
+
+<!-- ============ 页签导航 ============ -->
+<div class="tabs">
+<div class="tab on" data-pane="p-dr">🎯 v25-DR 降噪(现役)</div>
+<div class="tab" data-pane="p-carry">🚶 SONIC 携行</div>
+<div class="tab" data-pane="p-lb">🏆 Catch 榜</div>
+<div class="tab" data-pane="p-arch">🗄️ 历史档案</div>
 </div>
 
-<h2 style="font-size:18px;margin:6px 0 10px">🎯 v25-DR 检测器降噪 finetune (2026-07-15 过夜, 3090 交接任务) <span style="font-weight:400;font-size:13px;color:#888">目标: 清≥80 / 伪噪≥70 / vision-based 80 · 伪噪尺=检测器级腐蚀(σ按距/盲区/差分滞后/丢帧/k失配)</span></h2>
+<!-- ============ 页签1: v25-DR ============ -->
+<div class="pane on" id="p-dr">
+<h2>🎯 v25-DR 检测器降噪 finetune <span class="hint">2026-07-15 · 3090 交接任务 · 目标 清≥80 / 伪噪≥70 · 伪噪尺=检测器级腐蚀(σ按距/盲区/差分滞后/丢帧/k失配)</span></h2>
 <div class="lbwrap"><table class="lb">
 <tr><th>版本@iter</th><th>清(GT尺)</th><th>伪噪尺</th><th>判决</th></tr>
-<tr class="dim"><td>原版冠军 v4_3point</td><td>85.4%</td><td>21.2%</td><td>基线: 检测器噪声下崩(=M5 51%的sim镜像)</td></tr>
-<tr class="dim"><td>dr1(逐帧差分vel, 噪声5×超配)</td><td>62.9→40.4</td><td>32.9→49.5</td><td>❌噪声量级超配→放弃box obs</td></tr>
-<tr class="dim"><td>dr2(5帧差分, 量级贴档案)</td><td>29.8</td><td>58.7</td><td>❌结构性时滞→分布搬家(噪>清29pp)</td></tr>
-<tr class="gold"><td><b>dr3@1500(+50/50混合锚)</b></td><td><b>77.9%</b>(长评317抛)</td><td><b>61.3%</b></td><td><b>全场冠军</b>: 噪+40pp/清−7.5pp (<a href="media/carrywalk/v25dr3_1500_demo.mp4">▶视频</a>)</td></tr>
-<tr class="dim"><td>dr3@1999</td><td>65.3%</td><td>56.9%(合并823抛)</td><td>⚠️站点79.8为不可复现异常(两次5200步长评55.9/57.9定音)——被@1500双轴支配, "噪王"撤销</td></tr>
-<tr><td>dr3@1750</td><td>80.1%</td><td>57.6%</td><td>前沿中点</td></tr>
-<tr class="dim"><td>dr5(0.65混合)@500</td><td>80.0%</td><td>44.3%</td><td>❌腐蚀信号被稀释</td></tr>
-<tr><td>dr4 POSLAG(跑着)</td><td>—</td><td>—</td><td>速度通道连根拔(3维换5帧前位置): 攻双门的现役方案</td></tr>
+<tr class="dim"><td>原版冠军 v4_3point</td><td>85.4%</td><td>21.2%</td><td>基线: 检测器噪声下崩(=M5 51% 的 sim 镜像)</td></tr>
+<tr class="dim"><td>dr1(逐帧差分vel, 噪声5×超配)</td><td>62.9→40.4</td><td>32.9→49.5</td><td>❌ 噪声量级超配→放弃 box obs</td></tr>
+<tr class="dim"><td>dr2(5帧差分, 量级贴档案)</td><td>29.8</td><td>58.7</td><td>❌ 结构性时滞→分布搬家(噪>清29pp)</td></tr>
+<tr class="gold"><td><b>dr3@1500(+50/50混合锚)</b></td><td><b>77.9%</b>(长评317抛)</td><td><b>61.3%</b></td><td><b>交付冠军</b>: 噪+40pp/清−7.5pp; 已推 v24-3090 待 M5 (<a href="media/carrywalk/v25dr3_1500_demo.mp4">▶视频</a>)</td></tr>
+<tr class="dim"><td>dr3@1999</td><td>65.3%</td><td>56.9%(合并823抛)</td><td>⚠️ 站点79.8为不可复现异常(两次5200步长评定音) — 被@1500双轴支配</td></tr>
+<tr class="dim"><td>dr3@1750 / dr5(0.65混合)@500</td><td>80.1 / 80.0</td><td>57.6 / 44.3</td><td>前沿中点 / ❌腐蚀信号被稀释</td></tr>
+<tr><td>dr4 POSLAG(在训)</td><td>@500: 64.0</td><td>35.5</td><td>速度通道连根拔(3维换5帧前位置), @1000 判斜率</td></tr>
 </table></div>
-<div style="font-size:13px;color:#888;margin:-14px 0 22px"><b>核心发现</b>: actor obs 与 clean 有任何系统性结构差异, 纯腐蚀训练必然分布搬家(非对称critic锚不住actor); 50/50混合减缓但1500后仍滑; 混合比只是在帕累托前沿(84/61↔65/80)滑动, 鸿沟=速度通道 → POSLAG 通道同构化是破局刀。双前沿 ckpt 已推 v24-3090 (1b7ae24), 请 3090 M5 双测校准 伪噪↔M5 映射(现有锚点: 21.2↔51)。</div>
-
-<h2 style="font-size:18px;margin:6px 0 10px">📡 Detector 噪声鲁棒性 (2026-07-14 过夜) <span style="font-weight:400;font-size:13px;color:#888">冠军 ArmA_1499 零样本 · box obs 加噪+延迟 · 回答"detector 要做多准" · 基线 ~88%</span></h2>
+<div class="note"><b>核心发现</b>: actor obs 与 clean 有任何系统性结构差异, 纯腐蚀训练必然分布搬家(非对称 critic 锚不住 actor); 50/50 混合是锚但非根治; 混合比只在帕累托前沿滑动, 鸿沟=速度通道 → POSLAG 通道同构化是破局刀。伪噪↔M5 映射锚点: 21.2↔51。</div>
+<details><summary>📡 前哨: 零样本噪声扫参 (2026-07-14, DR 立项依据)</summary>
 <div class="lbwrap"><table class="lb">
 <tr><th>位置噪声 σ</th><th>速度噪声 σ</th><th>延迟</th><th>接住率(两轮合并)</th><th>样本</th><th>判读</th></tr>
-<tr class="gold"><td>0(同口径基线)</td><td>0</td><td>0</td><td><b>94.9%</b></td><td>39</td><td>基线家族 87-95%(小样本波动 ±8-12pp)</td></tr>
-<tr class="gold"><td>2 cm</td><td>0.10 m/s</td><td>0</td><td>82.3%</td><td>79</td><td rowspan="3">σ≤5cm / 延迟≤40ms: 与基线统计不可分(CI内) — 现实检测器精度无痛区</td></tr>
+<tr class="gold"><td>0(基线)</td><td>0</td><td>0</td><td><b>94.9%</b></td><td>39</td><td>基线家族 87-95%(±8-12pp)</td></tr>
+<tr class="gold"><td>2 cm</td><td>0.10 m/s</td><td>0</td><td>82.3%</td><td>79</td><td rowspan="3">σ≤5cm/延迟≤40ms: 统计不可分 — 无痛区</td></tr>
 <tr><td>5 cm</td><td>0.25 m/s</td><td>0</td><td>86.3%</td><td>80</td></tr>
 <tr><td>5 cm</td><td>0.25 m/s</td><td>40 ms</td><td>85.3%</td><td>75</td></tr>
-<tr><td>5 cm</td><td>0.25 m/s</td><td>100 ms</td><td>76.0%</td><td>96</td><td>明确退化 −12pp — 感知管线延迟预算 &lt;50ms</td></tr>
-<tr class="dim"><td>10 cm</td><td>0.50 m/s</td><td>0</td><td>65.9%</td><td>82</td><td>明确退化 −22pp — 粗检测器需噪声 DR finetune</td></tr>
+<tr><td>5 cm</td><td>0.25 m/s</td><td>100 ms</td><td>76.0%</td><td>96</td><td>−12pp — 感知延迟预算 &lt;50ms</td></tr>
+<tr class="dim"><td>10 cm</td><td>0.50 m/s</td><td>0</td><td>65.9%</td><td>82</td><td>−22pp — 粗检测器需 DR finetune</td></tr>
 </table></div>
-<div style="font-size:13px;color:#888;margin:-14px 0 22px">结论(两轮合并后修正): 从未见过 obs 噪声的 state 冠军, 在 <b>σ≤5cm + 延迟≤40ms</b> 区间零样本无可检测退化; 硬红线是<b>延迟(100ms −12pp)</b>和粗定位(10cm −22pp)。单轮 40 抛读数波动 ±12pp — 永远看合并样本。</div>
+</details>
+</div>
 
-<h2 style="font-size:18px;margin:6px 0 10px">🤖 SONIC 携行零样本 — 判死, 需 finetune (2026-07-14 过夜) <span style="font-weight:400;font-size:13px;color:#888">SONIC 复活于 A100(冒烟走 1.62m/参考 1.68m 零摔) · 死臂锁抱姿 + 箱上前臂床</span></h2>
+<!-- ============ 页签2: SONIC 携行 ============ -->
+<div class="pane" id="p-carry">
+<h2>🚶 携行段 — SONIC 携箱走路 <span class="hint">2026-07-14/15 · 零训练打通 · 破局=抱姿写进参考动作(用户提案)</span></h2>
 <div class="lbwrap"><table class="lb">
-<tr><th>轮</th><th>配置</th><th>静态托箱</th><th>携行(走完)</th><th>死因</th></tr>
-<tr class="dim"><td>r2</td><td>动作层锁臂 + pelvis 定高放箱</td><td>0/4(放高33cm弹走)</td><td>—</td><td>①几何: 床高应实测 ②对照组无箱也弓腰0.34 → 动作层 override 经 last_action 历史污染 SONIC obs</td></tr>
-<tr><td>r6</td><td>apply层钉臂(obs净) + 实测床高 + kp40</td><td><b>4/4 ✓</b></td><td>0/4(掉在步134-327)</td><td>步态振荡甩箱; 钉臂仍经本体感知致蹲身(位移1.62→0.73m)</td></tr>
-<tr><td>r7</td><td>+掌上腕∓1.57+腕唇0.40+慢走0.67×</td><td>4/4 ✓</td><td>0/4</td><td>钉臂→深蹲前倾→床变下坡→箱越唇前滑(帧检因果链)</td></tr>
-<tr class="gold"><td class="medal">🥇 r8</td><td><b>抱姿写进参考动作, 零钉臂</b>(用户提案: 手臂 ref←cradle 常值, SONIC 主动跟踪)</td><td>4/4 ✓</td><td><b>4/4 ✓ 零训练</b></td><td>三通道(命令/动作/本体感知)一致 → 蹲身消失(pitch 0.24)、真实迈步(位移1.35m)、直立携行全程不掉。SONIC 携行 finetune 免了</td></tr>
-<tr class="gold"><td>r9a</td><td>加压: <b>正常速度</b>(1.0×)</td><td>4/4 ✓</td><td><b>4/4 ✓ 零瞬掉</b></td><td>比慢走更干净(pitch 0.20 最佳)——SONIC 在原生速度上跟踪最好, demo 用正速 (<a href="media/carrywalk/sonic_carry_r9a_fullspeed.mp4">▶视频</a>)</td></tr>
-<tr><td>r9b</td><td>加压: <b>5m 三段停走停</b>(0.67×3)</td><td>4/4 ✓</td><td>3/4</td><td>掉箱发生在段间起停接缝(step 467/665)——续接缝是弱点; motionbricks 连续参考天然规避 (<a href="media/carrywalk/sonic_carry_r9b_5m.mp4">▶视频</a>)</td></tr>
+<tr><th>轮</th><th>配置</th><th>静态托箱</th><th>携行</th><th>结论</th></tr>
+<tr class="gold"><td class="medal">🥇 r8</td><td><b>抱姿写进参考, 零钉臂</b>(SONIC 主动跟踪"端着手走路")</td><td>4/4 ✓</td><td><b>4/4 ✓ 零训练</b></td><td>三通道(命令/动作/本体感知)一致→直立真迈步全程不掉</td></tr>
+<tr class="gold"><td>r9a</td><td>加压: 正常速度 1.0×</td><td>4/4 ✓</td><td><b>4/4 ✓ 零瞬掉</b></td><td>原生速度跟踪最好, demo 用正速 (<a href="media/carrywalk/sonic_carry_r9a_fullspeed.mp4">▶</a>)</td></tr>
+<tr><td>r9b</td><td>加压: 5m 三段停走停</td><td>4/4 ✓</td><td>3/4</td><td>掉在起停接缝; motionbricks 连续参考天然规避 (<a href="media/carrywalk/sonic_carry_r9b_5m.mp4">▶</a>)</td></tr>
+<tr class="dim"><td>r2-r7</td><td>死臂钉法(动作层/apply层/掌上床/慢走)</td><td>r6起 4/4</td><td>0/4 ×3</td><td>❌钉臂与命令/本体感知打架→蹲身→床倾→箱滑; 正解=改参考不改物理</td></tr>
 </table></div>
 <div class="grid" style="margin-bottom:26px">
-<div class="card"><div class="badge live">🥇 BREAKTHROUGH</div><div class="t">r8: SONIC 携箱走路成功 — 零训练 4/4</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r8_OK.mp4" type="video/mp4"></video><div class="m" style="margin-top:6px">用户提案: 把抱姿直接写进参考动作的手臂列(planner 后处理一行), SONIC 原生跟踪"端着手走路"——不钉臂, 三通道一致。直立、真迈步、全程抱稳。package delivery 携行段零训练打通。</div></div>
-<div class="card"><div class="badge dead">FALSIFIED ×3</div><div class="t">对照: 死臂钉法 r7(掌上床+慢走)</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r7.mp4" type="video/mp4"></video><div class="m" style="margin-top:6px">静态托稳 → 起步深蹲前倾 → 箱前滑脱床。教训: 手臂 override 与 SONIC 的命令/本体感知打架, 正解是改参考不改物理。</div></div>
+<div class="card"><div class="badge live">🥇 BREAKTHROUGH</div><div class="t">r8: SONIC 携箱走路 — 零训练 4/4</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r8_OK.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge dead">对照: 死臂钉法 r7</div><div class="t">静态稳 → 起步蹲身 → 箱滑脱</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/sonic_carry_r7.mp4" type="video/mp4"></video></div>
 </div>
-
-<h2 style="font-size:18px;margin:6px 0 10px">🏆 Leaderboard <span style="font-weight:400;font-size:13px;color:#888">姿态闸(dev≤0.40 · gbx∈(−0.65,0.15] · 站姿)优先,同闸比 32-env 费率 · 自动更新</span></h2>
+<details><summary>前哨: catch 冠军自家步态携行测试 (2026-07-14) — 蹭行可携但判死"自己走路"路线</summary>
 <div class="lbwrap"><table class="lb">
-<tr><th>#</th><th>ckpt</th><th>费率</th><th>foot</th><th>dev</th><th>strict</th><th>chest</th><th>备注</th><th>视频</th></tr>
-<tr><td colspan="9" style="background:#eef4fb;font-weight:600;font-size:12.5px">v24b 考卷(2026-07-13 起 canon:正面 ±10° 扇 + kp40 + REALIGN;费率=床托 30 帧口径;与下方旧考卷不可比)</td></tr>
-<tr class="gold"><td class="medal">🥇</td><td>ArmA @1499 终局 <b>★纪录</b></td><td><b>90.8%</b></td><td>0.23</td><td>—</td><td>16/16</td><td>0.23</td><td>纯 v24b DDP 零漂移单调 88.0→90.1→90.8;<b>三点3s口径仅 9.0%</b>(双尺并测);连击死因:脚动59%>贴胸37%>箱动15%,与箱稳无关(用户假设已证伪);⚠对角抵脸搬运待眼审</td><td><a href="../assets/box-catch/v24bA_i1499_sm.mp4">▶</a></td></tr>
-<tr><td class="medal">🥈</td><td>ArmB @500(+FRONTAL 悬停层)</td><td>90.5%</td><td>—</td><td>—</td><td>16/16</td><td>0.30</td><td>早峰后缓降(88.5@1000→86.9@1499);悬停层中性;三点口径 5.2%</td><td><a href="../assets/box-catch/v24bB_i500_sm.mp4">▶</a></td></tr>
-<tr><td class="medal">🥉</td><td>v24b_500 亲本(3090)A100 锚点</td><td>86.4%</td><td>—</td><td>—</td><td>16/16</td><td>0.24</td><td>3090报66.3%为其自家口径;三点口径 0.0%;chest 0.24 = 3s卡点</td><td><a href="../assets/box-catch/v24bP_i500_sm.mp4">▶</a></td></tr>
-<tr class="dim"><td>*</td><td>ArmA/B @250</td><td>79.7 / 80.5%</td><td>—</td><td>—</td><td>16/16</td><td>—</td><td>warm 小谷,历代最浅</td><td><a href="../assets/box-catch/v24bA_i250_sm.mp4">▶</a></td></tr>
-<tr><td colspan="9" style="background:#f7f7f7;font-weight:600;font-size:12.5px">旧考卷(±45° 扇 + kp14 手臂,2026-07-12→13)</td></tr>
-<tr class="gold"><td class="medal">🥇</td><td>v23i @1499 <b>★纪录</b></td><td><b>76.8%</b></td><td><b>0.31</b></td><td>—</td><td>16/16</td><td>1.00</td><td>肘部权限 0.35 单调爬升 40.9→64.6→68.9→76.8 零漂移;直立+弯举贴胸,肘角回 0.64≈pin;已续训 v23i2</td><td><a href="../assets/box-catch/v23i_i1499_sm.mp4">▶</a></td></tr>
-<tr><td class="medal">🥈</td><td>v23isb @1499</td><td>71.6%</td><td>0.33</td><td>—</td><td>16/16</td><td>✓</td><td>seed123 双胞胎:掌上稳定不翻(腕轴 ry 0.75-0.83 窄带),费率慢半拍;续训 seedB2 中</td><td><a href="../assets/box-catch/v23isb_i1499_sm.mp4">▶</a></td></tr>
-<tr><td class="medal">🥉</td><td>v23e @500</td><td>68.3%</td><td>0.31</td><td>0.28</td><td>16/16</td><td>✓</td><td>DR考卷,前纪录保持者</td><td><a href="../assets/box-catch/v23e_i500_sm.mp4">▶</a></td></tr>
-<tr><td class="medal">🥈</td><td>v23f 主力 @1499 终局</td><td>65.2%</td><td>—</td><td>—</td><td>✓</td><td>✓</td><td>弯举权限0.20;⚠一侧手心翻转</td><td><a href="../assets/box-catch/v23f_i1499_sm.mp4">▶</a></td></tr>
-<tr><td class="medal">🥉</td><td>v23f seedB @1499 终局</td><td>63.4%</td><td><b>0.24 纪录</b></td><td>—</td><td>16/16</td><td>✓</td><td>手心朝上学回来了 → v23i 指定血统</td><td><a href="../assets/box-catch/v23fsB_i1499_sm.mp4">▶</a></td></tr>
-<tr><td>4</td><td>v23e @1499 终局</td><td>64.0%</td><td>—</td><td>—</td><td>—</td><td>✓</td><td>漂移确认,峰值在500</td><td><a href="../assets/box-catch/v23e_i1499_sm.mp4">▶</a></td></tr>
-<tr class="gold"><td class="medal">🥈</td><td>v23g @1000 <b>(LIVE)</b></td><td><b>67.0%</b></td><td>0.46</td><td>—</td><td>16/16</td><td>✓</td><td>直立闸大赢家:gbx −0.12 全场最直,60→63→67 还在爬</td><td><a href="../assets/box-catch/v23g_i500_sm.mp4">▶</a></td></tr>
-<tr><td>4</td><td>v23i @500 <b>(LIVE)</b></td><td>64.6%</td><td><b>0.35 新纪录</b></td><td>—</td><td>16/16</td><td>1.00</td><td>肘部权限 0.35;40.9%@250 换挡震荡→64.6% 回血;帧:直立+箱贴上胸,历史最佳观感</td><td><a href="../assets/box-catch/v23i_i500_sm.mp4">▶</a></td></tr>
-<tr><td>—</td><td>v23g @1499 终局</td><td>63.4%</td><td>0.40</td><td>—</td><td>16/16</td><td>✓</td><td>从 67.0@1000 漂移回落,冠军定格 model_1000</td><td><a href="../assets/box-catch/v23g_i1499_sm.mp4">▶</a></td></tr>
-<tr class="dim"><td>*</td><td>v23h / v23h2 @250</td><td>35.6% / 32.5%❌</td><td>—</td><td>—</td><td>—</td><td>—</td><td>FALSIFIED×2:飞行中拦截占位奖励在 W=1.0 与 0.3 同崩 → 思路本身与收球几何冲突</td><td><a href="../assets/box-catch/v23h_i250_sm.mp4">▶</a></td></tr>
-
-<tr><td class="medal">🥈</td><td>v23d @2999</td><td>65.2%</td><td>0.42</td><td>0.27</td><td>16/16</td><td>100%</td><td>站姿里程碑(1.2→0.42)</td><td><a href="../assets/box-catch/v23d_i2999_sm.mp4">▶</a></td></tr>
-<tr><td class="medal">🥉</td><td>v23a @500</td><td>64.3%</td><td>1.22</td><td>0.28</td><td>16/16</td><td>棱蹭</td><td>三点式首战</td><td><a href="../assets/box-catch/v23a_i500_sm.mp4">▶</a></td></tr>
-<tr><td>4</td><td>v23c @2999</td><td>61.3%</td><td>0.33</td><td><b>0.18</b></td><td>16/16</td><td>100%</td><td>dev 全场最优</td><td>—</td></tr>
-<tr><td>5</td><td>v22n @2999</td><td>59.2%</td><td>1.20</td><td>0.19</td><td>16/16</td><td>—</td><td>唯一完全垂直(gbx +0.04)</td><td><a href="../assets/box-catch/v22n_i2999_fixedcam_vlc.mp4">▶</a></td></tr>
-<tr><td>6</td><td>v22k @1500</td><td>56.9%</td><td>1.23</td><td>0.34</td><td>15/16</td><td>—</td><td>用户终审血统峰值</td><td><a href="../assets/box-catch/v22k_i1500_sm.mp4">▶</a></td></tr>
-<tr><td>7</td><td>v22m @2999</td><td>56.0%</td><td>0.32</td><td>0.38</td><td>16/16</td><td>—</td><td>元祖自然站姿</td><td><a href="../assets/box-catch/v22m_i2999_sm.mp4">▶</a></td></tr>
-<tr class="dim"><td>*</td><td>v23c @1000</td><td>72.7%</td><td>1.18</td><td>0.33</td><td>16/16</td><td>100%</td><td>裸费率纪录,但弓步(闸外参考)</td><td>—</td></tr>
-<tr class="dim"><td>*</td><td>v22l @2999</td><td>63.0%</td><td>1.04</td><td>0.96❌</td><td>15/16</td><td>—</td><td>FALSIFIED:夹抱</td><td><a href="../assets/box-catch/v22l_i2999_sm.mp4">▶</a></td></tr>
+<tr><th>#</th><th>策略</th><th>接住</th><th>携行成功率</th><th>摔倒</th><th>备注</th></tr>
+<tr class="gold"><td>🥇</td><td>冠军 ArmA_1499(不锁臂)</td><td>31/32</td><td><b>100%</b></td><td>0</td><td>但步态探针: 0 迈步/抬脚3.3cm=蹭行 0.7m, 非真走路 → 走路交 SONIC</td></tr>
+<tr><td>🥈</td><td>v25b_500 贴胸刀(锁臂)</td><td>32/32</td><td>96.9%</td><td>1</td><td>贴胸在慢速携行下非硬前置</td></tr>
+<tr><td>🥉</td><td>冠军(锁臂)</td><td>32/32</td><td>93.8%</td><td>1</td><td>锁臂略差</td></tr>
+<tr class="dim"><td>4</td><td>v25a 碎步罚(锁臂)</td><td>32/32</td><td>71.9%</td><td><b>7</b></td><td>钉脚习惯损害步态, 淘汰</td></tr>
 </table></div>
-<div class="grid">
-
-<a class="card" href="../assets/box-catch/v23g_i250_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
-<div class="t">v23g upright-gate @250: gbx −0.28 → −0.12, the straightest hold in campaign history</div><div class="m">Tightened torso gate (−0.3→−0.15) makes lean-back income-free — curl-press becomes the only path to chest contact. Rate tax only 3pp (60.2%), contact kept at 0.92-1.00. Elbow relaxed to 0.70: proof the 0.20 authority cap, not the policy, limits visible curl → v23i raises it to 0.35.</div>
-<div class="d">2026-07-13 03:0x · triage video · training GPU0-2 → 1500</div></a>
-
-<a class="card" href="../assets/box-catch/v23h_i250_sm.mp4" target="_blank"><div class="badge dead">FALSIFIED</div>
-<div class="t">v23h intercept W=1.0: 35.6% collapse — reward distortion autopsy</div><div class="m">In-flight income for moving the bed to the predicted landing point at full weight taught landing-chasing that disrupts the intake itself (135 throws = miss-rethrow loop). Killed at 250. v23h2 reruns at W=0.3 to separate dosage from predictor bias.</div>
-<div class="d">2026-07-13 02:5x · autopsy video</div></a>
-
-<a class="card" href="../assets/box-catch/v23fsB_i1499_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">v23f seedB finale: 63.4%, palms re-learned UP (seed-basin divergence)</div><div class="m">Late bloomer (60.2 → 63.4 over 1500 DDP iters), foot-split record 0.24 at 500. User eyeball: seedB holds both palms up where the main line flipped one. Lineage audit 07-13: a silent sed mismatch meant v23f/g actually warmed from v23d_2999, not seedB/v23e — results stand, labels corrected, v23i now pins WARM_DOCKER explicitly to v23g_1000.</div>
-<div class="d">2026-07-13 01:4x · finale station pair</div></a>
-
-<a class="card" href="../assets/box-catch/v23d_i2999_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
-<div class="t">v23d finale: stance SOLVED — foot split 1.2 → 0.42 at 65.2%</div><div class="m">Linear-ramp feet-gather income (the v23b gaussian paid literally zero at lunge distance). Catch-instant lunge stays free; settled hold now stands tall. Chest contact 100%, all pose gates pass. Overnight milestone #2.</div>
-<div class="d">2026-07-12 20:2x · finale video</div></a>
-<a class="card" href="../assets/box-catch/v23e_i500_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
-<div class="t">v23e-DDP: DR pack merge (hover-timing, RSI, robot-mass) — running</div><div class="m">Warm from v23d finale to preserve every retained success; adds Catch-It throw-timing widening (0.3-1.2s hover), LadderMan reference-state randomization, robot link-mass DR. Short-cycle 1500 iters to dodge long-run drift. Target: break 72.7% peak.</div>
-<div class="d">2026-07-12 20:51 → · station video @500</div></a>
-<a class="card" href="../assets/box-catch/v23a_i500_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
-<div class="t">v23a 3-point carry: 64.3% — campaign record at iter 500</div><div class="m">Elbow-only scoop authority (1 DoF/arm) + bed-gated chest-delivery income + tighter hold-init. Rate 39.6% → 64.3% in one knob, strict 16/16 fp0. User eyeball found the flaw: box grazes the chest by an edge, face leans away — fixed in v23c.</div>
-<div class="d">2026-07-12 10:0x · video</div></a>
-
-<a class="card" href="../assets/box-catch/v23b_i500_sm.mp4" target="_blank"><div class="badge live">LIVE</div>
-<div class="t">v23b phase stance: vertical hold, feet-gather pending</div><div class="m">v23a + income-only feet-gather bonus after 0.6 s of settled hold (lunge at catch stays free). 59.4% at 500, torso gbx +0.01 (fully vertical). Stance verdict at the 1000 station.</div>
-<div class="d">2026-07-12 10:1x · video</div></a>
-
-<a class="card" href="../assets/box-catch/v22n_i2999_fixedcam_vlc.mp4" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">v23c-DDP4: real-contact contract + tilt-in + sloped bed — 3.79× throughput</div><div class="m">Chest income now pays ONLY at true contact (gap ≤ 5 mm, box top leaning INTO chest) + BOX_ELBOW_SCOOP slopes the bed toward the torso. First AMP-DDP production run: 4×8192 envs, 149.8k steps/s, discriminator param hashes bit-identical across ranks.</div>
-<div class="d">2026-07-12 10:4x · running on GPUs 3-6</div></a>
-
-<a class="card" href="../assets/box-catch/v22n_i2999_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">v22n soft-bed: pose+rate winner of the v22 ladder — 59.2%, 16/16, vertical</div><div class="m">Arms pinned at the corrected CRADLE_POSE (±0.02 rad wiggle), stock PD = compliant receiving bed; legs + waist do the catching. Only run in campaign history with a fully vertical hold. Fixed-camera video.</div>
-<div class="d">2026-07-12 05:37 · video + station table</div></a>
-
-<a class="card" href="../assets/box-catch/v22m_i2999_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">v22m arm-scale 0.10: stance champion — foot split 0.32, 56.0%</div><div class="m">Slow learner that came alive late: 4.3% at 500 → 56.0% at 2999 with 16/16 strict, and the only natural (non-lunge) stance in the fleet. Existence proof for the phase-stance goal.</div>
-<div class="d">2026-07-12 05:20 · video</div></a>
-
-<a class="card" href="../assets/box-catch/v22k_i500_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">v22k arm-scale 0.25 @500 — USER-RATIFIED pose, held-dev basin broken</div><div class="m">The actuator-constraint bet that ended three generations of price-signal failure: held dev 1.04 → 0.27, upright cradle hold. User verdict on the video: "exactly就是我想要的效果". Peaked 56.9% at 1500.</div>
-<div class="d">2026-07-12 02:20 · ratified station video</div></a>
-
-<a class="card" href="../assets/box-catch/v22l_i2999_sm.mp4" target="_blank"><div class="badge dead">FALSIFIED</div>
-<div class="t">v22l hold-init clamp: 63% rate bought with the wrong pose</div><div class="m">Kinematic arm lock for the first 50 steps of hold-practice episodes. Post-release the policy snaps back to the clamp-hug (held dev 0.96-1.02 through 3000 iters) — conditioned-reflex diagnosis confirmed ×4. Autopsy video.</div>
-<div class="d">2026-07-12 06:27 · autopsy</div></a>
-
-<a class="card" href="../assets/box-catch/v22k_i1500_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">v22k trajectory: 41.9 → 50.8 → 56.9% (500/1000/1500)</div><div class="m">Rate recovery at ~9pp/500 iters after the actuator change, posture tightening in parallel (gbx −0.19 → −0.14). Drifted after 1500; peak checkpoint archived.</div>
-<div class="d">2026-07-12 03:39 · 3-station series</div></a>
-
-<a class="card" href="https://github.com/ToberJ/box_campaign_h100/blob/a100-v22k-ckpts/migration/ddp_validation_report.md" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">AMP-DDP engineering: discriminator sync validated GO on 4×A100</div><div class="m">rsl_rl 3.0.1 native multi-GPU path + env-gated discriminator broadcast/all-reduce/skip-gate MIN-reduce. 200-iter validation: param sums bit-identical on all ranks, curve matches single-GPU, ckpt saved once. Full report in repo.</div>
-<div class="d">2026-07-12 09:5x · validation report</div></a>
-
-<a class="card" href="https://github.com/ToberJ/box_campaign_h100/tree/a100-v22k-ckpts/renders_gallery" target="_blank"><div class="badge rep">REPORT</div>
-<div class="t">Video gallery + training timeline (GitHub)</div><div class="m">All station videos with metrics tables and the mermaid gantt timeline (run start/end times, milestones). Checkpoints and params archived on the same branch.</div>
-<div class="d">updated every station</div></a>
-
+<div class="grid" style="margin-bottom:26px">
+<div class="card"><div class="badge live">100% CARRY</div><div class="t">冠军·不锁臂(蹭行)</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/champ_nolock.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge rep">CONTRAST</div><div class="t">v25b_500 贴胸刀</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/v25b_side.mp4" type="video/mp4"></video></div>
 </div>
-<div class="contrib"><b>Campaign facts</b>: box 0.34×0.26×0.22 m / 0.18 kg, drag k=0.85, throws 3–4.2 m at 5–7.6 m/s ±15°, hover-surprise launch · ruler = Active Reward Terms + gbx/dev/gap probes · every 500-iter station: render + strict 16 + probes + 32-env per-throw · videos are 72 h litterbox mirrors, permanent copies in the repo.</div>
+</details>
+</div>
+
+<!-- ============ 页签3: Catch 榜 ============ -->
+<div class="pane" id="p-lb">
+<h2>🏆 Catch 策略榜 — v24b 考卷 <span class="hint">正面 ±10° 扇 + kp40 + REALIGN · 费率=床托 30 帧口径 · GT 观测</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>#</th><th>ckpt</th><th>费率</th><th>strict</th><th>chest</th><th>备注</th><th>视频</th></tr>
+<tr class="gold"><td class="medal">🥇</td><td>ArmA @1499 <b>★纪录</b></td><td><b>90.8%</b></td><td>16/16</td><td>0.23</td><td>零漂移单调 88.0→90.1→90.8; 三点3s口径 9.0%; 连击死因: 脚动59%>贴胸37%>箱动15%</td><td><a href="../assets/box-catch/v24bA_i1499_sm.mp4">▶</a></td></tr>
+<tr><td class="medal">🥈</td><td>ArmB @500(+FRONTAL)</td><td>90.5%</td><td>16/16</td><td>0.30</td><td>早峰后缓降; 悬停层中性; 三点 5.2%</td><td><a href="../assets/box-catch/v24bB_i500_sm.mp4">▶</a></td></tr>
+<tr><td class="medal">🥉</td><td>v24b_500 亲本(3090) A100 锚点</td><td>86.4%</td><td>16/16</td><td>0.24</td><td>3090 自家口径 66.3%; 三点 0.0%</td><td><a href="../assets/box-catch/v24bP_i500_sm.mp4">▶</a></td></tr>
+<tr><td>4</td><td>CHAMPION_v4_3point(3090 v24e)</td><td>85.4%</td><td>—</td><td>gap门</td><td>3090 报 83.4%(自家 gap 口径); 我尺三点 6.6%; = v25-DR 的 warm 源</td><td>—</td></tr>
+</table></div>
+<details><summary>旧考卷榜 (±45° 扇 + kp14 手臂, 2026-07-12→13) — v22/v23 世代</summary>
+<div class="lbwrap"><table class="lb">
+<tr><th>#</th><th>ckpt</th><th>费率</th><th>foot</th><th>strict</th><th>备注</th><th>视频</th></tr>
+<tr class="gold"><td>🥇</td><td>v23i @1499 ★纪录</td><td><b>76.8%</b></td><td>0.31</td><td>16/16</td><td>肘部权限 0.35 单调爬升零漂移</td><td><a href="../assets/box-catch/v23i_i1499_sm.mp4">▶</a></td></tr>
+<tr><td>🥈</td><td>v23isb @1499</td><td>71.6%</td><td>0.33</td><td>16/16</td><td>seed 双胞胎, 掌上稳定</td><td><a href="../assets/box-catch/v23isb_i1499_sm.mp4">▶</a></td></tr>
+<tr><td>🥉</td><td>v23e @500</td><td>68.3%</td><td>0.31</td><td>16/16</td><td>DR考卷前纪录</td><td><a href="../assets/box-catch/v23e_i500_sm.mp4">▶</a></td></tr>
+<tr><td>4</td><td>v23g @1000</td><td>67.0%</td><td>0.46</td><td>16/16</td><td>直立闸大赢家 gbx −0.12</td><td><a href="../assets/box-catch/v23g_i500_sm.mp4">▶</a></td></tr>
+<tr><td>5</td><td>v23f/seedB/v23d/v23a/v23c/v22n/v22k/v22m</td><td>65.2-56.0</td><td>—</td><td>—</td><td>世代阶梯, 详见档案页签</td><td>—</td></tr>
+<tr class="dim"><td>*</td><td>v23h/h2(拦截) · v22l(夹抱)</td><td>❌</td><td>—</td><td>—</td><td>FALSIFIED: 拦截奖励与收球几何冲突 / 夹抱姿态</td><td>—</td></tr>
+</table></div>
+</details>
+</div>
+
+<!-- ============ 页签4: 历史档案 ============ -->
+<div class="pane" id="p-arch">
+<h2>🗄️ 历史档案 <span class="hint">v22-v23 世代全记录, 2026-07-12→13</span></h2>
+<div class="grid">
+<a class="card" href="../assets/box-catch/v23g_i250_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v23g upright-gate: gbx −0.28 → −0.12, the straightest hold</div><div class="m">Tightened torso gate makes lean-back income-free. Rate tax only 3pp, contact 0.92-1.00.</div><div class="d">2026-07-13</div></a>
+<a class="card" href="../assets/box-catch/v23h_i250_sm.mp4" target="_blank"><div class="badge dead">FALSIFIED</div>
+<div class="t">v23h intercept: 35.6% collapse</div><div class="m">In-flight landing-chasing income disrupts the intake itself. Killed at 250, W=0.3 rerun also failed.</div><div class="d">2026-07-13</div></a>
+<a class="card" href="../assets/box-catch/v23fsB_i1499_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v23f seedB: palms re-learned UP (seed-basin divergence)</div><div class="m">Foot-split record 0.24. Lineage audit: silent sed mismatch corrected, WARM_DOCKER now pinned.</div><div class="d">2026-07-13</div></a>
+<a class="card" href="../assets/box-catch/v23d_i2999_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v23d: stance SOLVED — foot split 1.2 → 0.42</div><div class="m">Linear-ramp feet-gather income; lunge stays free, settled hold stands tall.</div><div class="d">2026-07-12</div></a>
+<a class="card" href="../assets/box-catch/v23a_i500_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v23a 3-point carry: 64.3% record at iter 500</div><div class="m">Elbow-only scoop + bed-gated chest-delivery. User eyeball found the edge-graze flaw → v23c.</div><div class="d">2026-07-12</div></a>
+<a class="card" href="../assets/box-catch/v22n_i2999_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v22n soft-bed: pose+rate winner of v22 ladder</div><div class="m">Arms pinned at corrected CRADLE_POSE, stock PD compliant bed; only fully vertical hold in campaign.</div><div class="d">2026-07-12</div></a>
+<a class="card" href="../assets/box-catch/v22k_i500_sm.mp4" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">v22k arm-scale 0.25 — USER-RATIFIED pose</div><div class="m">Actuator-constraint bet ended three generations of price-signal failure: held dev 1.04 → 0.27. "exactly就是我想要的效果".</div><div class="d">2026-07-12</div></a>
+<a class="card" href="../assets/box-catch/v22l_i2999_sm.mp4" target="_blank"><div class="badge dead">FALSIFIED</div>
+<div class="t">v22l hold-init clamp: 63% bought with the wrong pose</div><div class="m">Conditioned-reflex clamp-hug confirmed ×4.</div><div class="d">2026-07-12</div></a>
+<a class="card" href="https://github.com/ToberJ/box_campaign_h100/blob/a100-v22k-ckpts/migration/ddp_validation_report.md" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">AMP-DDP engineering: GO on multi-A100</div><div class="m">Discriminator broadcast/all-reduce validated bit-identical; production 6×8192 = 130k+ steps/s.</div><div class="d">2026-07-12</div></a>
+<a class="card" href="https://github.com/ToberJ/box_campaign_h100/tree/a100-v22k-ckpts/renders_gallery" target="_blank"><div class="badge rep">REPORT</div>
+<div class="t">Video gallery + training timeline (GitHub)</div><div class="m">All station videos + gantt; checkpoints archived on branch.</div><div class="d">every station</div></a>
+</div>
+</div>
+
+<div class="contrib"><b>Campaign facts</b>: box 0.34×0.26×0.22 m / 0.18 kg, drag k=0.85, throws 3–4.2 m at 5–7.6 m/s, hover-surprise launch · 双尺协议: GT尺(eval_per_throw) + 伪噪尺(eval_per_throw_drenv, MIX_CLEAN=0) · 每 500-iter 站点: strict + 32-env per-throw + 长评复核(单站读数 ±7pp, 永远看合并样本) · 视频内嵌本页(GitHub Pages), ckpt 归档 <code>v24-3090</code> / <code>a100-v22k-ckpts</code> 分支.</div>
+
+<script>
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('on')});
+    document.querySelectorAll('.pane').forEach(function(x){x.classList.remove('on')});
+    t.classList.add('on');
+    document.getElementById(t.dataset.pane).classList.add('on');
+  });
+});
+</script>
 </body></html>
