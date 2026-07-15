@@ -42,6 +42,20 @@ a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transf
 <div class="card"><div class="badge rep">CONTRAST</div><div class="t">v25b_500 贴胸刀·侧面</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/v25b_side.mp4" type="video/mp4"></video></div>
 </div>
 
+<h2 style="font-size:18px;margin:6px 0 10px">🎯 v25-DR 检测器降噪 finetune (2026-07-15 过夜, 3090 交接任务) <span style="font-weight:400;font-size:13px;color:#888">目标: 清≥80 / 伪噪≥70 / vision-based 80 · 伪噪尺=检测器级腐蚀(σ按距/盲区/差分滞后/丢帧/k失配)</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>版本@iter</th><th>清(GT尺)</th><th>伪噪尺</th><th>判决</th></tr>
+<tr class="dim"><td>原版冠军 v4_3point</td><td>85.4%</td><td>21.2%</td><td>基线: 检测器噪声下崩(=M5 51%的sim镜像)</td></tr>
+<tr class="dim"><td>dr1(逐帧差分vel, 噪声5×超配)</td><td>62.9→40.4</td><td>32.9→49.5</td><td>❌噪声量级超配→放弃box obs</td></tr>
+<tr class="dim"><td>dr2(5帧差分, 量级贴档案)</td><td>29.8</td><td>58.7</td><td>❌结构性时滞→分布搬家(噪>清29pp)</td></tr>
+<tr class="gold"><td><b>dr3@1500(+50/50混合锚)</b></td><td><b>84.1% ✅门</b></td><td>61.3%</td><td>平衡冠军 (<a href="media/carrywalk/v25dr3_1500_demo.mp4">▶视频</a>)</td></tr>
+<tr class="gold"><td><b>dr3@1999</b></td><td>65.3%</td><td><b>79.8% ✅破70</b></td><td>噪王(晚期迁移产物); tp 4.2%=腐蚀下三点持稳</td></tr>
+<tr><td>dr3@1750</td><td>80.1%</td><td>57.6%</td><td>前沿中点</td></tr>
+<tr class="dim"><td>dr5(0.65混合)@500</td><td>80.0%</td><td>44.3%</td><td>❌腐蚀信号被稀释</td></tr>
+<tr><td>dr4 POSLAG(跑着)</td><td>—</td><td>—</td><td>速度通道连根拔(3维换5帧前位置): 攻双门的现役方案</td></tr>
+</table></div>
+<div style="font-size:13px;color:#888;margin:-14px 0 22px"><b>核心发现</b>: actor obs 与 clean 有任何系统性结构差异, 纯腐蚀训练必然分布搬家(非对称critic锚不住actor); 50/50混合减缓但1500后仍滑; 混合比只是在帕累托前沿(84/61↔65/80)滑动, 鸿沟=速度通道 → POSLAG 通道同构化是破局刀。双前沿 ckpt 已推 v24-3090 (1b7ae24), 请 3090 M5 双测校准 伪噪↔M5 映射(现有锚点: 21.2↔51)。</div>
+
 <h2 style="font-size:18px;margin:6px 0 10px">📡 Detector 噪声鲁棒性 (2026-07-14 过夜) <span style="font-weight:400;font-size:13px;color:#888">冠军 ArmA_1499 零样本 · box obs 加噪+延迟 · 回答"detector 要做多准" · 基线 ~88%</span></h2>
 <div class="lbwrap"><table class="lb">
 <tr><th>位置噪声 σ</th><th>速度噪声 σ</th><th>延迟</th><th>接住率(两轮合并)</th><th>样本</th><th>判读</th></tr>
