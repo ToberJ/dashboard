@@ -42,7 +42,7 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 </style></head><body>
 <div class="crumb"><a href="../index.html">← all projects</a></div>
 <h1>Box Catch — G1 Package-Delivery Campaign (a100-1)</h1>
-<div class="sub">2026-07-15: <b>现役 = v25-DR 检测器降噪 finetune</b>(dr3@1500 冠军 清77.9/伪噪61.3 已推分支, dr4 POSLAG 在训) · 终局架构 = detector→state接箱→SONIC携行→放箱(不蒸馏) · vision-based 目标 80%</div>
+<div class="sub">2026-07-16: <b>现役 = 攻克 sim2sim 税</b>(M5校准判死伪噪尺: 腐蚀训练交跨引擎税 −1→−20→−50; 双探针在跑: 冻结内层 vs KL锚) · 部署王座 = 冠军v4(M5 51%) · 真机 A线感知标定 + 首个 demo 今晚(3090侧) · 终局 = detector→state接箱→SONIC携行→放箱</div>
 
 <!-- ============ 管线总览(常驻) ============ -->
 <div class="pipe">
@@ -63,7 +63,18 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 
 <!-- ============ 页签1: v25-DR ============ -->
 <div class="pane on" id="p-dr">
-<h2>🎯 v25-DR 检测器降噪 finetune <span class="hint">2026-07-15 · 3090 交接任务 · 目标 清≥80 / 伪噪≥70 · 伪噪尺=检测器级腐蚀(σ按距/盲区/差分滞后/丢帧/k失配)</span></h2>
+<h2>🎯 抗噪训练 vs sim2sim 税 <span class="hint">2026-07-16 · 大门 = M3(MuJoCo清)≥78 且 M5(真感知链)≥51 · Isaac 本地尺已无 ranking 效力(对真链反向)</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>ckpt</th><th>Isaac清</th><th>M3</th><th>税</th><th>M5</th><th>判决</th></tr>
+<tr class="gold"><td><b>冠军 v4</b>(GT训练)</td><td>83-91</td><td>82.5</td><td><b>−1</b></td><td><b>50-51</b></td><td>部署王座, 今晚真机 demo 用它</td></tr>
+<tr class="dim"><td>dr3@1500(差分腐蚀)</td><td>77.9</td><td>57.5</td><td>−20</td><td>28.7</td><td>❌ 排序反转的发现者</td></tr>
+<tr class="dim"><td>kf1@1000(KF腐蚀)</td><td>76.3</td><td><b>26.3</b></td><td><b>−50</b></td><td>31.2</td><td>❌ 税律定形: 腐蚀越狠税越重; 但 M5>M3 = 训练分布=部署分布方向成立</td></tr>
+<tr class="dim"><td>kf2bf@500(盲帧flag)</td><td>74.0/KF14.6</td><td>—</td><td>—</td><td>—</td><td>❌ 反面锚点: 多付12分清尺换2.3分KF(噪声内)</td></tr>
+<tr class="dim"><td>探针②冻结内层@500</td><td>77.4/KF10.3</td><td>判卷中</td><td>?</td><td>—</td><td>杀标准处决(零抗噪); M3 判"内部先验"机制生死</td></tr>
+<tr><td><b>探针③ KL锚@500</b></td><td>在跑</td><td>待</td><td>待</td><td>待</td><td>KL(π‖冠军)只锚清洁样本 β=1.0; 过本地门即送 M3</td></tr>
+</table></div>
+<div class="note"><b>税律(3090 M5 校准, 3点单调)</b>: 无腐蚀−1 → 差分−20 → KF−50。机制假说 = obs 不可信时 PPO 把行为压向 Isaac 特化的内部动力学先验, 跨引擎即碎; 真机=第三个引擎, 税只会更重 → 不解决税, 抗噪训练全白练。双探针 = 同一假说两种修法(物理冻结 vs KL软锚)赛跑, M3 税小者当下一代配方骨架。真机侧: A线感知标定采集中(检测器 domain gap/深度/延迟/几何 四未知数上秤)。</div>
+<details><summary>v25-DR 伪噪尺时代全记录 (2026-07-15, 已被 M5 校准降级为训练期粗筛)</summary>
 <div class="lbwrap"><table class="lb">
 <tr><th>版本@iter</th><th>清(GT尺)</th><th>伪噪尺</th><th>判决</th></tr>
 <tr class="dim"><td>原版冠军 v4_3point</td><td>85.4%</td><td>21.2%</td><td>基线: 检测器噪声下崩(=M5 51% 的 sim 镜像)</td></tr>
@@ -72,9 +83,9 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 <tr class="gold"><td><b>dr3@1500(+50/50混合锚)</b></td><td><b>77.9%</b>(长评317抛)</td><td><b>61.3%</b></td><td><b>交付冠军</b>: 噪+40pp/清−7.5pp; 已推 v24-3090 待 M5 (<a href="media/carrywalk/v25dr3_1500_demo.mp4">▶视频</a>)</td></tr>
 <tr class="dim"><td>dr3@1999</td><td>65.3%</td><td>56.9%(合并823抛)</td><td>⚠️ 站点79.8为不可复现异常(两次5200步长评定音) — 被@1500双轴支配</td></tr>
 <tr class="dim"><td>dr3@1750 / dr5(0.65混合)@500</td><td>80.1 / 80.0</td><td>57.6 / 44.3</td><td>前沿中点 / ❌腐蚀信号被稀释</td></tr>
-<tr><td>dr4 POSLAG(在训)</td><td>@500: 64.0</td><td>35.5</td><td>速度通道连根拔(3维换5帧前位置), @1000 判斜率</td></tr>
+<tr><td>dr4 POSLAG(全程完赛)</td><td>64.0→70.9→77.2→76.7→<b>79.8</b></td><td>35.5→54.0→59.6→<b>70.8</b>→65.6</td><td>唯一两尺同涨家族; @1500 已推 3090 当第三锚点(M3/M5 待判)</td></tr>
 </table></div>
-<div class="note"><b>核心发现</b>: actor obs 与 clean 有任何系统性结构差异, 纯腐蚀训练必然分布搬家(非对称 critic 锚不住 actor); 50/50 混合是锚但非根治; 混合比只在帕累托前沿滑动, 鸿沟=速度通道 → POSLAG 通道同构化是破局刀。伪噪↔M5 映射锚点: 21.2↔51。</div>
+<div class="note"><b>核心发现</b>: actor obs 与 clean 有任何系统性结构差异, 纯腐蚀训练必然分布搬家(非对称 critic 锚不住 actor); 50/50 混合是锚但非根治; 混合比只在帕累托前沿滑动。伪噪尺终局: M5 校准发现其对真链<b>排序反向</b>(dr3 伪噪61.3>>冠军21.2, M5 28.7<<51), 降级为训练期粗筛。</div>
 <details><summary>📡 前哨: 零样本噪声扫参 (2026-07-14, DR 立项依据)</summary>
 <div class="lbwrap"><table class="lb">
 <tr><th>位置噪声 σ</th><th>速度噪声 σ</th><th>延迟</th><th>接住率(两轮合并)</th><th>样本</th><th>判读</th></tr>
@@ -85,6 +96,7 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 <tr><td>5 cm</td><td>0.25 m/s</td><td>100 ms</td><td>76.0%</td><td>96</td><td>−12pp — 感知延迟预算 &lt;50ms</td></tr>
 <tr class="dim"><td>10 cm</td><td>0.50 m/s</td><td>0</td><td>65.9%</td><td>82</td><td>−22pp — 粗检测器需 DR finetune</td></tr>
 </table></div>
+</details>
 </details>
 </div>
 
