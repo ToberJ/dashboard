@@ -75,6 +75,9 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 <tr><td><b>kf5dyn 动力学DR@500</b></td><td>76.5/KF17.4(家族最高)</td><td>判卷中</td><td>?</td><td>—</td><td>PD±20%/摩擦/重力/箱重全抖动; 税<10 则为配方骨架</td></tr>
 <tr class="gold"><td><b>★ v26lat 延迟DR@999</b></td><td><b>82.2 长评</b>(309投)</td><td>判卷中</td><td>?</td><td>—</td><td>动作延迟0/20/40ms ring buffer; 曲线72.4(摔,渲染抓获)→82.2→84.2; 渲染=教科书床托; <b>等 M-延迟20ms门(冠军0%,目标70+)</b></td></tr>
 </table></div>
+<div class="grid" style="margin-bottom:22px">
+<div class="card"><div class="badge live">🏆 THRONE</div><div class="t">BLIND167 过 M5 真视觉链: 盲区全黑仍接住</div><div class="m">左=机载第一视角(RF-DETR框); 接住瞬间画面全黑(&lt;1m盲区)——策略靠外推+盲龄感知在失明中完成接取</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/carrywalk/blind167_m5_vision.mp4" type="video/mp4"></video></div>
+</div>
 <div class="note"><b>税律(3090 M5 校准, 3点单调)</b>: 无腐蚀−1 → 差分−20 → KF−50。机制假说 = obs 不可信时 PPO 把行为压向 Isaac 特化的内部动力学先验, 跨引擎即碎; 真机=第三个引擎, 税只会更重 → 不解决税, 抗噪训练全白练。双探针 = 同一假说两种修法(物理冻结 vs KL软锚)赛跑, M3 税小者当下一代配方骨架。真机侧: A线感知标定采集中(检测器 domain gap/深度/延迟/几何 四未知数上秤)。</div>
 <details><summary>v25-DR 伪噪尺时代全记录 (2026-07-15, 已被 M5 校准降级为训练期粗筛)</summary>
 <div class="lbwrap"><table class="lb">
