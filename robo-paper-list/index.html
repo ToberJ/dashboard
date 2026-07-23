@@ -1,0 +1,92 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Robo Paper List — Humanoid Motion Retargeting & Tracking</title>
+<style>
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
+*{box-sizing:border-box}
+body{font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;max-width:1000px;margin:0 auto;padding:40px 24px 90px}
+a{text-decoration:none;color:inherit}
+h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:28px;font-size:14px}
+.crumb{font-size:13px;color:#999;margin-bottom:18px} .crumb a{color:var(--bl)}
+h2{font-size:19px;margin:38px 0 4px;padding-top:22px;border-top:1px solid var(--bd)}
+.secdesc{color:#777;font-size:13.5px;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px 18px}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:5px;margin:0 4px 8px 0}
+.badge.kin{background:#eef3ff;color:#2c6fd6}.badge.phy{background:#fdeee4;color:#c24f17}
+.badge.gen{background:#e9f7ec;color:#1f8a3d}.badge.single{background:#f3eefe;color:#7048b6}
+.badge.rec{background:#fff4d6;color:#9a6b00}.badge.sys{background:#eef1f4;color:#556}
+.t{font-size:16px;font-weight:600;margin-bottom:3px}
+.full{color:#888;font-size:12.5px;font-style:italic;margin-bottom:6px}
+.m{color:#555;font-size:13.5px} .note{color:#9a6b00;font-size:13px;margin-top:6px}
+.links{margin-top:9px;font-size:13px} .links a{color:var(--bl);margin-right:12px}
+.contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
+</style></head><body>
+<div class="crumb"><a href="../index.html">← all projects</a></div>
+<h1>Robo Paper List</h1>
+<div class="sub">Humanoid motion pipeline papers, classified by stage: retargeting (kinematic, 3D→3D) → tracking (physics-informed control) · 10 paper(s)</div>
+
+<h2>1 · Motion Retargeting — human motion → humanoid motion</h2>
+<p class="secdesc">3D human motion (mocap / SMPL) → 3D humanoid reference motion. Kinematic or physics-based mapping across the embodiment gap; output feeds tracking policies as reference trajectories.</p>
+<div class="grid">
+<div class="card"><span class="badge kin">KINEMATIC</span><span class="badge gen">GENERAL</span><span class="badge rec">推荐</span>
+<div class="t">GMR</div><div class="full">Retargeting Matters: General Motion Retargeting for Humanoid Motion Tracking (ICRA 2026)</div>
+<div class="m">Real-time, CPU-only retargeting from human motion (multiple data formats) to diverse humanoids. Shows retargeting quality — foot skating, penetration, infeasibility — dominates downstream tracking success. The retargeter behind TWIST/TWIST2; de-facto open-source default.</div>
+<div class="links"><a href="https://arxiv.org/abs/2510.02252">arXiv:2510.02252</a><a href="https://github.com/YanjieZe/GMR">code</a></div></div>
+
+<div class="card"><span class="badge phy">PHYSICS-BASED</span><span class="badge gen">GENERAL</span>
+<div class="t">SPIDER</div><div class="full">SPIDER: Scalable Physics-Informed Dexterous Retargeting (2025)</div>
+<div class="m">Sampling-based physics refinement turns kinematic human demos into dynamically feasible robot trajectories (contact-guided, curriculum virtual contacts). Scales across 9 humanoid/dexterous-hand embodiments, ~10× faster than RL baselines; feeds pipelines like HDMI.</div>
+<div class="links"><a href="https://arxiv.org/abs/2511.09484">arXiv:2511.09484</a><a href="https://github.com/facebookresearch/spider">code</a><a href="https://jc-bao.github.io/spider-project/">project</a></div></div>
+
+<div class="card"><span class="badge kin">KINEMATIC</span><span class="badge gen">INTERACTION</span>
+<div class="t">OmniRetarget</div><div class="full">OmniRetarget: Interaction-Preserving Data Generation for Humanoid Whole-Body Loco-Manipulation and Scene Interaction (2025)</div>
+<div class="m">Interaction-mesh retargeting that preserves robot–object–terrain contact relations (Laplacian deformation + kinematic constraints). Enables 30 s parkour / loco-manipulation on Unitree G1 with only 5 reward terms. The choice when objects and scenes matter, not just free-space motion.</div>
+<div class="links"><a href="https://arxiv.org/abs/2509.26633">arXiv:2509.26633</a><a href="https://omniretarget.github.io/">project</a></div></div>
+
+<div class="card"><span class="badge phy">PHYSICS-BASED</span><span class="badge sys">SIM AVATAR</span>
+<div class="t">PHC</div><div class="full">Perpetual Humanoid Control for Real-time Simulated Avatars (ICCV 2023)</div>
+<div class="m">Classic physics-based humanoid controller (Luo et al.): imitates ~10k AMASS clips, fall recovery, no external forces; PHC+ reaches 100% AMASS. Widely used as the physics-cleanup stage for video→human 3D motion (video-based control, language, VR tracking).</div>
+<div class="note">注：偏 simulated avatar / 需要调参；video → human 3D motion 的常用物理后端</div>
+<div class="links"><a href="https://arxiv.org/abs/2305.06456">arXiv:2305.06456</a><a href="https://github.com/ZhengyiLuo/PHC">code</a></div></div>
+</div>
+
+<h2>2 · Motion Tracking — humanoid target pose → physics-informed action</h2>
+<p class="secdesc">RL whole-body controllers that track retargeted reference motion on real hardware — from single-motion trackers to generalist "track-anything" policies.</p>
+<div class="grid">
+<div class="card"><span class="badge gen">GENERAL</span>
+<div class="t">SONIC</div><div class="full">SONIC: Supersizing Motion Tracking for Natural Humanoid Whole-Body Control (2025)</div>
+<div class="m">Scaling study for generalist motion tracking: performance improves consistently with data, model capacity, and compute; generalizes to unseen motions in sim and real. Positions motion tracking as the route to broad whole-body priors without per-task reward engineering.</div>
+<div class="links"><a href="https://arxiv.org/abs/2511.07820">arXiv:2511.07820</a></div></div>
+
+<div class="card"><span class="badge single">SINGLE-MOTION</span>
+<div class="t">BeyondMimic</div><div class="full">BeyondMimic: From Motion Tracking to Versatile Humanoid Control via Guided Diffusion (2025)</div>
+<div class="m">SOTA-quality per-motion tracking (jump spins, sprints, cartwheels) plus a guided-diffusion policy for zero-shot test-time tasks — inpainting, joystick teleop, obstacle avoidance — transferred to real hardware.</div>
+<div class="links"><a href="https://arxiv.org/abs/2508.08241">arXiv:2508.08241</a></div></div>
+
+<div class="card"><span class="badge gen">GENERAL</span><span class="badge rec">候选推荐</span>
+<div class="t">HoloMotion</div><div class="full">HoloMotion-1 Technical Report (Horizon Robotics, 2026)</div>
+<div class="m">Whole-body motion foundation model for zero-shot tracking: sparse-MoE Transformer + sequence-level policy optimization, trained on a hybrid corpus dominated by video-reconstructed in-the-wild motion. Real-time via KV-cached inference; direct real-robot transfer without fine-tuning.</div>
+<div class="links"><a href="https://arxiv.org/abs/2605.15336">arXiv:2605.15336</a><a href="https://github.com/HorizonRobotics/HoloMotion">code</a><a href="https://horizonrobotics.github.io/robot_lab/holomotion/">project</a></div></div>
+
+<div class="card"><span class="badge gen">GENERAL</span><span class="badge rec">候选推荐</span>
+<div class="t">OmniXtreme</div><div class="full">OmniXtreme: Breaking the Generality Barrier in High-Dynamic Humanoid Control (RSS 2026)</div>
+<div class="m">Decouples general skill learning (DAgger-distilled flow-matching base policy over many tracking experts) from sim-to-real refinement (frozen base + residual policy under motor constraints and power-safety regularization). Targets exactly the fidelity collapse that hits scaled-up high-dynamic motion libraries.</div>
+<div class="links"><a href="https://arxiv.org/abs/2602.23843">arXiv:2602.23843</a><a href="https://extreme-humanoid.github.io/">project</a></div></div>
+
+<div class="card"><span class="badge sys">SYSTEM / TELEOP</span>
+<div class="t">TWIST2</div><div class="full">TWIST2: Scalable, Portable, and Holistic Humanoid Data Collection System (2025)</div>
+<div class="m">Mocap-free whole-body teleoperation + data collection: PICO4U VR body tracking → GMR retargeting → tracking policy, with a $250 2-DoF neck for egocentric vision. 100 demos in 15 min at ~100% success; fully open-sourced with dataset.</div>
+<div class="links"><a href="https://arxiv.org/abs/2511.02832">arXiv:2511.02832</a><a href="https://github.com/amazon-far/TWIST2">code</a></div></div>
+</div>
+
+<h2>3 · Video → Humanoid — human videos as the motion source</h2>
+<p class="secdesc">Upstream of both stages: monocular RGB video → human (and object) 3D motion → retarget → track. Closes the loop from in-the-wild video to real-robot skills.</p>
+<div class="grid">
+<div class="card"><span class="badge phy">PHYSICS-BASED</span><span class="badge gen">INTERACTION</span>
+<div class="t">HDMI</div><div class="full">HDMI: Learning Interactive Humanoid Whole-Body Control from Human Videos (2025)</div>
+<div class="m">Extracts and retargets human + object trajectories from unconstrained monocular videos, then trains RL policies that co-track robot and object states (unified object representation, residual actions, general interaction reward). 6 real-world loco-manipulation tasks on Unitree G1, incl. 67 consecutive door traversals.</div>
+<div class="links"><a href="https://arxiv.org/abs/2509.16757">arXiv:2509.16757</a></div></div>
+</div>
+
+<div class="contrib">Pipeline: video → human 3D motion (e.g. PHC-style physics cleanup) → retargeting (GMR / OmniRetarget / SPIDER) → tracking policy (SONIC / HoloMotion / OmniXtreme / BeyondMimic) → real robot. Curated from Siqiao's reading list, 2026-07.</div>
+</body></html>
