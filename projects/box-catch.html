@@ -42,23 +42,52 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 </style></head><body>
 <div class="crumb"><a href="../index.html">← all projects</a></div>
 <h1>Box Catch — G1 Package-Delivery Campaign (a100-1)</h1>
-<div class="sub">2026-07-18 过夜75军令: <b>🏆 部署态新候选 cb_s37@749 = 插值考场合并92.1(240投) + 全战役最佳姿态</b>(完全直立胸前臂床)。配方=风暴课程(p_gap右移+15%风暴局+弧顶1.4×)×插值执行器@749尾部。三大方法论升级: 本地M3考场(CPU/插值双模式) · 考卷套方差±15pp→3套合并口径 · 部署管道切插值对全家族安全。等3090 M5-interp判(预估~66) · 谱系: 50→58.8→61.3→(M5待判)</div>
+<div class="sub">2026-07-22 现状: <b>🏆 冠军 COMBO_s37@749 已判(M3 83.8 / M5-interp 68.8 纪录 / 部署预演 50.0)</b> · 真机三次上机后 07-18 事故(腿部损伤,维修中): 根因=deploy 武装 2s ramp 抽走 91% 支撑力矩(rig 统计 12/12 摔),连带挖出总线冲突/幽灵箱/odom 标定三 bug,<b>四修全上、模型隔离实验判无罪</b> · 护栏套件(积分腿速/base_speed/obs腐坏门/幽灵箱网)超已发表社区实践 · M5 法庭全套已同步 A100(权重+rig+口径) · <b>维修窗口: Porter 全链开工</b>(sim 里搭"接箱→SONIC携行→视觉找假人→递交",代码即真机部署栈) · 谱系: 50→58.8→61.3→68.8</div>
 
 <!-- ============ 管线总览(常驻) ============ -->
 <div class="pipe">
-<div class="stage"><b>① 感知 detector</b><span class="st run">3090 侧 · M5 51%→校准中</span>OAK-D+RF-DETR+KF; 只需箱子位置(+差分速度)</div>
-<div class="stage"><b>② 接箱 state policy</b><span class="st run">A100 现役 · v25-DR</span>GT尺 85% / 伪噪尺 61%(dr3@1500); 目标: 噪≥70</div>
-<div class="stage"><b>③ 携行 SONIC</b><span class="st ok">零训练已打通</span>抱姿写进参考, 正速 4/4; 任意导航等 motionbricks 权重</div>
-<div class="stage"><b>④ 放箱 release</b><span class="st todo">未开工</span>balloon 时代 release tracker 有底子</div>
+<div class="stage"><b>① 感知 detector</b><span class="st ok">M5 法庭成熟</span>RF-DETR v2(mAP .864)+深度+KF; 冠军过卷 68.8; 法庭已同步 A100</div>
+<div class="stage"><b>② 接箱 state policy</b><span class="st ok">冠军 s37@749</span>M3 83.8 / M5-interp 68.8 / 预演 50.0; storm@749 8臂待判</div>
+<div class="stage"><b>③ 携行 SONIC</b><span class="st ok">送货员验收 5/5</span>mb 闭环导航+慢放配方(m4b4); 权重全套在库</div>
+<div class="stage"><b>④ 交接 catch→carry</b><span class="st run">Porter Phase 5</span>chain v3 设计就绪(姿态失配已诊断); 全链唯一未通环节</div>
+<div class="stage"><b>⑤ 真机</b><span class="st run">维修中</span>07-18 事故根因闭环(deploy ramp); 四修+护栏套件已上; 回归=空载武装+对拍先行</div>
+<div class="stage"><b>⑥ Porter 全链</b><span class="st run">开工</span>sim 全链(视觉接箱→携行→找假人→递交)=真机代码; 7 阶段带门禁</div>
 </div>
-<div class="note">catch→carry 全链拼装(chain v2): 接箱✓ 走路✓ 站稳✓, 箱子交接瞬间未通(5轮), 待 SONIC 携箱轻量 finetune 或更优交接。</div>
+<div class="note">事故因果链(A/B+统计实锤): 武装 2s ramp 把"目标混回当前姿势"→ 策略赖以撑体重的 PD 误差归零(71→6Nm)→ 塌陷→挣扎甩腿(17-30 rad/s+踝撞限位 0.8s)→损伤。修复=瞬时全权+状态门禁; 模型喂同款坏观测平静站立(无罪)。</div>
 
 <!-- ============ 页签导航 ============ -->
 <div class="tabs">
-<div class="tab on" data-pane="p-dr">🎯 v25-DR 降噪(现役)</div>
+<div class="tab on" data-pane="p-real">🤖 真机 & Porter</div>
+<div class="tab" data-pane="p-dr">🎯 抗噪战役(v25→s37)</div>
 <div class="tab" data-pane="p-carry">🚶 SONIC 携行</div>
 <div class="tab" data-pane="p-lb">🏆 Catch 榜</div>
 <div class="tab" data-pane="p-arch">🗄️ 历史档案</div>
+</div>
+
+<!-- ============ 页签0: 真机 & Porter ============ -->
+<div class="pane on" id="p-real">
+<h2>🤖 真机战役与事故闭环 <span class="hint">2026-07-16→19 · 三次上机 · 一次硬件损伤 · 四根因全修</span></h2>
+<div class="grid" style="margin-bottom:22px">
+<div class="card"><div class="badge dead">INCIDENT 07-18</div><div class="t">腿部损伤: 武装 2s ramp = 支撑力矩清零器</div><div class="m">策略靠"目标大幅偏离当前姿势"产生 71Nm 支撑力(PD 当力控); ramp 把目标混回当前姿势→6Nm(−91%)→塌陷→挣扎 1.36s(峰值 30 rad/s, 左踝贴机械限位 0.8s)→损伤。rig 统计: 有 ramp 12/12 摔(0.4s 内), 无 ramp 0/12; 幻影观测有无不影响。</div></div>
+<div class="card"><div class="badge live">模型无罪</div><div class="t">隔离实验: 纯考试 rig 喂同款坏观测 → 平静站立</div><div class="m">侧向 0.55m 幻影/站立中突跳/高度幻影三臂 ×25s: 全部站住, 峰值腿速与干净组相同(11.2-11.5)。暴力需要 deploy 语境, 不在权重。v29 平滑降级为常规升级。</div></div>
+<div class="card"><div class="badge rep">连带三 bug</div><div class="t">总线冲突 · 幽灵箱 · odom 标定</div><div class="m">①出厂 ai 服务未释放, 1kHz 抢 lowcmd(历次"嗡嗡响/软"元凶) ②镜像 FK 缺 mj_camlight→所有检测投影到世界原点(真机 dump 实锤 [-1.72,0.02,-0.67] age0) ③吊挂期腿式里程计漂移 0.5m 污染启动标定→武装瞬间重标定。</div></div>
+<div class="card"><div class="badge live">护栏套件(超已发表实践)</div><div class="t">10-agent 护栏研究 + 社区深度调研定版</div><div class="m">积分腿速(1.5rad/100ms, 接球零误触) · base_speed 1.8 · obs 腐坏门 · 幽灵箱网 · 看门狗/温度/理智钳 · 状态门禁+瞬时全权。力矩族全族死刑(真机健康站立 0.3-168Nm 盖住 runaway 全区间); 参考栈(unitree官方/BM/OmniH2O)runtime 护栏≈零, 腐坏观测=社区公认开放失败类。</div></div>
+</div>
+<h2>🧪 DDS 孪生: 原封部署代码在 MuJoCo 闭环 <span class="hint">全真栈(onboard+node+相机线格式零修改) · 事故 A/B 复现</span></h2>
+<div class="grid" style="margin-bottom:22px">
+<div class="card"><div class="badge live">FULL REAL STACK</div><div class="t">真栈 10 抛: 接 3 / 零中途摔</div><div class="m">真 onboard+真 node+OAK 相机模拟器打 MuJoCo 孪生; 注入 0.41m odom 漂移, 武装瞬间重标定 1 tick 清零。台架因检测域伪影(渲染域&gt;2.5m 检出塌方)系统性低估, 真机预测带以 M5 为准。</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/porter/twin_realstack_10throws.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge dead">事故复现组</div><div class="t">同款漂移 + 关掉重标定 → 塌</div><div class="m">与左侧唯一差别=标定开关。策略从武装起对抗幻影(obs 说骨盆 0.98m 实际 0.74)→深蹲挣扎→坍塌。</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/porter/twin_repro_norecal_flail.mp4" type="video/mp4"></video></div>
+</div>
+<h2>📦 Porter 全链(维修窗口主线) <span class="hint">抛箱→s37 接→切 SONIC 携行→视觉找假人→0.8m 递交 · 代码即真机部署栈</span></h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>Phase</th><th>内容</th><th>门禁</th><th>状态</th></tr>
+<tr><td>0</td><td>融合 ONNX 导出 + 对拍仪 + 推理基准</td><td>对拍≤1e-5 · tick p95&lt;12ms</td><td>🟠 进行中</td></tr>
+<tr><td>M</td><td>假人 gdino 检出尺子(3 候选)</td><td>≥80%@4m</td><td>🟠 并行</td></tr>
+<tr><td>1★</td><td>SONIC MuJoCo 步态硬测(最大风险前置)</td><td>站 30s+前进≥60%(stretch≤2)</td><td>⚪ 排队</td></tr>
+<tr><td>2-4</td><td>DDS 闭环 → 空手导航 → 视觉入环</td><td>各 ≥4/6</td><td>⚪</td></tr>
+<tr><td>5</td><td>catch→carry 切换(chain v3: 换参考零 blend, 先空手后带箱)</td><td>空手 6/6 · 带箱 ≥4/6</td><td>⚪ 全链唯一未通环节</td></tr>
+<tr><td>6</td><td>全链 E2E + demo</td><td>≥3/6</td><td>⚪</td></tr>
+</table></div>
 </div>
 
 <!-- ============ 页签1: v25-DR ============ -->
