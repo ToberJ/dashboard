@@ -42,7 +42,7 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 </style></head><body>
 <div class="crumb"><a href="../index.html">← all projects</a></div>
 <h1>Box Catch — G1 Package-Delivery Campaign (a100-1)</h1>
-<div class="sub">2026-07-22 现状: <b>🏆 冠军 COMBO_s37@749 已判(M3 83.8 / M5-interp 68.8 纪录 / 部署预演 50.0)</b> · 真机三次上机后 07-18 事故(腿部损伤,维修中): 根因=deploy 武装 2s ramp 抽走 91% 支撑力矩(rig 统计 12/12 摔),连带挖出总线冲突/幽灵箱/odom 标定三 bug,<b>四修全上、模型隔离实验判无罪</b> · 护栏套件(积分腿速/base_speed/obs腐坏门/幽灵箱网)超已发表社区实践 · M5 法庭全套已同步 A100(权重+rig+口径) · <b>维修窗口: Porter 全链开工</b>(sim 里搭"接箱→SONIC携行→视觉找假人→递交",代码即真机部署栈) · 谱系: 50→58.8→61.3→68.8</div>
+<div class="sub">2026-07-22 现状: <b>🏆 冠军 COMBO_s37@749 已判(M3 83.8 / M5-interp 68.8 纪录 / 部署预演 50.0)</b> · 真机三次上机后 07-18 事故(腿部损伤,维修中): 根因=deploy 武装 2s ramp 抽走 91% 支撑力矩(rig 统计 12/12 摔),连带挖出总线冲突/幽灵箱/odom 标定三 bug,<b>四修全上、模型隔离实验判无罪</b> · 护栏套件(积分腿速/base_speed/obs腐坏门/幽灵箱网)超已发表社区实践 · M5 法庭全套已同步 A100(权重+rig+口径) · <b>🎉 07-24 Porter 全链首通: 视觉接箱→一tick切换→携行2.86m→到点0.16m, 箱在怀40s</b>(sim 里搭"接箱→SONIC携行→视觉找假人→递交",代码即真机部署栈) · 谱系: 50→58.8→61.3→68.8</div>
 
 <!-- ============ 管线总览(常驻) ============ -->
 <div class="pipe">
@@ -79,14 +79,18 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 <div class="card"><div class="badge dead">事故复现组</div><div class="t">同款漂移 + 关掉重标定 → 塌</div><div class="m">与左侧唯一差别=标定开关。策略从武装起对抗幻影(obs 说骨盆 0.98m 实际 0.74)→深蹲挣扎→坍塌。</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/porter/twin_repro_norecal_flail.mp4" type="video/mp4"></video></div>
 </div>
 <h2>📦 Porter 全链(维修窗口主线) <span class="hint">抛箱→s37 接→切 SONIC 携行→视觉找假人→0.8m 递交 · 代码即真机部署栈</span></h2>
+<div class="grid" style="margin-bottom:14px">
+<div class="card"><div class="badge live">🎉 FIRST FULL CHAIN</div><div class="t">全链首通(2026-07-24): 接箱→切换→携行→到点, 箱在怀 40s</div><div class="m">GAPRAND167_v28@500 · 真保真视觉(RF-DETR 10ms/30fps×真丢帧签名+时戳补偿, 跟踪 p50 0.22m) · 1.0s 锁定→静止门→<b>一 tick 换参考+换增益(零 blend, seam 0.000)</b>→SEG 抱姿→mb 规划携行 2.86m→到点 0.16m 站定 · JV 护栏 v3(200ms 密度判据, 事故延迟仅 +120ms): 同种子误杀 12/20→0, 真事故类(峰2.31)照杀</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="media/porter/porter_fullchain_brep7.mp4" type="video/mp4"></video></div>
+</div>
 <div class="lbwrap"><table class="lb">
 <tr><th>Phase</th><th>内容</th><th>门禁</th><th>状态</th></tr>
-<tr><td>0</td><td>融合 ONNX 导出 + 对拍仪 + 推理基准</td><td>对拍≤1e-5 · tick p95&lt;12ms</td><td>🟠 进行中</td></tr>
-<tr><td>M</td><td>假人 gdino 检出尺子(3 候选)</td><td>≥80%@4m</td><td>🟠 并行</td></tr>
-<tr><td>1★</td><td>SONIC MuJoCo 步态硬测(最大风险前置)</td><td>站 30s+前进≥60%(stretch≤2)</td><td>⚪ 排队</td></tr>
-<tr><td>2-4</td><td>DDS 闭环 → 空手导航 → 视觉入环</td><td>各 ≥4/6</td><td>⚪</td></tr>
-<tr><td>5</td><td>catch→carry 切换(chain v3: 换参考零 blend, 先空手后带箱)</td><td>空手 6/6 · 带箱 ≥4/6</td><td>⚪ 全链唯一未通环节</td></tr>
-<tr><td>6</td><td>全链 E2E + demo</td><td>≥3/6</td><td>⚪</td></tr>
+<tr><td>0</td><td>融合 ONNX 导出 + 对拍仪 + 推理基准</td><td>对拍≤1e-5 · tick p95&lt;12ms</td><td>✅ 对拍 3.3e-6 · ORT p95 1.48ms</td></tr>
+<tr><td>M</td><td>假人检出尺子</td><td>≥80%@4m</td><td>✅ 100%@≤4.5m</td></tr>
+<tr><td>1★</td><td>SONIC MuJoCo 步态硬测(最大风险前置)</td><td>站 30s+前进≥60%(stretch≤2)</td><td>✅ 18/18 全 stretch — 头号风险蒸发</td></tr>
+<tr><td>2-4</td><td>DDS 闭环 → 空手导航 → 视觉找人</td><td>各 ≥4/6</td><td>✅ 6/6 · 6/6 · 6/6(找人停距 0.84-0.86m, 人位误差 6.9cm)</td></tr>
+<tr><td>5a</td><td>catch→carry 一 tick 切换(零 blend)</td><td>空手 6/6</td><td>✅ 6/6, 14/14 切换 seam 0.000</td></tr>
+<tr><td>5b</td><td>带箱全链(真检测器 RF-DETR 入环 + JV 护栏 v3 密度判据)</td><td>≥4/6</td><td>🟠 <b>首通达成</b>(brep7): 接住→切换(箱-胸8.8cm)→携行2.86m(≤12.8cm)→到点0.16m·箱在怀40s; 当前真接 2/20, 主拦截=速度护栏(6次, 待包络重标定)</td></tr>
+<tr><td>6</td><td>全链 E2E + 递交 demo</td><td>≥3/6</td><td>⚪ 排队</td></tr>
 </table></div>
 </div>
 
