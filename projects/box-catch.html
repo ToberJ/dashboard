@@ -42,7 +42,7 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 </style></head><body>
 <div class="crumb"><a href="../index.html">← all projects</a></div>
 <h1>Box Catch — G1 Package-Delivery Campaign (a100-1)</h1>
-<div class="sub">2026-07-22 现状: <b>🏆 冠军 COMBO_s37@749 已判(M3 83.8 / M5-interp 68.8 纪录 / 部署预演 50.0)</b> · 真机三次上机后 07-18 事故(腿部损伤,维修中): 根因=deploy 武装 2s ramp 抽走 91% 支撑力矩(rig 统计 12/12 摔),连带挖出总线冲突/幽灵箱/odom 标定三 bug,<b>四修全上、模型隔离实验判无罪</b> · 护栏套件(积分腿速/base_speed/obs腐坏门/幽灵箱网)超已发表社区实践 · M5 法庭全套已同步 A100(权重+rig+口径) · <b>🎉 07-24 Porter 全链首通: 视觉接箱→一tick切换→携行2.86m→到点0.16m, 箱在怀40s</b>(sim 里搭"接箱→SONIC携行→视觉找假人→递交",代码即真机部署栈) · 谱系: 50→58.8→61.3→68.8</div>
+<div class="sub">2026-07-22 现状: <b>🏆 冠军 COMBO_s37@749 已判(M3 83.8 / M5-interp 68.8 纪录 / 部署预演 50.0)</b> · 真机三次上机后 07-18 事故(腿部损伤,维修中): 根因=deploy 武装 2s ramp 抽走 91% 支撑力矩(rig 统计 12/12 摔),连带挖出总线冲突/幽灵箱/odom 标定三 bug,<b>四修全上、模型隔离实验判无罪</b> · 护栏套件(积分腿速/base_speed/obs腐坏门/幽灵箱网)超已发表社区实践 · M5 法庭全套已同步 A100(权重+rig+口径) · <b>🎉 07-24 Porter 全链首通: 视觉接箱→一tick切换→携行2.86m→到点0.16m, 箱在怀40s</b>(sim 里搭"接箱→SONIC携行→视觉找假人→递交",代码即真机部署栈) · 谱系: 50→58.8→61.3→68.8 · <b>🏭 07-31→08-02 Warehouse 循环 demo: 9投8接6递零摔 + v33 包络微调 死亡带 18%→79%</b> · 08-02→04 限位审计: 命令流恶习实锤+戒断, 到电机超限指令=0</div>
 
 <!-- ============ 管线总览(常驻) ============ -->
 <div class="pipe">
@@ -66,6 +66,24 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 
 <!-- ============ 页签0: 真机 & Porter ============ -->
 <div class="pane on" id="p-real">
+
+<h2>🏭 Warehouse 全链循环 demo + v33 包络/限位战役 <span class="hint">2026-07-31→08-04 · 教授演示素材 · 纯真视觉 + 全物理碰撞 + 一套部署代码(twin=真机同二进制)</span></h2>
+<div class="grid" style="margin-bottom:14px">
+<div class="card"><div class="badge live">🏆 v33 终版 demo</div><div class="t">卡车高位死亡带 7 投 7 接 6 递零摔(一镜到底)</div><div class="m">G1 扔箱人在货舱内走动持箱 3-9s 随机突抛(出手 ~2.0m,前一天该区 v31c 仅 18%)· v33_599 包络微调后满分局 · G1 收货人(GDINO 认 person)· 每链: 接箱→一tick切换→抱行→scan找人→递交→人收走→返站→re-arm</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="../assets/videos/g1-v33-7x7.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge live">🎉 6 递循环首证</div><div class="t">9 投 8 接 6 完整递送(末尾 4 连击),两次滑箱护栏拒切后自动恢复</div><div class="m">loop_test14 · 循环状态机对全部六类失败闭环: miss→回收重投 / 滑箱→LATCH-SIGHT 拒切 / 途中掉箱→幽灵返站 / 递成→返站 re-arm · 递出的箱子真实堆在传送带上(道具全碰撞)· 零摔零护栏误触发</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="../assets/videos/g1-6xdelivery.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge">👁 机器人第一视角</div><div class="t">OAK 鱼眼 = detector 真实输入 · HUD 标注 stage/在跑策略/检测判决</div><div class="m">绿框=过全部门控进 KF · 红框=被拒(SIZE/DEPTH/STATIC 标原因: 卡车轮曾是穿尺寸门的假阳性, 裙板+静态抑制双修)· 黄框=怀中箱喂 carry 心跳侧通道 · 0-33s 吊挂(policy none, 画面歪)→ 41s v31c 一tick接管调平</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="../assets/videos/g1-pov-vision.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge">👁 v33 局 POV</div><div class="t">7×7 满分局的第一视角(含 G1 扔箱人走动持箱全程)</div><div class="m">持箱期策略"装看不见"(person-region 抑制 + 静止≥2s 静态抑制), 出手瞬间检测恢复、KF 0.2-0.3s 重捕获(五投出手时 KF 误差 0.21-0.46m = 走动持箱零污染)</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="../assets/videos/g1-v33-pov.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge">🤾 walking thrower</div><div class="t">双 G1 版: 扔箱人+收货人都是 G1(mocap 雕像, GDINO 6/6 认 person)</div><div class="m">双人消歧: PORTER_PERSON_SIDE 送货方向先验单局拦截 36 次"把扔箱人当收货人" · 持箱几秒不抛/边走边持均验证(hold6: 静置 6s 后抛 2/3 接)</div><video controls preload="metadata" style="width:100%;border-radius:6px;margin-top:6px"><source src="../assets/videos/g1-thrower.mp4" type="video/mp4"></video></div>
+<div class="card"><div class="badge">📈 能力包络</div><div class="t">55 投扫描: 能力边界 = 训练 DR 边界, 逐格重合</div><div class="m">训练区(高&lt;1.7m·距&lt;4m) 80% · 高位带 18% · 远距 36% → 对症微调(仅拓宽投掷 DR, warm-start 一夜): 死亡带 18%→79%(p≈0.002), 常规区无回归, freeze 注入 tilt 峰 7.8° 零摔</div><img src="../assets/img/g1-envelope-map.png" style="width:100%;border-radius:6px;margin-top:6px" alt="catch envelope map"></div>
+</div>
+<div class="lbwrap"><table class="lb">
+<tr><th>候选(死亡带同 seed)</th><th>死亡带 z1.7-2.4</th><th>常规区 z1.2-1.6</th><th>摔</th><th>接球段超限指令</th><th>定性</th></tr>
+<tr><td>v33_599 裸奔</td><td><b>79%</b></td><td>80%</td><td>0</td><td>~5000+/局(滥用)</td><td>成绩最好, 但怼限位=卸载即砸真机, 不可上硬件</td></tr>
+<tr><td><b>v34_599(合法冠军)</b></td><td><b>50%</b></td><td>36%</td><td>0</td><td>5344(被部署钳拦下)</td><td>钳制训练部署一致 · 当前部署候选</td></tr>
+<tr><td>v35_999(最干净手)</td><td>36%</td><td>2/3(n小)</td><td>0</td><td><b>126</b>(戒断 97.6%)</td><td>命令流干净, 成绩换的</td></tr>
+</table></div>
+<div class="m" style="margin:8px 0 4px">🔩 <b>限位战役(2026-08-02→04, 部署审计副产物)</b>: 4 参考栈 84 项样板审计 → 修 4 高危(异常必阻尼/全29关节 35rad/s 硬切/PD 目标钳制到 URDF 限位/NaN 拒发)→ 钳制遥测揪出策略把踝目标打到限位外 1.8-2.45 rad 当免费满油门(带载隐形——社区通行的"实际位置罚"全体失明; 卸载即撞限位 = 07-18 坏腿同款物理)。<b>到电机的超限指令自 v34 起 = 0(代码保证)</b>; 训练侧 v35 戒断 97.6%。诚实脚注: v33 的 79%/80% 是"含限位技巧"的历史测量, 合法力矩天花板当前 36-50%(踝 kp×限位内误差 ≈ 电机额定一半)——差值即动作表达力升级(模仿引导/前馈力矩/LATENT 流形先验)的目标增量。参考: LATENT(G1 网球, 限位=准终止定价)· ETH 羽毛球(软罚不够→约束RL)· HITTER。</div>
+
 <h2>🤖 真机战役与事故闭环 <span class="hint">2026-07-16→19 · 三次上机 · 一次硬件损伤 · 四根因全修</span></h2>
 <div class="grid" style="margin-bottom:22px">
 <div class="card"><div class="badge dead">INCIDENT 07-18</div><div class="t">腿部损伤: 武装 2s ramp = 支撑力矩清零器</div><div class="m">策略靠"目标大幅偏离当前姿势"产生 71Nm 支撑力(PD 当力控); ramp 把目标混回当前姿势→6Nm(−91%)→塌陷→挣扎 1.36s(峰值 30 rad/s, 左踝贴机械限位 0.8s)→损伤。rig 统计: 有 ramp 12/12 摔(0.4s 内), 无 ramp 0/12; 幻影观测有无不影响。</div></div>
