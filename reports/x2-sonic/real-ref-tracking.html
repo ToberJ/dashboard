@@ -1,0 +1,100 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>First real-robot ref-motion tracking: real ≈ sim</title>
+<style>
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e2e2e2;--ac:#d4571c;--gd:#0aa05a}
+*{box-sizing:border-box}
+body{font:16px/1.7 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--fg);max-width:1040px;margin:0 auto;padding:48px 28px 120px}
+h1{font-size:28px;margin:0 0 4px;letter-spacing:-.5px}
+h2{font-size:22px;margin:46px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--ac)}
+.sub{color:var(--mut);font-size:15px;margin-bottom:8px}
+.tag{display:inline-block;background:#f4f4f4;border:1px solid var(--bd);border-radius:5px;padding:1px 9px;font-size:13px;color:#444;margin:2px 4px 2px 0}
+figure{margin:18px 0 26px;text-align:center}
+figcaption{color:var(--mut);font-size:13.5px;margin-top:8px;text-align:left}
+.key{background:#fff8f3;border-left:4px solid var(--ac);padding:12px 16px;margin:16px 0;border-radius:0 6px 6px 0}
+.win{background:#f1faf4;border-left:4px solid var(--gd)}.warn{background:#fbf7ec;border-left:4px solid #d9a300}
+ul{margin:8px 0}li{margin:5px 0}code{background:#f4f4f4;padding:1px 5px;border-radius:4px;font-size:13.5px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px}
+th,td{border:1px solid var(--bd);padding:7px 11px;text-align:left;vertical-align:top}th{background:#fafafa}
+.foot{margin-top:54px;color:var(--mut);font-size:13px;border-top:1px solid var(--bd);padding-top:14px}
+a{color:#c24f17}
+video{width:100%;max-width:980px;border:1px solid #e2e2e2;border-radius:8px;background:#000}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0;text-align:left}
+.chip{font-size:13px;padding:3px 10px;border-radius:5px;background:#f4f4f4;border:1px solid var(--bd);color:#777}
+.chip b{font-family:ui-monospace,Consolas,monospace;font-weight:600;margin-right:6px}
+.chip.good{background:#f1faf4;border-color:#bfe3cc;color:#0a7a46}
+.chip.bad{background:#fdeee9;border-color:#f0c8ba;color:#c0392b}
+.bounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.bound{background:#fff;border:1px solid var(--bd);border-radius:8px;padding:14px 16px}
+.bound .bv{font-size:24px;font-weight:650}
+.bound .bk{font-size:13.5px;color:var(--mut)}
+.ruler{border:1px solid var(--bd);border-radius:8px;padding:16px 16px 6px;margin:16px 0;max-width:980px}
+.ruler svg{width:100%;height:auto;display:block}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin:16px 0}
+.vgrid figure{margin:0}
+.vgrid video{width:100%}
+</style></head><body><a class="back-link" href="../../projects/x2-sonic.html" style="display:inline-block;margin:0 0 16px;padding:6px 14px;background:#f4f4f4;border:1px solid #e2e2e2;border-radius:6px;color:#444;text-decoration:none;font-size:14px">← Back to project</a>
+<h1>First real-robot ref-motion tracking: real ≈ sim</h1>
+<div class="sub">X2 SONIC · unified deploy stack v5 · AgiBot X2 Ultra on gantry · 2026-08-20</div><span class="tag">real robot</span><span class="tag">sim2real</span><span class="tag">motion tracking</span><span class="tag">milestone</span>
+<h2>1 · Result</h2>
+<div class="key win">First real-robot reference-motion tracking on the AgiBot X2: the robot tracked a <b>29.8&nbsp;s all-natural mocap clip</b> (walk out ~5&nbsp;m → turn in place 180° → walk back) on the gantry, and the operator's verdict was <b>"the real and sim videos are nearly identical."</b> Zero falls, zero guard trips, and the first field validation of the v5 unified deploy stack — the same <code>s3_deploy.py</code> file, byte-identical, runs both the MuJoCo twin and the real robot.</div>
+<div class="chips">
+<span class="chip good"><b>0</b> falls / incidents</span>
+<span class="chip good"><b>0</b> guard trips (vel / effort / staleness)</span>
+<span class="chip good"><b>0.9 ms</b> control-loop p99 (n = 9039)</span>
+<span class="chip"><b>23–25 s</b> two full runs</span>
+<span class="chip good"><b>1</b> bad-pose engage refused by the 25° tilt gate</span>
+</div>
+
+<h2>2 · The reference clip: all-natural mocap stitch</h2>
+<p>None of the 2,497 clips in <code>x2_native_v3</code> walks out and back (mocap-room limits; the "180" in LAFAN-style names is a capture direction, not a turn). The clip was therefore stitched from <b>five natural segments</b> — natural start → natural decelerating stop → a real human turning in place (178°) → natural start → natural stop — cut at gait-phase-matched frames, blended over 0.4&nbsp;s seams, with per-segment heading drift (10–17°) corrected by aiming each seam at the corridor heading. 29.8&nbsp;s, 5.05&nbsp;m out, returns to origin ±0.2&nbsp;m. A planner-generated alternative was rejected by eyeball review as "unnatural."</p>
+<figure><video controls preload="metadata" src="../../assets/videos/x2r_ref_clip.mp4"></video>
+<figcaption>Kinematic playback of the reference clip (no physics, no policy). The 4&nbsp;s standing head is the gantry-release window.</figcaption></figure>
+
+<h2>3 · Tracking quality: the bottleneck is the model, not the deploy path</h2>
+<figure><video controls preload="metadata" src="../../assets/videos/x2r_sbs_ref_vs_tracked.mp4"></video>
+<figcaption>Left = reference (kinematic) · right = policy-tracked rollout in the calibrated twin (physics), aligned at walk onset. Visible gaps: stride shrink, arms holding their own habitual pose, phase lag in the later half.</figcaption></figure>
+<table>
+<tr><th>Metric</th><th>Value</th><th>Reading</th></tr>
+<tr><td>Mean leg-joint tracking error</td><td>10.3° (p95 15.6°)</td><td>usable locomotion tracking, not tight</td></tr>
+<tr><td>Mean arm-joint tracking error</td><td>26.5° (p95 29.5°)</td><td>arms barely track the reference (wrist actions rail at the ±20 clip)</td></tr>
+<tr><td>Distance ratio (realized / reference)</td><td>0.68 path · 0.53 x-displacement</td><td>systematic stride shrink on large natural strides</td></tr>
+<tr><td>Lateral corridor</td><td>±0.25 m</td><td>heading tracks straight; only distance is discounted</td></tr>
+</table>
+<figure><img src="../../assets/img/x2r_tracking_quality.png" alt="tracking quality panels">
+<figcaption>Reference walks at 1.0–1.1&nbsp;m/s on the out leg — above the policy's comfort band (≤0.8) — and that is where the shrink is worst; the slower return leg tracks speed almost exactly.</figcaption></figure>
+<figure><img src="../../assets/img/x2r_root_path.png" alt="root path overlay">
+<figcaption>Top-down root path: blue = reference (5.05&nbsp;m out, back to origin), red = tracked (2.66&nbsp;m out, overshoots to −1&nbsp;m on return).</figcaption></figure>
+<div class="key">Three lines of evidence put the residual gap on the model side: bridge latency is p50 0.4&nbsp;ms / p99 0.9&nbsp;ms; the real robot reproduces the twin's behavior; and the same stride shrink already appears in the cleanest pure-sim runner. The error structure (arms ≫ legs, fast strides ≫ slow) is a mimic-capability signature, not a comms/timing one. Next: A/B the mainline-50k checkpoint on the same clip; consider fine-tuning with large-stride walking data.</div>
+
+<h2>4 · The night on the robot</h2>
+<table>
+<tr><th>Session</th><th>What happened</th></tr>
+<tr><td>1</td><td>Engaged 0.8 s, operator test-stop — first brake check.</td></tr>
+<tr><td>2</td><td><b>25° tilt gate's first field trip:</b> hanging pose was 37° pitched; the bridge refused engage and damped. Zero motion, zero incident — exactly as designed.</td></tr>
+<tr><td>3</td><td><b>Full run, 23.4 s:</b> out → 180° turn → return; operator ended it near the end of the return leg.</td></tr>
+<tr><td>4</td><td>Engaged 1.7 s, second test-stop.</td></tr>
+<tr><td>5</td><td><b>Full run, 24.7 s</b> — the "real ≈ sim" run. Loop latency p50 0.4 ms / p99 0.9 ms over 9,039 ticks.</td></tr>
+</table>
+<p>Field notes: at ready pose the gantry rope held the robot at a genuine 8–14° forward lean (leg-kinematics and IMU gravity agree within 2°, so it is real lean, not sensor bias — the TILTKIN split correctly preserved it). The policy engaged from a 12° lean and still walked; next time the rope gets adjusted to &lt;5° anyway. The 23&nbsp;s of stable walking also implicitly validates the real IMU's angular-velocity frame — a twin-style 94° frame bug would not survive gait.</p>
+
+<h2>5 · Twin pre-flight: the four-gate check</h2>
+<p>Before the robot, the same clip ran through the calibrated MuJoCo twin (isolated DDS domain) using the exact files the robot would run: clip gate passed (ready pose = clip frame 0, 0.000&nbsp;rad from the trained stand), full 29.8&nbsp;s playback, no e-stop, root height never below 0.608&nbsp;m.</p>
+<table>
+<tr><th>Gate</th><th>Status</th></tr>
+<tr><td>md5 identity — file the robot runs = file the twin validated</td><td>PASS (<code>s3_deploy.py 3bd213be…</code> · <code>x2_sim_twin.py 10f6c333…</code>)</td></tr>
+<tr><td>Twin all-green (stand + walk + motion)</td><td>PASS — zero falls, full clip playback</td></tr>
+<tr><td>No private twin-physics edits</td><td>PASS — shipped twin, calibrated actuator friction only</td></tr>
+<tr><td>Deploy-only logic = 0</td><td>PASS — all six v5 fixes default-on, no env forks in the launch script</td></tr>
+</table>
+<figure><video controls preload="metadata" src="../../assets/videos/x2r_twin_run.mp4"></video>
+<figcaption>The twin regression, full commanded window. This is what we watched before going to the robot — and what the robot then did.</figcaption></figure>
+
+<h2>6 · Next</h2>
+<ul>
+<li><b>Model (mainline):</b> mainline-50k A/B on the same clip; evaluate fine-tuning with large-stride data; revisit arm-tracking weights.</li>
+<li><b>Field:</b> rope trim to &lt;5° ready lean; let the clip run to natural completion; play the eight validated gesture clips on the robot.</li>
+<li><b>Data:</b> head-camera intrinsics captured the same day (RGBD 1280×720, HFOV 85.4° / VFOV 54.9°); motor continuous-torque table still pending from vendor (peak × 0.5 stopgap).</li>
+</ul>
+
+<div class="foot">SBS clip: left = reference motion (kinematic), right = policy rollout in the calibrated MuJoCo twin (full physics) · real-robot session log archived · deploy and sim share one byte-identical control file</div>
+</body></html>
