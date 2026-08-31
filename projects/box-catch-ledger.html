@@ -43,12 +43,13 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 </style></head><body>
 <div class="crumb"><a href="../index.html">Visualization Hub</a> › <a href="box-catch.html">Box Catch</a> › 里程碑</div>
 <h1>里程碑与关键结论</h1>
-<div class="sub">远端 high-level 记录器 · 明细数据留在本地 <code>box_catch/LEDGER.md</code> · 更新于 2026-08-30</div>
+<div class="sub">远端 high-level 记录器 · 明细数据留在本地 <code>box_catch/LEDGER.md</code> · 更新于 2026-08-31</div>
 
 <h2>里程碑</h2>
 <div class="lbwrap"><table class="lb">
 <tr><th style="width:92px">日期</th><th>里程碑</th></tr>
-<tr class="gold"><td>2026-08-30</td><td><b>手臂标准做出来了,而且是免费的</b><br><span style="color:#666;font-size:13px">"抛球前垂手、出手后抬臂"孪生 12/12 通过。接球率代价实测 <b>0.5pp(p=0.82)</b> —— 此前"要牺牲 14pp"是错误感知口径造的幻影。</span></td></tr>
+<tr class="gold"><td>2026-08-31</td><td><b>v83b:手臂标准家族接球能力翻一半,姿势不可作弊化</b><br><span style="color:#666;font-size:13px">GT 完美抛 20.9%→<b>30.8%</b>(+9.9pp 显著);机械垂手门把"前伸应付判据"堵死(v82a 曾骗过数字判据、被渲染目检抓获)。对比真机跑过的 v38e:部署口径 2.4%→12.8%(5.3×)。</span></td></tr>
+<tr><td>2026-08-30</td><td><b>手臂标准做出来了,而且是免费的</b><br><span style="color:#666;font-size:13px">"抛球前垂手、出手后抬臂"孪生 12/12 通过。接球率代价实测 <b>0.5pp(p=0.82)</b> —— 此前"要牺牲 14pp"是错误感知口径造的幻影。</span></td></tr>
 <tr><td>2026-08-23</td><td><b>G1 真机首次自由站立接球(E2)</b><br><span style="color:#666;font-size:13px">10 抛接 1-2,零护栏零甩动。</span></td></tr>
 <tr><td>2026-08-20</td><td><b>X2 真机 ref-motion 跟踪 real ≈ sim</b></td></tr>
 <tr><td>2026-07-25</td><td><b>Porter 全链打通</b><br><span style="color:#666;font-size:13px">接箱 → 切换 → 抱走 → 找人 → 递出,全程视频。</span></td></tr>
@@ -57,8 +58,8 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 <h2>当前能力(必须带条件读)</h2>
 <div class="pipe">
 <div class="stage"><span class="st ok">姿势</span><b>已达成</b>出手后才抬臂,孪生 12/12。代价 0.5pp,p=0.82。</div>
-<div class="stage"><span class="st run">接球率</span><b>真机口径 ~10%</b>最理想条件(真值观测+完美抛+训练箱型)上限 <b>46.8%</b>。</div>
-<div class="stage"><span class="st todo">目标差距</span><b>2.4-7×</b>目标是完美抛 ≥80% / 偏球 40-50%。</div>
+<div class="stage"><span class="st run">接球率</span><b>部署口径 12.8-19.7%(v83b)</b>GT 上限:可交付组 30.8%,无约束参照 40-47%。</div>
+<div class="stage"><span class="st todo">目标差距</span><b>3-4×</b>目标偏球 40-50%/完美抛 80%;且 80% 对标的 79.2% 已判幻影,目标待重新对表。</div>
 <div class="stage"><span class="st todo">真机数据</span><b>可用率 = 0</b>43 场真机,唯二有分数的因幸存者偏差作废。</div>
 </div>
 
@@ -69,6 +70,9 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 <tr><td><b>真机比孪生快,不是慢</b></td><td>互相关重测(不依赖抛球切分,n=1.5-2.2 万 tick):命令→身体 真机 40ms / 孪生 100-120ms。原先"真机 350ms"源于把 21 抛数成 41 抛</td></tr>
 <tr><td><b>"只有少数抛启动"是策略固有行为</b></td><td>位移两极比:真机 5.8× · Isaac 三档 4.6-7.0×。<b>真值观测下也存在</b>,所以不是感知造成的;而且真值下不动的反而接得更好(55% vs 26%)</td></tr>
 <tr><td><b>执行侧无罪</b></td><td>真机力矩交付率 93-104%,只用到限值 5-9%,<b>零饱和</b></td></tr>
+<tr><td><b>接球失败定律:覆盖圈 ≈0.4m</b></td><td>GT 下接不接住几乎只由"箱子到达时离机器人多远"决定:&lt;0.3m 多接住,&gt;0.7m 基本必丢(v50a 失败抛 64% 落在 0.7m 外)。距离/偏移都不是变量</td></tr>
+<tr><td><b>"完美抛"自带 6° 瞄准噪声</b></td><td>AIM_ERR_STD=6°(clamp±15°)⇒ 3.25m 处 σ=34cm、最大 87cm。GT"完美抛"天花板 ≈ P(噪声落进覆盖圈)。80% 目标当年对标的 79.2% 已判幻影(手臂钉死+秒抛的另一个世界)</td></tr>
+<tr><td><b>飞行期有两份"别去接"的工资</b></td><td>参考跟踪 2.18/ep + 静止奖励 0.74/ep 在飞行期照付无门控;接住是一次性奖金。七炉只调过接住侧,从没砍过反对派 —— 下一炉的靶子</td></tr>
 <tr><td><b>把两段手臂套在没这么训过的权重上:率没掉,姿势做不到</b></td><td>v50a+两段 7.6% vs 常举 6.0%(CI 下界 5.7%),但悬停期手停在 <b>7cm</b>(目标 ≤5cm,训练版是 2cm)</td></tr>
 </table></div>
 
@@ -91,6 +95,6 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 ⇒ <b>文档拦得住"忘了在哪"和"忘了带条件",拦不住"比较了不该比的两个数"。目前唯一有效的防线是独立复核。</b>
 </div>
 
-<div class="contrib">明细数据(22 格同口径主表 · 孪生/真机台账 · ckpt md5):本地 <code>robo_manip_project/box_catch/LEDGER.md</code> ·
+<div class="contrib">明细数据(38+ 格同口径主表 · 孪生/真机台账 · ckpt md5):本地 <code>robo_manip_project/box_catch/LEDGER.md</code> ·
 已作废清单:<code>memory/RETRACTED.md</code></div>
 </body></html>
