@@ -77,7 +77,8 @@ details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding
 <tr><th>说法</th><th>为什么废</th></tr>
 <tr class="dim"><td>手臂代价 14.1pp</td><td><code>FAR_COV/NEAR_COV</code> 默认关 = sim 白得真机没有的早期预警。正确口径 0.5pp</td></tr>
 <tr class="dim"><td>v50a 79.2% 是 GT 天花板</td><td>原日志无 ckpt 无条件行、另一个评测脚本、手臂钉死。受控重测 40.6%</td></tr>
-<tr class="dim"><td>v50a "sim2real 反转"</td><td><code>day1</code> 是 MuJoCo 孪生 + 仿真相机,<b>v50a 真机零数据</b></td></tr>
+<tr class="dim"><td>v50a "sim2real 反转"</td><td><code>day1</code> 台架不是真机(仿真相机 + 无总线接管),<b>v50a 真机零数据</b></td></tr>
+<tr class="dim"><td>"86 个 real_day1_* 里 25 个是孪生"</td><td>过度声称。只能证明<b>那 25 个没有真机接管痕迹</b>(相机输入是渲染的假人场景);另一端是孪生还是空跑,产物给不出。判真机应认正向证据 <code>bus is ours</code></td></tr>
 <tr class="dim"><td>真机起步太晚 350/560ms</td><td>抛球切分器把 21 抛数成 41,从不存在的事件起算反应时间</td></tr>
 <tr class="dim"><td>地面摩擦是嫌疑</td><td>运动学反推≈里程计无打滑;Isaac 摩擦降到 0.15 位移反而上升</td></tr>
 </table></div>
