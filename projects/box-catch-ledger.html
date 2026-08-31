@@ -1,0 +1,95 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Box Catch — 里程碑与关键结论</title>
+<style>
+:root{--fg:#1a1a1a;--mut:#666;--bd:#e3e3e3;--ac:#d4571c;--bl:#2c6fd6}
+*{box-sizing:border-box}
+body{font:16px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fafafa;color:#1a1a1a;max-width:1000px;margin:0 auto;padding:40px 24px 90px}
+a{text-decoration:none;color:inherit}
+h1{font-size:26px;margin:0 0 4px} .sub{color:#777;margin-bottom:20px;font-size:14px}
+h2{font-size:18px;margin:6px 0 10px}
+h2 .hint{font-weight:400;font-size:13px;color:#888}
+.crumb{font-size:13px;color:#999;margin-bottom:18px} .crumb a{color:var(--bl)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.card{display:block;background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:16px 18px;transition:.15s}
+a.card:hover{border-color:var(--ac);box-shadow:0 3px 14px rgba(0,0,0,.07);transform:translateY(-1px)}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:5px;margin-bottom:8px}
+.badge.rep{background:#fdeee4;color:#c24f17}.badge.live{background:#e9f7ee;color:#1d7a3e}.badge.dead{background:#f6e7e7;color:#a33}
+.t{font-size:16px;font-weight:600;margin-bottom:5px} .m{color:#555;font-size:13.5px;min-height:18px}
+.d{color:#999;font-size:12px;margin-top:8px}
+.contrib{margin-top:40px;border-top:1px solid var(--bd);padding-top:16px;color:#888;font-size:13px}
+.contrib code{background:#f0f0f0;padding:1px 5px;border-radius:4px}
+.lb{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e3e3e3;border-radius:10px;overflow:hidden;font-size:13.5px;margin-bottom:26px}
+.lb th{background:#f4f4f4;text-align:left;padding:8px 10px;font-size:12px;letter-spacing:.4px;color:#666}
+.lb td{padding:8px 10px;border-top:1px solid #eee;font-variant-numeric:tabular-nums}
+.lb tr.gold td{background:#fdf6e9}.lb tr.dim td{color:#999}
+.lb .medal{font-size:15px}.lb a{color:var(--bl)}
+.lbwrap{overflow-x:auto}
+.note{font-size:13px;color:#888;margin:-14px 0 22px}
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:0 0 8px}
+.stage{background:#fff;border:1px solid #e3e3e3;border-radius:10px;padding:10px 14px;font-size:13px}
+.stage b{display:block;font-size:14px}
+.stage .st{font-size:12px;font-weight:700}
+.st.ok{color:#1d7a3e}.st.run{color:#c24f17}.st.todo{color:#999}
+details{margin-bottom:26px}
+details summary{cursor:pointer;font-size:15px;font-weight:600;color:#555;padding:8px 0}
+/* ---- tabbed sub-windows ---- */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 0;border-bottom:2px solid var(--bd);padding-bottom:0}
+.tab{cursor:pointer;padding:9px 16px;font-size:14.5px;font-weight:600;color:#666;background:#f0f0f0;border:1px solid var(--bd);border-bottom:none;border-radius:9px 9px 0 0}
+.tab.on{background:#fff;color:var(--ac);border-color:var(--ac);position:relative;top:2px;padding-bottom:11px}
+.pane{display:none;background:#fff;border:1px solid var(--bd);border-top:none;border-radius:0 0 10px 10px;padding:20px 18px 8px;margin-bottom:26px}
+.pane.on{display:block}
+.pane .lb{border:1px solid #eee}
+</style></head><body>
+<div class="crumb"><a href="../index.html">Visualization Hub</a> › <a href="box-catch.html">Box Catch</a> › 里程碑</div>
+<h1>里程碑与关键结论</h1>
+<div class="sub">远端 high-level 记录器 · 明细数据留在本地 <code>box_catch/LEDGER.md</code> · 更新于 2026-08-30</div>
+
+<h2>里程碑</h2>
+<div class="lbwrap"><table class="lb">
+<tr><th style="width:92px">日期</th><th>里程碑</th></tr>
+<tr class="gold"><td>2026-08-30</td><td><b>手臂标准做出来了,而且是免费的</b><br><span style="color:#666;font-size:13px">"抛球前垂手、出手后抬臂"孪生 12/12 通过。接球率代价实测 <b>0.5pp(p=0.82)</b> —— 此前"要牺牲 14pp"是错误感知口径造的幻影。</span></td></tr>
+<tr><td>2026-08-23</td><td><b>G1 真机首次自由站立接球(E2)</b><br><span style="color:#666;font-size:13px">10 抛接 1-2,零护栏零甩动。</span></td></tr>
+<tr><td>2026-08-20</td><td><b>X2 真机 ref-motion 跟踪 real ≈ sim</b></td></tr>
+<tr><td>2026-07-25</td><td><b>Porter 全链打通</b><br><span style="color:#666;font-size:13px">接箱 → 切换 → 抱走 → 找人 → 递出,全程视频。</span></td></tr>
+</table></div>
+
+<h2>当前能力(必须带条件读)</h2>
+<div class="pipe">
+<div class="stage"><span class="st ok">姿势</span><b>已达成</b>出手后才抬臂,孪生 12/12。代价 0.5pp,p=0.82。</div>
+<div class="stage"><span class="st run">接球率</span><b>真机口径 ~10%</b>最理想条件(真值观测+完美抛+训练箱型)上限 <b>46.8%</b>。</div>
+<div class="stage"><span class="st todo">目标差距</span><b>2.4-7×</b>目标是完美抛 ≥80% / 偏球 40-50%。</div>
+<div class="stage"><span class="st todo">真机数据</span><b>可用率 = 0</b>43 场真机,唯二有分数的因幸存者偏差作废。</div>
+</div>
+
+<h2>2026-08-30 的关键结论</h2>
+<div class="lbwrap"><table class="lb">
+<tr><th style="width:150px">结论</th><th>依据</th></tr>
+<tr><td><b>手臂标准是免费的</b></td><td>同一感知下 v66a 常举 10.1% vs v73a 垂手 9.6%,z=0.23,<b>p=0.82</b>(n≈350/格)</td></tr>
+<tr><td><b>真机比孪生快,不是慢</b></td><td>互相关重测(不依赖抛球切分,n=1.5-2.2 万 tick):命令→身体 真机 40ms / 孪生 100-120ms。原先"真机 350ms"源于把 21 抛数成 41 抛</td></tr>
+<tr><td><b>"只有少数抛启动"是策略固有行为</b></td><td>位移两极比:真机 5.8× · Isaac 三档 4.6-7.0×。<b>真值观测下也存在</b>,所以不是感知造成的;而且真值下不动的反而接得更好(55% vs 26%)</td></tr>
+<tr><td><b>执行侧无罪</b></td><td>真机力矩交付率 93-104%,只用到限值 5-9%,<b>零饱和</b></td></tr>
+<tr><td><b>把两段手臂套在没这么训过的权重上:率没掉,姿势做不到</b></td><td>v50a+两段 7.6% vs 常举 6.0%(CI 下界 5.7%),但悬停期手停在 <b>7cm</b>(目标 ≤5cm,训练版是 2cm)</td></tr>
+</table></div>
+
+<h2>已作废(保留是为了不重犯)</h2>
+<div class="lbwrap"><table class="lb">
+<tr><th>说法</th><th>为什么废</th></tr>
+<tr class="dim"><td>手臂代价 14.1pp</td><td><code>FAR_COV/NEAR_COV</code> 默认关 = sim 白得真机没有的早期预警。正确口径 0.5pp</td></tr>
+<tr class="dim"><td>v50a 79.2% 是 GT 天花板</td><td>原日志无 ckpt 无条件行、另一个评测脚本、手臂钉死。受控重测 40.6%</td></tr>
+<tr class="dim"><td>v50a "sim2real 反转"</td><td><code>day1</code> 是 MuJoCo 孪生 + 仿真相机,<b>v50a 真机零数据</b></td></tr>
+<tr class="dim"><td>真机起步太晚 350/560ms</td><td>抛球切分器把 21 抛数成 41,从不存在的事件起算反应时间</td></tr>
+<tr class="dim"><td>地面摩擦是嫌疑</td><td>运动学反推≈里程计无打滑;Isaac 摩擦降到 0.15 位移反而上升</td></tr>
+</table></div>
+
+<h2>方法论(这条可能比数据更值钱)</h2>
+<div class="note" style="background:#fdf6e9;border:1px solid #e8d9b8;border-radius:8px;padding:14px;color:#6b5636">
+2026-08-30 一天之内犯了 <b>4 次同一形状的错</b> —— 把不该比较的两个数放在一起下结论
+(拿偏球比瞄准抛 / 拿孪生当真机 / 拿 ckpt 差算成配置差 / 把判据门设在噪声底上)。
+<b>4 次全是另一个 agent 抓到的,零次自查发现</b>,而那些规矩当时都已白纸黑字写在 skill 里。<br><br>
+⇒ <b>文档拦得住"忘了在哪"和"忘了带条件",拦不住"比较了不该比的两个数"。目前唯一有效的防线是独立复核。</b>
+</div>
+
+<div class="contrib">明细数据(22 格同口径主表 · 孪生/真机台账 · ckpt md5):本地 <code>robo_manip_project/box_catch/LEDGER.md</code> ·
+已作废清单:<code>memory/RETRACTED.md</code></div>
+</body></html>
