@@ -1,0 +1,839 @@
+{
+  "updated": "2026-10-07",
+  "verified": {
+    "clips": 5,
+    "cases": 20,
+    "passed": 20,
+    "datasetFiles": 50,
+    "fullDatasetValidated": false,
+    "hardwareValidated": false,
+    "scope": "historical shared_release_suite_v2 only"
+  },
+  "clips": [
+    {
+      "id": "c",
+      "name": "ChordC",
+      "title": "三指按弦与分步释放",
+      "sourceFrames": [
+        0,
+        492
+      ],
+      "fingers": 3,
+      "speed": 1.0,
+      "passed": true,
+      "cases": [
+        {
+          "name": "nominal",
+          "passed": true
+        },
+        {
+          "name": "half_dt",
+          "passed": true
+        },
+        {
+          "name": "stress_low",
+          "passed": true
+        },
+        {
+          "name": "stress_high",
+          "passed": true
+        }
+      ],
+      "video": "../assets/guitar/c.mp4",
+      "poster": "../assets/guitar/c.png",
+      "initialization": "采用几何初始化与稳定阶段；不代表完整从远处接近。",
+      "meanFretForces": [
+        1.8194,
+        2.6868,
+        1.0694
+      ],
+      "contacts": [
+        {
+          "finger": "index_finger",
+          "string": 5,
+          "fret": 1
+        },
+        {
+          "finger": "middle_finger",
+          "string": 3,
+          "fret": 2
+        },
+        {
+          "finger": "ring_finger",
+          "string": 2,
+          "fret": 3
+        }
+      ],
+      "convergencePercent": 0.0118
+    },
+    {
+      "id": "f",
+      "name": "ChordF",
+      "title": "四指尖保持 · 不含横按",
+      "sourceFrames": [
+        0,
+        240
+      ],
+      "fingers": 4,
+      "speed": 1.0,
+      "passed": true,
+      "cases": [
+        {
+          "name": "nominal",
+          "passed": true
+        },
+        {
+          "name": "half_dt",
+          "passed": true
+        },
+        {
+          "name": "stress_low",
+          "passed": true
+        },
+        {
+          "name": "stress_high",
+          "passed": true
+        }
+      ],
+      "video": "../assets/guitar/f.mp4",
+      "poster": "../assets/guitar/f.png",
+      "initialization": "包含 0.8 s 程序驱动加载，之后为 dataset 参考动作。",
+      "meanFretForces": [
+        0.6372,
+        1.087,
+        0.0915,
+        2.4763
+      ],
+      "contacts": [
+        {
+          "finger": "index_finger",
+          "string": 1,
+          "fret": 1
+        },
+        {
+          "finger": "middle_finger",
+          "string": 4,
+          "fret": 2
+        },
+        {
+          "finger": "ring_finger",
+          "string": 2,
+          "fret": 3
+        },
+        {
+          "finger": "pinky",
+          "string": 3,
+          "fret": 3
+        }
+      ],
+      "convergencePercent": 0.3601
+    },
+    {
+      "id": "a",
+      "name": "ChordA",
+      "title": "相邻弦三指保持",
+      "sourceFrames": [
+        120,
+        336
+      ],
+      "fingers": 3,
+      "speed": 0.4,
+      "passed": true,
+      "cases": [
+        {
+          "name": "nominal",
+          "passed": true
+        },
+        {
+          "name": "half_dt",
+          "passed": true
+        },
+        {
+          "name": "stress_low",
+          "passed": true
+        },
+        {
+          "name": "stress_high",
+          "passed": true
+        }
+      ],
+      "video": "../assets/guitar/a.mp4",
+      "poster": "../assets/guitar/a.png",
+      "initialization": "包含 0.8 s 程序驱动加载，之后为 dataset 参考动作。",
+      "meanFretForces": [
+        0.3625,
+        1.7022,
+        3.1286
+      ],
+      "contacts": [
+        {
+          "finger": "middle_finger",
+          "string": 3,
+          "fret": 2
+        },
+        {
+          "finger": "ring_finger",
+          "string": 4,
+          "fret": 2
+        },
+        {
+          "finger": "pinky",
+          "string": 5,
+          "fret": 2
+        }
+      ],
+      "convergencePercent": 0.0339
+    },
+    {
+      "id": "bb",
+      "name": "ChordBb",
+      "title": "四指保持子任务",
+      "sourceFrames": [
+        108,
+        276
+      ],
+      "fingers": 4,
+      "speed": 1.0,
+      "passed": true,
+      "cases": [
+        {
+          "name": "nominal",
+          "passed": true
+        },
+        {
+          "name": "half_dt",
+          "passed": true
+        },
+        {
+          "name": "stress_low",
+          "passed": true
+        },
+        {
+          "name": "stress_high",
+          "passed": true
+        }
+      ],
+      "video": "../assets/guitar/bb.mp4",
+      "poster": "../assets/guitar/bb.png",
+      "initialization": "包含 0.8 s 程序驱动加载，之后为 dataset 参考动作。",
+      "meanFretForces": [
+        1.6379,
+        0.3334,
+        1.7834,
+        3.5456
+      ],
+      "contacts": [
+        {
+          "finger": "index_finger",
+          "string": 2,
+          "fret": 1
+        },
+        {
+          "finger": "middle_finger",
+          "string": 3,
+          "fret": 3
+        },
+        {
+          "finger": "ring_finger",
+          "string": 4,
+          "fret": 3
+        },
+        {
+          "finger": "pinky",
+          "string": 5,
+          "fret": 3
+        }
+      ],
+      "convergencePercent": 0.004
+    },
+    {
+      "id": "d",
+      "name": "ChordD",
+      "title": "四指保持与释放",
+      "sourceFrames": [
+        36,
+        300
+      ],
+      "fingers": 4,
+      "speed": 0.5,
+      "passed": true,
+      "cases": [
+        {
+          "name": "nominal",
+          "passed": true
+        },
+        {
+          "name": "half_dt",
+          "passed": true
+        },
+        {
+          "name": "stress_low",
+          "passed": true
+        },
+        {
+          "name": "stress_high",
+          "passed": true
+        }
+      ],
+      "video": "../assets/guitar/d.mp4",
+      "poster": "../assets/guitar/d.png",
+      "initialization": "包含 0.8 s 程序驱动加载，之后为 dataset 参考动作。",
+      "meanFretForces": [
+        2.3982,
+        0.6785,
+        3.1123,
+        2.3761
+      ],
+      "contacts": [
+        {
+          "finger": "index_finger",
+          "string": 3,
+          "fret": 4
+        },
+        {
+          "finger": "middle_finger",
+          "string": 2,
+          "fret": 5
+        },
+        {
+          "finger": "ring_finger",
+          "string": 5,
+          "fret": 5
+        },
+        {
+          "finger": "pinky",
+          "string": 4,
+          "fret": 6
+        }
+      ],
+      "convergencePercent": 0.009
+    }
+  ],
+  "transition": {
+    "tag": "Transition_C_D_v4_vertical",
+    "status": "两种时间步均通过，力收敛检查通过",
+    "nominal": {
+      "passed": true,
+      "checks": {
+        "endpoint_phases_complete": true,
+        "phase_local_correct_strings": true,
+        "no_bridge_side_or_unassigned_fret": true,
+        "released_transfer_executed": true,
+        "released_transfer_clear": true,
+        "finite_limited_impact": true,
+        "finite_limited_motors": true,
+        "finite_limited_wrist": true,
+        "no_rigid_contact": true,
+        "no_self_contact": true,
+        "penetration_under_0_1mm": true,
+        "joint_tracking_rms_below_2deg": true,
+        "wrist_tracking_rms_below_2mm": true,
+        "complete_duration": true,
+        "one_continuous_run": true
+      },
+      "phases": [
+        {
+          "name": "C dataset clip",
+          "contacts": [
+            {
+              "finger": "index_finger",
+              "checks": {
+                "full_hold_evaluated": true,
+                "continuous_fret_contact": true,
+                "continuous_correct_finger": true,
+                "full_release_evaluated": true,
+                "release_test_present": true,
+                "release_fret_force": true,
+                "release_finger_force": true
+              },
+              "passed": true,
+              "min_fret_force_N": 1.5413749362544253,
+              "mean_fret_force_N": 1.8194229171745055
+            },
+            {
+              "finger": "middle_finger",
+              "checks": {
+                "full_hold_evaluated": true,
+                "continuous_fret_contact": true,
+                "continuous_correct_finger": true,
+                "full_release_evaluated": true,
+                "release_test_present": true,
+                "release_fret_force": true,
+                "release_finger_force": true
+              },
+              "passed": true,
+              "min_fret_force_N": 2.4715224310081636,
+              "mean_fret_force_N": 2.6867941944598037
+            },
+            {
+              "finger": "ring_finger",
+              "checks": {
+                "full_hold_evaluated": true,
+                "continuous_fret_contact": true,
+                "continuous_correct_finger": true,
+                "full_release_evaluated": true,
+                "release_test_present": true,
+                "release_fret_force": true,
+                "release_finger_force": true
+              },
+              "passed": true,
+              "min_fret_force_N": 1.0437110766238382,
+              "mean_fret_force_N": 1.0694126301888536
+            }
+          ],
+          "simultaneous_contact": true,
+          "passed": true
+        },
+        {
+          "name": "D dataset clip at half speed",
+          "contacts": [
+            {
+              "finger": "index_finger",
+              "checks": {
+                "full_hold_evaluated": true,
+                "continuous_fret_contact": true,
+                "continuous_correct_finger": true,
+                "full_release_evaluated": true,
+                "release_test_present": true,
+                "release_fret_force": true,
+                "release_finger_force": true
+              },
+              "passed": true,
+              "min_fret_force_N": 2.368638114662912,
+              "mean_fret_force_N": 2.3958278608585526
+            },
+            {
+              "finger": "middle_finger",
+              "checks": {
+                "full_hold_evaluated": true,
+                "continuous_fret_contact": true,
+                "continuous_correct_finger": true,
+                "full_release_evaluated": true,
+                "release_test_present": true,
+                "release_fret_force": true,
+                "release_finger_force": true
+              },
+              "passed": true,
+              "min_fret_force_N": 0.6422798379079818,
+              "mean_fret_force_N": 0.677312480260954
+            },
+            {
+              "finger": "ring_finger",
+              "checks": {
+                "full_hold_evaluated": true,
+                "continuous_fret_contact": true,
+                "continuous_correct_finger": true,
+                "full_release_evaluated": true,
+                "release_test_present": true,
+                "release_fret_force": true,
+                "release_finger_force": true
+              },
+              "passed": true,
+              "min_fret_force_N": 2.98598381942841,
+              "mean_fret_force_N": 3.1211884826365712
+            },
+            {
+              "finger": "pinky",
+              "checks": {
+                "full_hold_evaluated": true,
+                "continuous_fret_contact": true,
+                "continuous_correct_finger": true,
+                "full_release_evaluated": true,
+                "release_test_present": true,
+                "release_fret_force": true,
+                "release_finger_force": true
+              },
+              "passed": true,
+              "min_fret_force_N": 2.344643645145267,
+              "mean_fret_force_N": 2.3758587553103543
+            }
+          ],
+          "simultaneous_contact": true,
+          "passed": true
+        }
+      ],
+      "peak_hand_string_N": 6.0084122788523215,
+      "forbidden_contact": null,
+      "tracking_rms_deg": 0.5071813051084836,
+      "wrist_position_rms_mm": 0.356758041523038,
+      "limits": "13.5 N impact / 2 deg joint RMS / 2 mm wrist RMS are declared engineering screens, not calibrated hardware safety or human-pose truth.",
+      "limitations": [
+        "Not a continuous human MoCap recording: the bridge is explicitly planned.",
+        "C and D are existing candidate contact tasks, not verified complete musical chords.",
+        "C source speed1x, D source speed0.5x; bridge timing is chosen.",
+        "Geometric initialization and bounded virtual wrist; no G1 or audio validation.",
+        "Planning collision checks do not establish physical success."
+      ],
+      "full_musical_chord_transition_validated": false
+    },
+    "convergence": {
+      "tag": "Transition_C_D_v4_vertical",
+      "passed": true,
+      "complete_runs": 2,
+      "same_compiled_guitar": true,
+      "force_convergence": [
+        {
+          "phase": "C dataset clip",
+          "finger": "index_finger",
+          "mean_force_relative_difference": 3.2787145545665895e-05
+        },
+        {
+          "phase": "C dataset clip",
+          "finger": "middle_finger",
+          "mean_force_relative_difference": 0.0001073370780075763
+        },
+        {
+          "phase": "C dataset clip",
+          "finger": "ring_finger",
+          "mean_force_relative_difference": 0.00011781225829613526
+        },
+        {
+          "phase": "D dataset clip at half speed",
+          "finger": "index_finger",
+          "mean_force_relative_difference": 1.537657026202606e-05
+        },
+        {
+          "phase": "D dataset clip at half speed",
+          "finger": "middle_finger",
+          "mean_force_relative_difference": 5.685443903775205e-06
+        },
+        {
+          "phase": "D dataset clip at half speed",
+          "finger": "ring_finger",
+          "mean_force_relative_difference": 4.442084204542757e-05
+        },
+        {
+          "phase": "D dataset clip at half speed",
+          "finger": "pinky",
+          "mean_force_relative_difference": 9.221683194648779e-05
+        }
+      ],
+      "peak_force_relative_difference": 0.00023125468494967477,
+      "individual_checks": [
+        {
+          "passed": true,
+          "checks": {
+            "endpoint_phases_complete": true,
+            "phase_local_correct_strings": true,
+            "no_bridge_side_or_unassigned_fret": true,
+            "released_transfer_executed": true,
+            "released_transfer_clear": true,
+            "finite_limited_impact": true,
+            "finite_limited_motors": true,
+            "finite_limited_wrist": true,
+            "no_rigid_contact": true,
+            "no_self_contact": true,
+            "penetration_under_0_1mm": true,
+            "joint_tracking_rms_below_2deg": true,
+            "wrist_tracking_rms_below_2mm": true,
+            "complete_duration": true,
+            "one_continuous_run": true
+          },
+          "phases": [
+            {
+              "name": "C dataset clip",
+              "contacts": [
+                {
+                  "finger": "index_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 1.5413749362544253,
+                  "mean_fret_force_N": 1.8194229171745055
+                },
+                {
+                  "finger": "middle_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.4715224310081636,
+                  "mean_fret_force_N": 2.6867941944598037
+                },
+                {
+                  "finger": "ring_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 1.0437110766238382,
+                  "mean_fret_force_N": 1.0694126301888536
+                }
+              ],
+              "simultaneous_contact": true,
+              "passed": true
+            },
+            {
+              "name": "D dataset clip at half speed",
+              "contacts": [
+                {
+                  "finger": "index_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.368638114662912,
+                  "mean_fret_force_N": 2.3958278608585526
+                },
+                {
+                  "finger": "middle_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 0.6422798379079818,
+                  "mean_fret_force_N": 0.677312480260954
+                },
+                {
+                  "finger": "ring_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.98598381942841,
+                  "mean_fret_force_N": 3.1211884826365712
+                },
+                {
+                  "finger": "pinky",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.344643645145267,
+                  "mean_fret_force_N": 2.3758587553103543
+                }
+              ],
+              "simultaneous_contact": true,
+              "passed": true
+            }
+          ],
+          "peak_hand_string_N": 6.0084122788523215,
+          "forbidden_contact": null,
+          "tracking_rms_deg": 0.5071813051084836,
+          "wrist_position_rms_mm": 0.356758041523038,
+          "limits": "13.5 N impact / 2 deg joint RMS / 2 mm wrist RMS are declared engineering screens, not calibrated hardware safety or human-pose truth.",
+          "limitations": [
+            "Not a continuous human MoCap recording: the bridge is explicitly planned.",
+            "C and D are existing candidate contact tasks, not verified complete musical chords.",
+            "C source speed1x, D source speed0.5x; bridge timing is chosen.",
+            "Geometric initialization and bounded virtual wrist; no G1 or audio validation.",
+            "Planning collision checks do not establish physical success."
+          ],
+          "full_musical_chord_transition_validated": false
+        },
+        {
+          "passed": true,
+          "checks": {
+            "endpoint_phases_complete": true,
+            "phase_local_correct_strings": true,
+            "no_bridge_side_or_unassigned_fret": true,
+            "released_transfer_executed": true,
+            "released_transfer_clear": true,
+            "finite_limited_impact": true,
+            "finite_limited_motors": true,
+            "finite_limited_wrist": true,
+            "no_rigid_contact": true,
+            "no_self_contact": true,
+            "penetration_under_0_1mm": true,
+            "joint_tracking_rms_below_2deg": true,
+            "wrist_tracking_rms_below_2mm": true,
+            "complete_duration": true,
+            "one_continuous_run": true
+          },
+          "phases": [
+            {
+              "name": "C dataset clip",
+              "contacts": [
+                {
+                  "finger": "index_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 1.5429016098343515,
+                  "mean_fret_force_N": 1.8194825708585
+                },
+                {
+                  "finger": "middle_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.4711866378918015,
+                  "mean_fret_force_N": 2.6865058018217627
+                },
+                {
+                  "finger": "ring_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 1.043830801723278,
+                  "mean_fret_force_N": 1.0695386201058665
+                }
+              ],
+              "simultaneous_contact": true,
+              "passed": true
+            },
+            {
+              "name": "D dataset clip at half speed",
+              "contacts": [
+                {
+                  "finger": "index_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.3687129267100007,
+                  "mean_fret_force_N": 2.395864700473991
+                },
+                {
+                  "finger": "middle_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 0.6422891910694591,
+                  "mean_fret_force_N": 0.6773163310830659
+                },
+                {
+                  "finger": "ring_finger",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.986094885950471,
+                  "mean_fret_force_N": 3.1213271284571524
+                },
+                {
+                  "finger": "pinky",
+                  "checks": {
+                    "full_hold_evaluated": true,
+                    "continuous_fret_contact": true,
+                    "continuous_correct_finger": true,
+                    "full_release_evaluated": true,
+                    "release_test_present": true,
+                    "release_fret_force": true,
+                    "release_finger_force": true
+                  },
+                  "passed": true,
+                  "min_fret_force_N": 2.344385933786002,
+                  "mean_fret_force_N": 2.3756396611427872
+                }
+              ],
+              "simultaneous_contact": true,
+              "passed": true
+            }
+          ],
+          "peak_hand_string_N": 6.007022805363728,
+          "forbidden_contact": null,
+          "tracking_rms_deg": 0.5070552658154488,
+          "wrist_position_rms_mm": 0.3571658706211452,
+          "limits": "13.5 N impact / 2 deg joint RMS / 2 mm wrist RMS are declared engineering screens, not calibrated hardware safety or human-pose truth.",
+          "limitations": [
+            "Not a continuous human MoCap recording: the bridge is explicitly planned.",
+            "C and D are existing candidate contact tasks, not verified complete musical chords.",
+            "C source speed1x, D source speed0.5x; bridge timing is chosen.",
+            "Geometric initialization and bounded virtual wrist; no G1 or audio validation.",
+            "Planning collision checks do not establish physical success."
+          ],
+          "full_musical_chord_transition_validated": false
+        }
+      ],
+      "scope": "One candidate C→D contact-task transition, two timesteps; not full-chord/audio/hardware/generalization validation."
+    }
+  },
+  "provenance": {
+    "sources": {
+      "retarget/contact_labels/shared_multifinger_release_suite_v2.json": "198dbb4fb1fc5231815866acc49b1db24dce280cbcd6a1ee4522ddb66ccf8da4",
+      "analysis/mentor_contact_targets/shared_release_suite_v2_report.json": "1ea2f815ed2ec85aa63328112c8f43cb0d4a2b91fbc3dcd1ba65bc41a9af8d9b"
+    },
+    "source": "Saved project reports; shared_multifinger_release_suite_v2",
+    "kind": "Manual contact-task regression",
+    "motion": "Pei Xu dataset mocap → IK → bounded motors → MuJoCo contact",
+    "caveats": [
+      "Candidate contact labels are manually specified, not human contact ground truth.",
+      "Per-clip tuning and source-speed scaling are disclosed.",
+      "No learned policy, G1 execution or acoustic success is established by this benchmark."
+    ]
+  }
+}
