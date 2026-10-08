@@ -28,6 +28,13 @@ cd_v2 = ROOT / 'analysis/dual_chord_pick_v1/dual_velocity_v2'
 for ext in ['mp4','png']:
     shutil.copy2(cd_v2/f'preview.{ext}', ASSETS/f'c-to-d-dual_velocity_v2.{ext}')
 
+# Publish only the completed and visually reviewed v4 video.
+cd_v4 = ROOT / 'analysis/dual_chord_pick_v1/dual_candidate_v4'
+review_v4 = json.loads((cd_v4/'review.json').read_text())
+assert review_v4.get('visual_review') == 'reviewed', 'Wait for complete v4 media review before building'
+for ext in ['mp4','png']:
+    shutil.copy2(cd_v4/f'preview.{ext}', ASSETS/f'c-to-d-dual_candidate_v4.{ext}')
+
 def read(path): return json.loads((ROOT/path).read_text())
 def esc(value): return html.escape(str(value), quote=True)
 
