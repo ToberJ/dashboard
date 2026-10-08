@@ -38,6 +38,14 @@ for ext in ['mp4','png']:
 # Same reviewed frames at physical speed; slow original remains available.
 shutil.copy2(cd_v4/'preview_realtime.mp4', ASSETS/'c-to-d-dual_candidate_v4-realtime.mp4')
 
+# Both frozen bias cases are complete and reviewed; publish original-speed video.
+for run in ['dual_bias_plus_v4','dual_bias_minus_v4']:
+    folder=ROOT/'analysis/dual_chord_pick_v1'/run
+    review=json.loads((folder/'review.json').read_text())
+    assert review.get('visual_review')=='reviewed' and review.get('video_complete')
+    shutil.copy2(folder/'preview_realtime.mp4',ASSETS/f'c-to-d-{run}-realtime.mp4')
+    shutil.copy2(folder/'preview.png',ASSETS/f'c-to-d-{run}.png')
+
 def read(path): return json.loads((ROOT/path).read_text())
 def esc(value): return html.escape(str(value), quote=True)
 
