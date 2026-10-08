@@ -49,8 +49,8 @@ for run in ['dual_bias_plus_v4','dual_bias_minus_v4']:
 # Explicit geometry-only long-window diagnostic media, not physics success.
 for name in ['ChordC','ChordD','ChordE']:
     folder=ROOT/'analysis/long_window_retarget_v1'
-    shutil.copy2(folder/f'{name}_fixed_views_v2.mp4',ASSETS/f'long-{name}-fixed-views-v2.mp4')
-    shutil.copy2(folder/f'{name}_fixed_views_v2_frame80.png',ASSETS/f'long-{name}-fixed-views-v2.png')
+    shutil.copy2(folder/f'{name}_fixed_views_v3.mp4',ASSETS/f'long-{name}-fixed-views-v3.mp4')
+    shutil.copy2(folder/f'{name}_fixed_views_v3_frame80.png',ASSETS/f'long-{name}-fixed-views-v3.png')
 
 def read(path): return json.loads((ROOT/path).read_text())
 def esc(value): return html.escape(str(value), quote=True)
