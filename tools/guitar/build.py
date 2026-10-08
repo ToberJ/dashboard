@@ -18,6 +18,11 @@ SITE = Path(__file__).resolve().parents[2]
 ASSETS = SITE / 'assets/guitar'
 ASSETS.mkdir(parents=True, exist_ok=True)
 
+# Reviewed full C-to-D v1 diagnostic; retain failure label, not a milestone pass.
+cd_folder = ROOT / 'analysis/dual_chord_pick_v1/dual_nominal_v1'
+for src, dst in [('preview.mp4','c-to-d-dual_nominal_v1.mp4'),('preview.png','c-to-d-dual_nominal_v1.png')]:
+    shutil.copy2(cd_folder/src, ASSETS/dst)
+
 def read(path): return json.loads((ROOT/path).read_text())
 def esc(value): return html.escape(str(value), quote=True)
 
