@@ -23,6 +23,11 @@ cd_folder = ROOT / 'analysis/dual_chord_pick_v1/dual_nominal_v1'
 for src, dst in [('preview.mp4','c-to-d-dual_nominal_v1.mp4'),('preview.png','c-to-d-dual_nominal_v1.png')]:
     shutil.copy2(cd_folder/src, ASSETS/dst)
 
+# Complete v2 diagnostic; contact failures retained.
+cd_v2 = ROOT / 'analysis/dual_chord_pick_v1/dual_velocity_v2'
+for ext in ['mp4','png']:
+    shutil.copy2(cd_v2/f'preview.{ext}', ASSETS/f'c-to-d-dual_velocity_v2.{ext}')
+
 def read(path): return json.loads((ROOT/path).read_text())
 def esc(value): return html.escape(str(value), quote=True)
 
