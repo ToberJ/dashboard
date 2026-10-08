@@ -46,6 +46,12 @@ for run in ['dual_bias_plus_v4','dual_bias_minus_v4']:
     shutil.copy2(folder/'preview_realtime.mp4',ASSETS/f'c-to-d-{run}-realtime.mp4')
     shutil.copy2(folder/'preview.png',ASSETS/f'c-to-d-{run}.png')
 
+# Explicit geometry-only long-window diagnostic media, not physics success.
+for name in ['ChordC','ChordD','ChordE']:
+    folder=ROOT/'analysis/long_window_retarget_v1'
+    shutil.copy2(folder/f'{name}_mapping_only.mp4',ASSETS/f'long-{name}-mapping-only.mp4')
+    shutil.copy2(folder/f'{name}_mapping_frame80.png',ASSETS/f'long-{name}-mapping-only.png')
+
 def read(path): return json.loads((ROOT/path).read_text())
 def esc(value): return html.escape(str(value), quote=True)
 
