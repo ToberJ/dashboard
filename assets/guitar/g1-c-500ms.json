@@ -1,0 +1,92 @@
+{
+  "scope": "Single physical0.5s cold-reset C:200ms run plus300ms continuation restoring actual qpos/qvel/ctrl and controller references. Solver warmstart rebuilt at checkpoint. No continuous approach, disturbance, right pluck or long-term robustness claim.",
+  "source_files": [
+    "static_c_cartesian_T0.2.npz",
+    "static_c_cartesian_continue_T0.3.npz"
+  ],
+  "duration_s": 0.5000000000019653,
+  "contacts": [
+    {
+      "finger": "index_finger",
+      "string": 5,
+      "fret": 1,
+      "tail100ms_fret_mean_N": 1.912974631335376,
+      "tail100ms_fret_min_N": 1.834739897907983,
+      "post150ms_positive_fraction": 1.0,
+      "post150ms_above002N_fraction": 1.0,
+      "post150ms_min_N": 1.834739897907983
+    },
+    {
+      "finger": "middle_finger",
+      "string": 3,
+      "fret": 2,
+      "tail100ms_fret_mean_N": 2.7855622582646675,
+      "tail100ms_fret_min_N": 2.7643425387613956,
+      "post150ms_positive_fraction": 1.0,
+      "post150ms_above002N_fraction": 1.0,
+      "post150ms_min_N": 2.5917782802307476
+    },
+    {
+      "finger": "ring_finger",
+      "string": 2,
+      "fret": 3,
+      "tail100ms_fret_mean_N": 1.5224740518852846,
+      "tail100ms_fret_min_N": 1.4941931156396357,
+      "post150ms_positive_fraction": 1.0,
+      "post150ms_above002N_fraction": 1.0,
+      "post150ms_min_N": 1.4378740647446606
+    }
+  ],
+  "left_wrong_string_peak_N_all_steps": 0.603248855958548,
+  "tail100ms_sampled_other_string_contact_peaks_N": {
+    "wuji_l_index_finger_tip_sensor_frame/S4": 0.416634376784967
+  },
+  "tail100ms_chest_contact_fraction": 1.0,
+  "tail100ms_thigh_contact_fraction": 1.0,
+  "tail100ms_face_deg_mean": 6.4931000745633005,
+  "tail100ms_face_deg_range": [
+    6.459878856733959,
+    6.555999349086572
+  ],
+  "tail100ms_head_deg_mean": 0.3684131376352669,
+  "tail100ms_wrist_error_mm": 4.157942576013395,
+  "tail100ms_com_drift_mm": 0.35998825462321477,
+  "sampled_joint_limit_excess_deg": 0.0,
+  "sampled_max_motor_force_ratio": 0.6017728448940893,
+  "sampled_ctrl_clamp_excess": 0.0,
+  "tail100ms_support_force_world_N": {
+    "thigh": [
+      7.582003273753404,
+      2.9433935743438395,
+      23.207984883560297
+    ],
+    "right_arm_hand": [
+      -24.182370238906323,
+      9.566624104663562,
+      0.823652734623967
+    ],
+    "chest": [
+      30.787869121817565,
+      -12.760104881657332,
+      4.324925416206509
+    ],
+    "left_hand": [
+      -14.254720118078993,
+      0.2103623955300511,
+      1.1951851714722643
+    ]
+  },
+  "continuation_worst_overlap": {
+    "t": 0.4691875000017635,
+    "bodies": [
+      "right_ankle_roll_link",
+      "world"
+    ],
+    "depth_mm": 0.05085139527647841
+  },
+  "warnings": [],
+  "free_guitar": true,
+  "nmocap": 0,
+  "neq": 0,
+  "max_body_gravcomp": 0.0
+}

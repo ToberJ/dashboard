@@ -1,0 +1,269 @@
+{
+  "scope": "Four diagnostic controller variants, all single200ms cold resets. No claim robust contact, continuous reaching or picking. No parameter sweep of physics.",
+  "runs": [
+    {
+      "variant": "control",
+      "scope": "Single cold-reset200ms diagnostic. First150ms treated as source-style loading; final50ms assessed. 0.02N only contact event screen, not clean-note/hardware force criterion. Not a long hold, not a transition and not robust.",
+      "termination": "duration_completed",
+      "duration_s": 0.2000000000002518,
+      "contacts_after_150ms": [
+        {
+          "finger": "index_finger",
+          "user_string": 5,
+          "fret": 1,
+          "fret_mean_N": 0.0,
+          "fret_min_N": 0.0,
+          "fret_max_N": 0.0,
+          "fraction_fret_over_002N": 0.0,
+          "longest_fret_below_002N_s": 0.05,
+          "fraction_fret_positive": 0.0,
+          "finger_mean_N": 0.695194401378144,
+          "finger_min_N": 0.6248333159346771
+        },
+        {
+          "finger": "middle_finger",
+          "user_string": 3,
+          "fret": 2,
+          "fret_mean_N": 2.548344610130813,
+          "fret_min_N": 2.471635026671879,
+          "fret_max_N": 2.632820461363899,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 4.047152255912752,
+          "finger_min_N": 4.022848015814867
+        },
+        {
+          "finger": "ring_finger",
+          "user_string": 2,
+          "fret": 3,
+          "fret_mean_N": 1.0128023448300807,
+          "fret_min_N": 0.9774651899842015,
+          "fret_max_N": 1.0476088552631362,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 3.5846777045200886,
+          "finger_min_N": 3.5600630681294567
+        }
+      ],
+      "chest_fraction_over_001N": 1.0,
+      "thigh_fraction_over_001N": 1.0,
+      "wrong_hand_string_peak_N": 1.8548692012751693,
+      "tail_wrist_error_mm": 4.6451165924856355,
+      "tail_wrist_error_deg": 2.3330442668169264,
+      "tail_face_deg": 8.219016823120333,
+      "tail_head_deg": 0.7706364156992255,
+      "worst_overlap": {
+        "t": 0.005350000000000304,
+        "bodies": [
+          "guitar",
+          "wuji_l_thumb_distal"
+        ],
+        "depth_mm": 0.07700151261327229
+      },
+      "warnings": [],
+      "max_body_gravcomp": 0.0,
+      "sampled_max_joint_limit_excess_deg": 0.0,
+      "all_actuators_force_limited": true
+    },
+    {
+      "variant": "torque",
+      "scope": "Single cold-reset200ms diagnostic. First150ms treated as source-style loading; final50ms assessed. 0.02N only contact event screen, not clean-note/hardware force criterion. Not a long hold, not a transition and not robust.",
+      "termination": "duration_completed",
+      "duration_s": 0.2000000000002518,
+      "contacts_after_150ms": [
+        {
+          "finger": "index_finger",
+          "user_string": 5,
+          "fret": 1,
+          "fret_mean_N": 0.0,
+          "fret_min_N": 0.0,
+          "fret_max_N": 0.0,
+          "fraction_fret_over_002N": 0.0,
+          "longest_fret_below_002N_s": 0.05,
+          "fraction_fret_positive": 0.0,
+          "finger_mean_N": 1.1788231266706235,
+          "finger_min_N": 1.1152134270374974
+        },
+        {
+          "finger": "middle_finger",
+          "user_string": 3,
+          "fret": 2,
+          "fret_mean_N": 2.4501601600459924,
+          "fret_min_N": 2.3934251729346085,
+          "fret_max_N": 2.53580881568503,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 3.906433625879875,
+          "finger_min_N": 3.8402328818557425
+        },
+        {
+          "finger": "ring_finger",
+          "user_string": 2,
+          "fret": 3,
+          "fret_mean_N": 1.1818852180248245,
+          "fret_min_N": 1.1432797826222134,
+          "fret_max_N": 1.2228233248874656,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 3.789877899176499,
+          "finger_min_N": 3.750639936282821
+        }
+      ],
+      "chest_fraction_over_001N": 1.0,
+      "thigh_fraction_over_001N": 1.0,
+      "wrong_hand_string_peak_N": 7.436473309476628,
+      "tail_wrist_error_mm": 8.451062245878196,
+      "tail_wrist_error_deg": 3.077930311092433,
+      "tail_face_deg": 8.09950044048951,
+      "tail_head_deg": 0.7468506101994321,
+      "worst_overlap": {
+        "t": 0.006101250000000534,
+        "bodies": [
+          "guitar",
+          "wuji_l_thumb_distal"
+        ],
+        "depth_mm": 0.08729765796422137
+      },
+      "warnings": [],
+      "max_body_gravcomp": 0.0,
+      "sampled_max_joint_limit_excess_deg": 0.8974974996728461,
+      "all_actuators_force_limited": true
+    },
+    {
+      "variant": "relative",
+      "scope": "Single cold-reset200ms diagnostic. First150ms treated as source-style loading; final50ms assessed. 0.02N only contact event screen, not clean-note/hardware force criterion. Not a long hold, not a transition and not robust.",
+      "termination": "duration_completed",
+      "duration_s": 0.2000000000002518,
+      "contacts_after_150ms": [
+        {
+          "finger": "index_finger",
+          "user_string": 5,
+          "fret": 1,
+          "fret_mean_N": 0.0,
+          "fret_min_N": 0.0,
+          "fret_max_N": 0.0,
+          "fraction_fret_over_002N": 0.0,
+          "longest_fret_below_002N_s": 0.05,
+          "fraction_fret_positive": 0.0,
+          "finger_mean_N": 1.6678066681959187,
+          "finger_min_N": 1.5766980573196396
+        },
+        {
+          "finger": "middle_finger",
+          "user_string": 3,
+          "fret": 2,
+          "fret_mean_N": 2.4722366716555837,
+          "fret_min_N": 2.4430478737993813,
+          "fret_max_N": 2.505184420884455,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 3.971074123402932,
+          "finger_min_N": 3.922139128552588
+        },
+        {
+          "finger": "ring_finger",
+          "user_string": 2,
+          "fret": 3,
+          "fret_mean_N": 1.2301132096731378,
+          "fret_min_N": 1.193988296740505,
+          "fret_max_N": 1.2722872861966474,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 3.909655839205903,
+          "finger_min_N": 3.8416471956938194
+        }
+      ],
+      "chest_fraction_over_001N": 1.0,
+      "thigh_fraction_over_001N": 1.0,
+      "wrong_hand_string_peak_N": 5.370611638479391,
+      "tail_wrist_error_mm": 7.958316043571386,
+      "tail_wrist_error_deg": 2.1742079615658527,
+      "tail_face_deg": 8.045861947724639,
+      "tail_head_deg": 0.7285435766111266,
+      "worst_overlap": {
+        "t": 0.00605625000000052,
+        "bodies": [
+          "guitar",
+          "wuji_l_thumb_distal"
+        ],
+        "depth_mm": 0.08914088692636798
+      },
+      "warnings": [],
+      "max_body_gravcomp": 0.0,
+      "sampled_max_joint_limit_excess_deg": 0.6766734863997678,
+      "all_actuators_force_limited": true
+    },
+    {
+      "variant": "cartesian",
+      "scope": "Single cold-reset200ms diagnostic. First150ms treated as source-style loading; final50ms assessed. 0.02N only contact event screen, not clean-note/hardware force criterion. Not a long hold, not a transition and not robust.",
+      "termination": "duration_completed",
+      "duration_s": 0.2000000000002518,
+      "contacts_after_150ms": [
+        {
+          "finger": "index_finger",
+          "user_string": 5,
+          "fret": 1,
+          "fret_mean_N": 1.9901479879898816,
+          "fret_min_N": 1.9367481157955073,
+          "fret_max_N": 2.042473020887502,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 4.603359275921159,
+          "finger_min_N": 4.520995717844804
+        },
+        {
+          "finger": "middle_finger",
+          "user_string": 3,
+          "fret": 2,
+          "fret_mean_N": 2.628861905647953,
+          "fret_min_N": 2.5917782802307476,
+          "fret_max_N": 2.667484264365215,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 4.481704632424581,
+          "finger_min_N": 4.427393754979164
+        },
+        {
+          "finger": "ring_finger",
+          "user_string": 2,
+          "fret": 3,
+          "fret_mean_N": 1.465465785906864,
+          "fret_min_N": 1.4378740647446606,
+          "fret_max_N": 1.4962854544523265,
+          "fraction_fret_over_002N": 1.0,
+          "longest_fret_below_002N_s": 0.0,
+          "fraction_fret_positive": 1.0,
+          "finger_mean_N": 4.542702093052459,
+          "finger_min_N": 4.517789430515263
+        }
+      ],
+      "chest_fraction_over_001N": 1.0,
+      "thigh_fraction_over_001N": 1.0,
+      "wrong_hand_string_peak_N": 0.0,
+      "tail_wrist_error_mm": 3.2913572052194797,
+      "tail_wrist_error_deg": 1.0813948652920635,
+      "tail_face_deg": 7.878802874630015,
+      "tail_head_deg": 0.7242407224419988,
+      "worst_overlap": {
+        "t": 0.005510000000000353,
+        "bodies": [
+          "guitar",
+          "wuji_l_thumb_distal"
+        ],
+        "depth_mm": 0.08169259926054784
+      },
+      "warnings": [],
+      "max_body_gravcomp": 0.0,
+      "sampled_max_joint_limit_excess_deg": 0.0,
+      "all_actuators_force_limited": true
+    }
+  ]
+}

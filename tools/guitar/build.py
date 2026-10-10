@@ -241,7 +241,17 @@ posture_evidence = dict(updated='2026-10-09', user_visual_check='pass', user_com
 (ASSETS/'g1-posture-evidence.json').write_text(json.dumps(posture_evidence,ensure_ascii=False,indent=2)+'\n')
 project['updated']='2026-10-09'
 project['g1Posture']=posture_evidence
-project['latestReview']['status']='g1_posture_visually_approved_rigid_approach_verified'
+
+left_integration=read('analysis/g1_left_playing_v1/integration_summary.json')
+project['g1PlayingIntegration']=left_integration
+(ASSETS/'g1-playing-integration.json').write_text(json.dumps(left_integration,ensure_ascii=False,indent=2)+'\n')
+for src,dst in [('overview.png','g1-string-precontact.png'),('six_views.png','g1-string-precontact-six.png')]:
+    shutil.copy2(ROOT/'analysis/g1_left_playing_v1/string_precontact_evidence'/src,ASSETS/dst)
+
+for src,dst in [('continued_c_500ms.png','g1-c-500ms.png'),('continued_c_500ms_audit.json','g1-c-500ms.json'),('static_c_comparison.png','g1-c-controller-comparison.png'),('static_c_comparison.json','g1-c-controller-comparison.json'),('static_c_cartesian_evidence/overview.png','g1-c-cold-reset.png'),('static_c_cartesian_evidence/six_views.png','g1-c-cold-reset-six.png')]:
+    shutil.copy2(ROOT/'analysis/g1_left_playing_v1'/src,ASSETS/dst)
+
+project['latestReview']['status']='g1_c_hold_not_passed_neighbor_contact_and_posture_drift'
 project['latestReview']['priority']='left_fretting_with_free_guitar_support_then_physical_pluck'
 next(p for p in phases if p['id']=='hardware').update(status='open',tag='G1坐姿已确认；仿真演奏整合中')
 next(t for t in tasks if t['id']=='HW-02').update(status='open',detail='G1 EDU29＋Wuji Hand2坐姿已确认，自由琴支撑与右臂到位已测试；仍需在此姿态验证按弦和拨弦。')
