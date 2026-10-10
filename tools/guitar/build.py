@@ -220,6 +220,34 @@ project['latestReview']['status']='both_right_hand_methods_independent_contact_c
 next(p for p in phases if p['id']=='foundation').update(status='open',tag='接触力学底线；精细音色后置')
 next(p for p in phases if p['id']=='bimanual').update(status='open',tag='当前：左C按住＋右手拨弦')
 next(p for p in phases if p['id']=='plucking').update(status='open',tag='进入双手同场景接触检查')
+# User-approved G1 pose: scoped support / right approach evidence, never playing success.
+posture_root = ROOT / 'analysis/g1_torso_support_v1'
+posture_approval = read('analysis/g1_torso_support_v1/approved_posture_20261009/manifest.json')
+assert posture_approval['user_visual_check'] == 'pass'
+posture_audit = read('analysis/g1_torso_support_v1/right_reach_move_T30_audit.json')
+posture_rim = read('analysis/g1_torso_support_v1/right_reach_move_T30_upper_edge_audit.json')
+posture_media = posture_root / 'right_reach_move_T8_evidence_frontlit_v1'
+for src, dst in [('whole_body_full_1x.mp4','g1-approved-posture-overview.mp4'),
+                 ('six_views_last10s_1x.mp4','g1-approved-posture-six-views.mp4'),
+                 ('final_overview.png','g1-approved-posture.png'),
+                 ('six_views_159.png','g1-approved-posture-six-views.png')]:
+    shutil.copy2(posture_media/src, ASSETS/dst)
+posture_evidence = dict(updated='2026-10-09', user_visual_check='pass', user_comment='这个姿态非常好',
+    scope='Free-guitar rigid support and motor-driven right-arm approach; no strings or pressing/plucking validation.',
+    video=dict(duration_s=8, speed=1, initial_state='Saved physically generated 60s support checkpoint', camera_profile='guitar-six-v5'),
+    posture=dict(backward_tilt_target_deg=10, headstock='slightly up', support=['thigh pad proxy','upper rear body edge against chest','normal left neck grip'], guitar_fixed=False, pad_location='thigh only'),
+    extension30s=dict(tail5s=posture_audit['tail5s_per_step_mean'],contact_fraction_over001N=posture_audit['tail5s_contact_fraction_over001N'],com_drift_mm=posture_audit['tail5s_com_drift_mm'],max_right_soft_overlap_mm=posture_audit['max_all_step_right_overlap_mm'],upper_back_edge=posture_rim['last2s']),
+    limitations=['No physical strings in this support/approach scene','Initial settling transient remains in predecessor; this run starts from its physical checkpoint','Material/mass/pad proxy not hardware calibrated','Left-hand pressing while retaining support and actual right pluck remain unverified'])
+(ASSETS/'g1-posture-evidence.json').write_text(json.dumps(posture_evidence,ensure_ascii=False,indent=2)+'\n')
+project['updated']='2026-10-09'
+project['g1Posture']=posture_evidence
+project['latestReview']['status']='g1_posture_visually_approved_rigid_approach_verified'
+project['latestReview']['priority']='left_fretting_with_free_guitar_support_then_physical_pluck'
+next(p for p in phases if p['id']=='hardware').update(status='open',tag='G1坐姿已确认；仿真演奏整合中')
+next(t for t in tasks if t['id']=='HW-02').update(status='open',detail='G1 EDU29＋Wuji Hand2坐姿已确认，自由琴支撑与右臂到位已测试；仍需在此姿态验证按弦和拨弦。')
+task('G1-POSTURE','hardware','保留用户认可的坐姿基准','scoped','P0','G1 / 支撑','约10°后倾、琴头微翘；腿部防滑代理＋琴上背缘靠胸＋左手握颈。用户目检认可，右臂到位及30s保持已测试。','限定无弦支撑/接近验证；保留胸口短暂卸载、慢漂移、材料未知和旧初始化问题。')
+task('G1-PLAY','hardware','当前坐姿下左手按C＋右手单弦拨动','next','P0','G1 / 双手','围绕认可琴位与双臂总体外观，整合左手接触任务和拨片轨迹。','自由琴真实接触支撑，同时目标弦按住、拨开后释放、无误弦/意外碰撞；尚未通过。',('G1-POSTURE',))
+
 (ASSETS/'project.json').write_text(json.dumps(project,ensure_ascii=False,indent=2)+'\n')
 (ASSETS/'evidence.json').write_text(json.dumps(dict(updated=project['updated'],verified=project['verified'],clips=clips,transition=project['transition'],provenance=project['provenance']),ensure_ascii=False,indent=2)+'\n')
 

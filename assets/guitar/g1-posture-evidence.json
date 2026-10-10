@@ -1,0 +1,63 @@
+{
+  "updated": "2026-10-09",
+  "user_visual_check": "pass",
+  "user_comment": "这个姿态非常好",
+  "scope": "Free-guitar rigid support and motor-driven right-arm approach; no strings or pressing/plucking validation.",
+  "video": {
+    "duration_s": 8,
+    "speed": 1,
+    "initial_state": "Saved physically generated 60s support checkpoint",
+    "camera_profile": "guitar-six-v5"
+  },
+  "posture": {
+    "backward_tilt_target_deg": 10,
+    "headstock": "slightly up",
+    "support": [
+      "thigh pad proxy",
+      "upper rear body edge against chest",
+      "normal left neck grip"
+    ],
+    "guitar_fixed": false,
+    "pad_location": "thigh only"
+  },
+  "extension30s": {
+    "tail5s": {
+      "t": 27.500125000040295,
+      "face_deg": 9.329729374722941,
+      "head_deg": 0.985788202203216,
+      "torso_N": 0.5490373745571631,
+      "thigh_N": 23.30781562788475,
+      "left_neck_N": 1.4174552229937771,
+      "left_fret_N": 0.0,
+      "guitar_overlap_mm": 0.03379775094801839,
+      "right_overlap_mm": 0.00033719667699732154,
+      "tip_error_mm": 0.5327389654227247,
+      "blade_normal_deg": 0.7364177657723455
+    },
+    "contact_fraction_over001N": {
+      "torso": 0.99625,
+      "thigh": 1.0,
+      "neck": 1.0
+    },
+    "com_drift_mm": 0.6886597891393752,
+    "max_right_soft_overlap_mm": 0.0003834124636531433,
+    "upper_back_edge": {
+      "inward_from_upper_silhouette_mm": {
+        "min": 4.016486536843722,
+        "max": 4.03434127421462,
+        "mean": 4.0254446460691575
+      },
+      "distance_to_sampled_rear_edge_mm": {
+        "min": 1.114317538305955,
+        "max": 1.193240938358841,
+        "mean": 1.15333656798252
+      }
+    }
+  },
+  "limitations": [
+    "No physical strings in this support/approach scene",
+    "Initial settling transient remains in predecessor; this run starts from its physical checkpoint",
+    "Material/mass/pad proxy not hardware calibrated",
+    "Left-hand pressing while retaining support and actual right pluck remain unverified"
+  ]
+}

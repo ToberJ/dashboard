@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07",
+  "updated": "2026-10-09",
   "name": "Dexterous Hand Plays Guitar",
   "phases": [
     {
@@ -66,8 +66,8 @@
       "id": "hardware",
       "n": "07",
       "title": "G1 集成与 sim-to-real",
-      "status": "planned",
-      "tag": "后续",
+      "status": "open",
+      "tag": "G1坐姿已确认；仿真演奏整合中",
       "goal": "把两只手接到 G1，逐级验证实际安装、支撑、驱动与物理参数。",
       "deliverable": "硬件尺寸与限幅、手臂／手腕集成、参数辨识、台架到双手的分级实验。",
       "gate": "先台架单指、再左手、右手与双手；真实观测与仿真对照，不把虚拟腕成功当作 G1 结果。"
@@ -452,10 +452,10 @@
       "id": "HW-02",
       "phase": "hardware",
       "title": "将虚拟腕替换为 G1 手臂／支撑模型",
-      "status": "planned",
+      "status": "open",
       "priority": "P1",
       "lane": "硬件",
-      "detail": "加入真实可达性、手腕负载与吉他固定方式。",
+      "detail": "G1 EDU29＋Wuji Hand2坐姿已确认，自由琴支撑与右臂到位已测试；仍需在此姿态验证按弦和拨弦。",
       "accept": "全模型可执行参考，支撑力与关节限制一致，明确外部夹具。",
       "depends": [
         "HW-01",
@@ -704,6 +704,30 @@
       "depends": [
         "SIM-02",
         "SIM-03"
+      ]
+    },
+    {
+      "id": "G1-POSTURE",
+      "phase": "hardware",
+      "title": "保留用户认可的坐姿基准",
+      "status": "scoped",
+      "priority": "P0",
+      "lane": "G1 / 支撑",
+      "detail": "约10°后倾、琴头微翘；腿部防滑代理＋琴上背缘靠胸＋左手握颈。用户目检认可，右臂到位及30s保持已测试。",
+      "accept": "限定无弦支撑/接近验证；保留胸口短暂卸载、慢漂移、材料未知和旧初始化问题。",
+      "depends": []
+    },
+    {
+      "id": "G1-PLAY",
+      "phase": "hardware",
+      "title": "当前坐姿下左手按C＋右手单弦拨动",
+      "status": "next",
+      "priority": "P0",
+      "lane": "G1 / 双手",
+      "detail": "围绕认可琴位与双臂总体外观，整合左手接触任务和拨片轨迹。",
+      "accept": "自由琴真实接触支撑，同时目标弦按住、拨开后释放、无误弦/意外碰撞；尚未通过。",
+      "depends": [
+        "G1-POSTURE"
       ]
     }
   ],
@@ -1560,8 +1584,8 @@
     "firstClaim": false
   },
   "latestReview": {
-    "status": "both_right_hand_methods_independent_contact_checks_complete",
-    "priority": "shared_posture_fingerstyle_and_continuous_pick",
+    "status": "g1_posture_visually_approved_rigid_approach_verified",
+    "priority": "left_fretting_with_free_guitar_support_then_physical_pluck",
     "holdout": "2/3 first attempts; same-recording windows",
     "transition": "1.5s strict FAIL",
     "acoustics": "not passed",
@@ -2376,5 +2400,68 @@
       "results": "S3/S2 independently pass inherited local checks",
       "further_physics_running": false
     }
+  },
+  "g1Posture": {
+    "updated": "2026-10-09",
+    "user_visual_check": "pass",
+    "user_comment": "这个姿态非常好",
+    "scope": "Free-guitar rigid support and motor-driven right-arm approach; no strings or pressing/plucking validation.",
+    "video": {
+      "duration_s": 8,
+      "speed": 1,
+      "initial_state": "Saved physically generated 60s support checkpoint",
+      "camera_profile": "guitar-six-v5"
+    },
+    "posture": {
+      "backward_tilt_target_deg": 10,
+      "headstock": "slightly up",
+      "support": [
+        "thigh pad proxy",
+        "upper rear body edge against chest",
+        "normal left neck grip"
+      ],
+      "guitar_fixed": false,
+      "pad_location": "thigh only"
+    },
+    "extension30s": {
+      "tail5s": {
+        "t": 27.500125000040295,
+        "face_deg": 9.329729374722941,
+        "head_deg": 0.985788202203216,
+        "torso_N": 0.5490373745571631,
+        "thigh_N": 23.30781562788475,
+        "left_neck_N": 1.4174552229937771,
+        "left_fret_N": 0.0,
+        "guitar_overlap_mm": 0.03379775094801839,
+        "right_overlap_mm": 0.00033719667699732154,
+        "tip_error_mm": 0.5327389654227247,
+        "blade_normal_deg": 0.7364177657723455
+      },
+      "contact_fraction_over001N": {
+        "torso": 0.99625,
+        "thigh": 1.0,
+        "neck": 1.0
+      },
+      "com_drift_mm": 0.6886597891393752,
+      "max_right_soft_overlap_mm": 0.0003834124636531433,
+      "upper_back_edge": {
+        "inward_from_upper_silhouette_mm": {
+          "min": 4.016486536843722,
+          "max": 4.03434127421462,
+          "mean": 4.0254446460691575
+        },
+        "distance_to_sampled_rear_edge_mm": {
+          "min": 1.114317538305955,
+          "max": 1.193240938358841,
+          "mean": 1.15333656798252
+        }
+      }
+    },
+    "limitations": [
+      "No physical strings in this support/approach scene",
+      "Initial settling transient remains in predecessor; this run starts from its physical checkpoint",
+      "Material/mass/pad proxy not hardware calibrated",
+      "Left-hand pressing while retaining support and actual right pluck remain unverified"
+    ]
   }
 }
