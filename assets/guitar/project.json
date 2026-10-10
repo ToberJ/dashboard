@@ -3101,6 +3101,59 @@
           "tail_max_friction_utilization": 0.756117192169251
         }
       }
+    },
+    "fine_model_hold_confirmation": {
+      "stubtrackservo": {
+        "fret_tail50ms_N": [
+          1.771537956469482,
+          2.7065646896593814,
+          1.413079208465804
+        ],
+        "contact_fraction": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "wrong_N": 0.0,
+        "tilt_deg": 8.304824863534991,
+        "pick_change_mm": 2.9553544802210556,
+        "nut_displacement_mm": 9.845804474269668,
+        "joint_excess_deg": 0.0,
+        "max_motor_ratio": 0.6063051559064776,
+        "max_overlap_mm": 0.08455006573123824,
+        "warnings": []
+      },
+      "fineservo": {
+        "fret_tail50ms_N": [
+          1.8454940844237182,
+          2.539523297821869,
+          1.4425296029995394
+        ],
+        "contact_fraction": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "wrong_N": 0.0,
+        "tilt_deg": 8.28806650192353,
+        "pick_change_mm": 2.9534205604138304,
+        "nut_displacement_mm": 9.912048927736553,
+        "joint_excess_deg": 0.0,
+        "max_motor_ratio": 0.6064748543167681,
+        "max_overlap_mm": 0.08272982550664235,
+        "warnings": []
+      },
+      "scope": "Matched0.5s cold C hold, same controller; full fine dt1.25us versus reduced dt2.5us. Not plucking/approach equivalence."
+    },
+    "continuous_approach": {
+      "status": "first_variant_failed_followups_running",
+      "failure_source": "stub_servo_approach_relative_T1",
+      "hold_target_fret_force_N": [
+        0,
+        0,
+        0
+      ],
+      "scope": "Cold hold success does not transfer automatically to continuous approach; coordinate and path corrections under test."
     }
   }
 }
