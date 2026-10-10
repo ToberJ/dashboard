@@ -253,6 +253,14 @@ for src,dst in [('continued_c_500ms.png','g1-c-500ms.png'),('continued_c_500ms_a
 
 project['latestReview']['status']='g1_c_hold_not_passed_neighbor_contact_and_posture_drift'
 project['latestReview']['priority']='left_fretting_with_free_guitar_support_then_physical_pluck'
+support_control=read('analysis/g1_left_playing_v1/support_control_summary.json')
+project['g1SupportControl']=support_control
+project['updated']='2026-10-10'
+project['latestReview']['status']='g1_reduced_cold_C_hold_improved_continuous_playing_unverified'
+(ASSETS/'g1-support-control.json').write_text(json.dumps(support_control,ensure_ascii=False,indent=2)+'\n')
+for src,dst in [('static_c_stubtrackservo_T0.5_evidence/overview.png','g1-support-control.png'),('static_c_stubtrackservo_T0.5_evidence/six_views.png','g1-support-control-six.png')]:
+    shutil.copy2(ROOT/'analysis/g1_left_playing_v1'/src,ASSETS/dst)
+
 next(p for p in phases if p['id']=='hardware').update(status='open',tag='G1坐姿已确认；仿真演奏整合中')
 next(t for t in tasks if t['id']=='HW-02').update(status='open',detail='G1 EDU29＋Wuji Hand2坐姿已确认，自由琴支撑与右臂到位已测试；仍需在此姿态验证按弦和拨弦。')
 task('G1-POSTURE','hardware','保留用户认可的坐姿基准','scoped','P0','G1 / 支撑','约10°后倾、琴头微翘；腿部防滑代理＋琴上背缘靠胸＋左手握颈。用户目检认可，右臂到位及30s保持已测试。','限定无弦支撑/接近验证；保留胸口短暂卸载、慢漂移、材料未知和旧初始化问题。')

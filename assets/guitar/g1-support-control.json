@@ -1,0 +1,165 @@
+{
+  "updated": "2026-10-10",
+  "status": "partial_cold_C_hold_only",
+  "source": "static_c_stubtrackservo_T0.5",
+  "physics": "Free guitar; torque-limited joint motors and mj_step; nmocap=0, neq=0.",
+  "model_scope": "Reduced strings: collision/dynamic nodes only near frets0–5 and picking window. Missing dynamic mass rigidly lumped into guitar; not a validated full-string replacement.",
+  "duration_s": 0.5000000000011587,
+  "fret_tail50ms_mean_N": [
+    1.771537956469482,
+    2.7065646896593814,
+    1.413079208465804
+  ],
+  "fret_post150ms_positive_fraction": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "left_wrong_string_peak_N": 0.0,
+  "tilt_tail50ms_deg": 8.304824863534991,
+  "pick_relative_displacement_end_mm": 2.9553544802210556,
+  "nut_world_displacement_end_mm": 9.845804474269668,
+  "max_soft_overlap_mm": 0.08455006573123824,
+  "sampled_motor_limit_fraction": 0.6063051559064776,
+  "limitations": [
+    "Cold C initialization, not continuous reaching or dataset retarget validation",
+    "No pluck executed; not a completed seated-playing milestone",
+    "Remaining slow drift; no long-duration robustness claim",
+    "Original fine-string confirmation and continuous approach are separate experiments; their outcomes are not represented by this hold result"
+  ],
+  "audit": {
+    "scope": "REDUCED STRING CANDIDATE dt2.5us, added right forearm motor feedforward ramp 18.5N over100ms based on observed baseline support force, not a guaranteed actual force; right reference step cap0.02rad per10ms instead of0.006; adds right pick position feedback1500N/m and60Ns/m mapped to existing capped real arm motors, no desired joint velocity feedforward; adds100Hz collision-aware right pick position/normal IK with guitar-relative forearm support normal reference: gaps noncollidable, omitted dynamic mass rigidly lumped. Cold-reset static C with source finger PD+feedforward through bounded torque motors; removes unintended position-reference clipping, keeps original joint/force limits; no reaching/robustness claim. Thumb adapted; source4.5N feedforward rotated to free-guitar frame; arm task wrench mapped to real G1 joints;additionalCartesian1500N/m,60Ns/m,8Nm/rad,0.25Nms/rad feedback through capped real arm motors;old rigid-support arm joint reference preload removed, all physical properties and gains unchanged;100Hz reference IK tracks source-C guitar-relative wrist x/y and orientation, with initial world wrist height retained for neck support.",
+    "source_files": [
+      "static_c_stubtrackservo_T0.5.npz"
+    ],
+    "duration_s": 0.5000000000011587,
+    "contacts": [
+      {
+        "finger": "index_finger",
+        "string": 5,
+        "fret": 1,
+        "tail50ms_fret_mean_N": 1.771537956469482,
+        "tail50ms_fret_min_N": 1.7415796510564279,
+        "post_loading_positive_fraction": 1.0,
+        "post_loading_above002N_fraction": 1.0,
+        "post_loading_min_N": 1.6327733588830506
+      },
+      {
+        "finger": "middle_finger",
+        "string": 3,
+        "fret": 2,
+        "tail50ms_fret_mean_N": 2.7065646896593814,
+        "tail50ms_fret_min_N": 2.670279689698215,
+        "post_loading_positive_fraction": 1.0,
+        "post_loading_above002N_fraction": 1.0,
+        "post_loading_min_N": 2.6054689266682702
+      },
+      {
+        "finger": "ring_finger",
+        "string": 2,
+        "fret": 3,
+        "tail50ms_fret_mean_N": 1.413079208465804,
+        "tail50ms_fret_min_N": 1.3543670447914966,
+        "post_loading_positive_fraction": 1.0,
+        "post_loading_above002N_fraction": 1.0,
+        "post_loading_min_N": 1.2387802952830604
+      }
+    ],
+    "tail_start_s": 0.45,
+    "post_loading_start_s": 0.15,
+    "left_wrong_string_peak_N_all_steps": 0.0,
+    "tail50ms_sampled_other_string_contact_peaks_N": {},
+    "tail50ms_chest_contact_fraction": 1.0,
+    "tail50ms_thigh_contact_fraction": 1.0,
+    "tail50ms_face_deg_mean": 8.304824863534991,
+    "tail50ms_face_deg_range": [
+      8.289603116590603,
+      8.320345206742722
+    ],
+    "tail50ms_head_deg_mean": 0.6738776997208125,
+    "tail50ms_wrist_error_mm": 1.4307021397064363,
+    "tail50ms_com_drift_mm": 0.08859886921736862,
+    "sampled_joint_limit_excess_deg": 0.0,
+    "sampled_max_motor_force_ratio": 0.6063051559064776,
+    "sampled_ctrl_clamp_excess": 0.0,
+    "tail50ms_support_force_world_N": {
+      "chest": [
+        26.973100981798563,
+        -1.9614496618710893,
+        13.557892714353725
+      ],
+      "left_hand": [
+        -13.138537882921907,
+        -0.11794826298807826,
+        -1.3916454105618015
+      ],
+      "thigh": [
+        8.416835088718525,
+        -0.8965499673419371,
+        23.90716711981388
+      ],
+      "right_arm_hand": [
+        -22.278035277366985,
+        2.9481523601438875,
+        -6.521763342011457
+      ]
+    },
+    "worst_overlap": {
+      "t": 0.005327499999999825,
+      "bodies": [
+        "guitar",
+        "wuji_l_thumb_distal"
+      ],
+      "depth_mm": 0.08455006573123824
+    },
+    "warnings": [],
+    "free_guitar": true,
+    "nmocap": 0,
+    "neq": 0,
+    "max_body_gravcomp": 0.0
+  },
+  "functional_audit": {
+    "scope": "Saved physical states at 500 Hz. Pad target errors and nut displacement are distinct. Contact relative velocity does not track a persistent material point. No new pass threshold.",
+    "source": "static_c_stubtrackservo_T0.5",
+    "summary": {
+      "end_nut_world_displacement_mm": [
+        -9.15489449202067,
+        1.4384982271425373,
+        -3.3254316165012288
+      ],
+      "end_pick_guitar_relative_change_mm": [
+        -2.6340630217428496,
+        0.5921945689068495,
+        1.2021387997260655
+      ],
+      "end_nut_relative_thigh_displacement_mm": [
+        -2.904339741335443,
+        1.5181606634185885,
+        9.577541374550837
+      ],
+      "tail50ms_pad_error_mean_mm": {
+        "index_finger": 1.1131042243960012,
+        "middle_finger": 0.24458569609412925,
+        "ring_finger": 0.8154367693667737
+      },
+      "thigh": {
+        "tail_sample_contact_fraction": 1.0,
+        "tail_mean_tangential_speed_mm_s": 0.13997838455006184,
+        "tail_mean_normal_N": 23.159200875505277,
+        "tail_max_friction_utilization": 0.31142566513169107
+      },
+      "chest": {
+        "tail_sample_contact_fraction": 1.0,
+        "tail_mean_tangential_speed_mm_s": 0.0752414846857973,
+        "tail_mean_normal_N": 26.728317905669375,
+        "tail_max_friction_utilization": 0.647873193078633
+      },
+      "right_forearm": {
+        "tail_sample_contact_fraction": 1.0,
+        "tail_mean_tangential_speed_mm_s": 0.08118215423543163,
+        "tail_mean_normal_N": 19.75476527154074,
+        "tail_max_friction_utilization": 0.756117192169251
+      }
+    }
+  }
+}
