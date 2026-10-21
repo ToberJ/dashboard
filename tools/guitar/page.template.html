@@ -16,6 +16,7 @@
   <p class="sidebar-caption">Research workspace<br>项目计划 · 进展 · 证据</p>
   <nav aria-label="项目导航">
     <a href="#overview"><span>00</span> 项目概览</a>
+    <a href="#rl-fingers4"><span>↳</span> 最新：四指 RL 按弦</a>
     <a href="#g1-posture"><span>↳</span> 已确认 G1 坐姿</a>
     <a href="#overall"><span>01</span> Overall draft plan</a>
     <a href="#roadmap"><span>02</span> Step-by-step 路线</a>
@@ -24,9 +25,24 @@
     <a href="#tasks"><span>05</span> Tasks & acceptance</a>
     <a href="#decisions"><span>06</span> 决策与边界</a>
   </nav>
-  <div class="sidebar-bottom"><span class="dot"></span> 快照 · 2026.10.09<br><small>有证据的进度，不是实时任务调度。</small></div>
+  <div class="sidebar-bottom"><span class="dot"></span> 快照 · 2026.10.21<br><small>有证据的进度，不是实时任务调度。</small></div>
 </aside>
 <main id="main">
+  <section id="rl-fingers4" class="section" aria-labelledby="rl-fingers4-title">
+    <div class="section-heading"><div><div class="eyebrow">LATEST / 2026-10-21 · 01:20 PDT · RL SPECIALIST</div><h2 id="rl-fingers4-title">四指和弦 RL 策略：A 和弦四根目标弦同时按实，3/3 个 case 通过主口径。</h2></div><span class="status scoped">配对评测通过 · 单和弦、冻臂</span></div>
+    <p class="section-intro">Wuji Hand 2 + G1 全身链，MuJoCo Warp 2048 个并行世界，全部真物理接触。左臂由 IK 摆位后冻结，PPO 只学 20 维手指残差；本轮<b>不用前馈按压先验</b>，从零训练 21 次更新（run：fingers4-noprior，旧名 MF4s→MF4d2）。reset 为立指手型（指尖在目标品丝后、拇指贴颈、等初始力矩沉降）。右手仅支撑，没有拨弦。</p>
+    <div class="two-column">
+      <article class="panel"><h3>配对评测 · 均值动作，每 case 1 个世界，精细求解器</h3><div class="table-wrap"><table><thead><tr><th>case</th><th>手指</th><th>按窗内全部按实</th><th>最长连续按实</th><th>主口径</th><th>次口径</th><th>立指角 θ</th></tr></thead><tbody>
+        <tr><th scope="row">A_005450</th><td>4 指</td><td>50%</td><td><b>134 ms</b></td><td class="pass"><span aria-label="通过">✓</span></td><td class="pass"><span aria-label="通过">✓</span></td><td>20.6°</td></tr>
+        <tr><th scope="row">Db1_004534</th><td>3 指</td><td>80%</td><td>344 ms</td><td class="pass"><span aria-label="通过">✓</span></td><td class="pass"><span aria-label="通过">✓</span></td><td>24.2°</td></tr>
+        <tr><th scope="row">Db1_004612</th><td>3 指</td><td>76%</td><td>162 ms</td><td class="pass"><span aria-label="通过">✓</span></td><td class="pass"><span aria-label="通过">✓</span></td><td>25.1°</td></tr>
+      </tbody></table></div><p>"按实" = 每根目标弦同时满足手对弦力 ≥ 2 N 且弦对品丝力 ≥ 1 N。主口径：按实持续 ≥ 50 ms 且相邻弦受力 &lt; 1 N；次口径：相邻弦 &lt; 0.02 N。θ 为远节指骨轴与指板法线夹角，越小越"立"。</p></article>
+      <article class="panel"><h3>训练曲线与边界</h3><p>四根目标弦同时按实的训练占比 0.7 → 1.7 → 2.2 → 3.2 → 4.7 → 5.8 → 9.3%（最后 7 次更新把"全部按实"奖励从 0.3 提到 1.0，并换 CG200/1e-5 训练求解器）；无名指弦 4.3 → 14%。</p><p>边界：四指持续时间（134 ms）明显短于三指（300 ms 级）；琴只靠右大腿托着，按压窗内有毫米级漂移；只验证了单个和弦、固定 reset，没有换把、没有扰动、没有右手拨弦。带前馈先验与退火的对照版本仍在训练。</p></article>
+    </div>
+    <figure class="video-frame"><video controls playsinline preload="none" poster="../assets/guitar/fingers4-noprior_initial_vs_learned.png" src="../assets/guitar/fingers4-noprior_initial_vs_learned.mp4" aria-label="四指 RL 策略：初始策略与学到的策略并排，四视角，0.2 倍速"></video><figcaption><strong>初始策略（左）vs 学到的策略（右）· 固定四视角 · 0.2×</strong><span>三个 case 依次播放：A_005450（四指）、Db1_004534、Db1_004612（三指）。每帧是一个保存的 50 ms 物理状态的运动学回放，只用于观看；判据全部来自保存的物理量。</span></figcaption></figure>
+    <figure class="video-frame"><video controls playsinline preload="none" poster="../assets/guitar/fingers4-noprior_string_closeup.png" src="../assets/guitar/fingers4-noprior_string_closeup.mp4" aria-label="四指 RL 策略弦近景：学到的策略与初始策略，两个机位"></video><figcaption><strong>弦近景 · 两个固定机位（斜视与正上方）· 学到 vs 初始</strong><span>看指尖落点、是否碰邻弦、以及弦被压到品丝的过程；力取每个控制 tick 末的采样。</span></figcaption></figure>
+    <details class="method-note"><summary>方法、代码与下一步</summary><div class="detail-body"><p>策略：状态/谱双编码器（128 + 128）→ 3×256 MLP → 手残差头；观测只有本体（关节角、角速度、上一步指令）、琴位姿、指尖几何参考点、谱事件和指法提示，不给接触力。奖励按压段截断 credit，相邻弦 1 N 容差，"全部目标弦同时按实"奖励 1.0。训练物理为粗化弦模型（与精细模型三张表 ≤ 0.4 mm 一致），评测用精细求解器。代码与评测在 <code>sub-agent/review_1018/stageZ_mf2/</code>（RESULTS.md §6）。</p><ol><li>先验退火 + reset 横向抖动的统一 10-case 版本（4090）和固定先验四指版本（3090）正在训练，用同一配对评测对比。</li><li>加初态扰动与 DR，测鲁棒性；然后做换把/换和弦过渡。</li><li>右手拨弦与完整曲子另验。</li></ol></div></details>
+  </section>
   <header class="topbar"><span>MANIPULATION / CONTACT / CONTROL</span><a href="../assets/guitar/project.json" download>下载计划与状态 JSON ↗</a></header>
   <section id="overview" class="hero">
     <div class="eyebrow"><span class="dot"></span> RESEARCH IN PROGRESS <span class="outline-label">SIMULATION FIRST</span></div>

@@ -266,6 +266,13 @@ next(t for t in tasks if t['id']=='HW-02').update(status='open',detail='G1 EDU29
 task('G1-POSTURE','hardware','保留用户认可的坐姿基准','scoped','P0','G1 / 支撑','约10°后倾、琴头微翘；腿部防滑代理＋琴上背缘靠胸＋左手握颈。用户目检认可，右臂到位及30s保持已测试。','限定无弦支撑/接近验证；保留胸口短暂卸载、慢漂移、材料未知和旧初始化问题。')
 task('G1-PLAY','hardware','当前坐姿下左手按C＋右手单弦拨动','next','P0','G1 / 双手','围绕认可琴位与双臂总体外观，整合左手接触任务和拨片轨迹。','自由琴真实接触支撑，同时目标弦按住、拨开后释放、无误弦/意外碰撞；尚未通过。',('G1-POSTURE',))
 
+# 2026-10-21 RL specialist evidence: four-finger chord policy, kinematic replay videos (see stageZ_mf2/RESULTS.md section 6).
+rl_videos = ROOT / 'sub-agent/review_1018/stageZ_mf2/videos'
+for stem in ['fingers4-noprior_initial_vs_learned','fingers4-noprior_string_closeup']:
+    assert read(f'sub-agent/review_1018/stageZ_mf2/videos/{stem}_manifest.json')['ffmpeg_returncode'] == 0
+    for ext in ['mp4','png']:
+        shutil.copy2(rl_videos/f'{stem}.{ext}', ASSETS/f'{stem}.{ext}')
+
 (ASSETS/'project.json').write_text(json.dumps(project,ensure_ascii=False,indent=2)+'\n')
 (ASSETS/'evidence.json').write_text(json.dumps(dict(updated=project['updated'],verified=project['verified'],clips=clips,transition=project['transition'],provenance=project['provenance']),ensure_ascii=False,indent=2)+'\n')
 
