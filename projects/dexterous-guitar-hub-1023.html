@@ -1,0 +1,331 @@
+<title>Dexterous Guitar Hub</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* layout: visual hub; video cards with big-number tiles, inline SVG diagrams, figure gallery; 2-col grid stacking on phones */
+:root{
+  --bg:#f4f4f2; --fg:#1a1a19; --muted:#6b6b66; --line:#dcdcd7; --card:#ffffff; --soft:#ecece9;
+  --accent:#1f4e8c; --accent-soft:#e9eff7; --blue:#1f4e8c; --blue-soft:#e9eff7; --ok:#1f6f4a; --ok-soft:#e8f1ec; --warn:#8a5a00; --warn-soft:#f5efdf; --violet:#1f4e8c; --violet-soft:#ecece9;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#161615; --fg:#ebeae6; --muted:#a3a29c; --line:#2e2e2b; --card:#1e1e1c; --soft:#262624; --accent:#8fb3e6; --accent-soft:#1d2838; --blue:#8fb3e6; --blue-soft:#1d2838; --ok:#7fcfa0; --ok-soft:#1c2f25; --warn:#e0b45a; --warn-soft:#352c16; --violet:#8fb3e6; --violet-soft:#262624; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#161615; --fg:#ebeae6; --muted:#a3a29c; --line:#2e2e2b; --card:#1e1e1c; --soft:#262624; --accent:#8fb3e6; --accent-soft:#1d2838; --blue:#8fb3e6; --blue-soft:#1d2838; --ok:#7fcfa0; --ok-soft:#1c2f25; --warn:#e0b45a; --warn-soft:#352c16; --violet:#8fb3e6; --violet-soft:#262624; color-scheme:dark }
+body{background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-block:32px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:30px;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+h2{font-size:21px;margin:40px 0 12px;text-wrap:balance}
+.sub{color:var(--muted);font-size:15px;margin:0 0 14px;max-width:72ch}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:12px;font-family:var(--mono)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.grid,.grid3{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.card.wide{grid-column:1/-1}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.6px;padding:2px 8px;border-radius:5px;margin-bottom:8px;font-family:var(--mono)}
+.badge.pass{background:var(--ok-soft);color:var(--ok)} .badge.prog{background:var(--warn-soft);color:var(--warn)} .badge.method{background:var(--soft);color:var(--muted)} .badge.design{background:var(--soft);color:var(--muted)}
+.t{font-size:17px;font-weight:600;margin-bottom:8px;text-wrap:balance}
+.m{color:var(--muted);font-size:14px}
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:4px}
+@media (max-width:560px){.vids{grid-template-columns:1fr}}
+.vids figure{margin:0;min-width:0}
+.vids video{width:100%;max-width:100%;border-radius:6px;background:#000;display:block}
+.vids figcaption,.gal figcaption{font-size:12.5px;color:var(--muted);margin-top:4px}
+.vids .one{grid-column:1/-1}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.tile{flex:1 1 120px;min-width:0;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card)}
+.tile .v{font-family:var(--mono);font-weight:600;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .k{font-size:11.5px;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;margin-top:2px}
+.tile.ok .v{color:var(--ok)} .tile.warn .v{color:var(--warn)}
+.gal{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:760px){.gal{grid-template-columns:1fr 1fr}} @media (max-width:480px){.gal{grid-template-columns:1fr}}
+.gal figure{margin:0;min-width:0} .gal img{width:100%;max-width:100%;border-radius:6px;border:1px solid var(--line);display:block;background:#111}
+.gal .span2{grid-column:span 2} @media (max-width:480px){.gal .span2{grid-column:span 1}}
+.diag{width:100%;max-width:100%;height:auto;display:block}
+.svgwrap{overflow-x:auto}
+.note{font-size:13px;color:var(--muted)}
+.lessons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.lessons{grid-template-columns:repeat(2,minmax(0,1fr))}} @media (max-width:480px){.lessons{grid-template-columns:1fr}}
+.lesson{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--card);min-width:0}
+.lesson .ic{font-family:var(--mono);font-weight:600;color:var(--muted);font-size:13px;letter-spacing:.5px;margin-bottom:4px}
+.lesson b{display:block;margin-bottom:2px}
+.lesson span{font-size:13.5px;color:var(--muted)}
+.foot{margin-top:44px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12.5px}
+.mono{font-family:var(--mono);font-size:13px}
+
+/* diagrams as flex boxes (no SVG text) */
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.box{flex:1 1 150px;min-width:0;border-radius:10px;padding:10px 12px;border:1px solid var(--line);background:var(--card)}
+.box .bt{font-weight:700;font-size:14px;margin-bottom:6px}
+.box .bl{font-size:12.5px;color:var(--muted);line-height:1.35;overflow-wrap:anywhere}
+.box.obs{background:var(--card)} .box.obs .bt{color:var(--fg)}
+.box.pol{border-top:3px solid var(--accent)} .box.pol .bt{color:var(--accent)}
+.box.act{background:var(--card)} .box.act .bt{color:var(--fg)}
+.box.phy{border-top:3px solid var(--accent)} .box.phy .bt{color:var(--accent)}
+.box.rew{background:var(--card);border-top:3px solid var(--accent)} .box.rew .bt{color:var(--accent)}
+.arr{align-self:center;color:var(--accent);font-size:20px;flex:0 0 auto}
+@media (max-width:760px){.arr{display:none}.box{flex-basis:45%}}
+.loops{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 0;font-size:12.5px;color:var(--muted)}
+.lp{border:1px dashed var(--line);border-radius:999px;padding:2px 10px} .lp.acc{color:var(--accent);border-color:var(--accent)} .lp{color:var(--muted)}
+.scaf{margin-top:12px;background:var(--soft);border-radius:10px;padding:10px 12px}
+.st{font-size:12.5px;font-weight:700;color:var(--fg);letter-spacing:.3px;margin-bottom:8px}
+.scrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:760px){.scrow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sc{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+.sc b{display:block;font-size:13px} .sc span{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.models{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.md{flex:1 1 220px;min-width:0;font-size:12.5px;border-radius:8px;padding:6px 10px;font-weight:600}
+.md{background:var(--soft);color:var(--fg);border:1px solid var(--line)} .md.acc{border-color:var(--accent);color:var(--accent)}
+.tl{display:flex;gap:4px;margin:4px 0 10px}
+.seg{min-width:0;border-radius:6px;padding:6px 4px;text-align:center;overflow:hidden}
+.seg b{display:block;font-size:12px} .seg span{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.seg.p{background:var(--accent-soft)} .seg.mv{background:var(--soft)}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.rules{grid-template-columns:1fr}}
+.rule{border-radius:8px;padding:10px 12px;min-width:0}
+.rule{background:var(--card);border:1px solid var(--line)} .rule.p{border-top:3px solid var(--accent)} .rule.mv{border-top:3px solid var(--muted)}
+.rule b{display:block;font-size:13px;margin-bottom:4px} .rule.p b{color:var(--accent)} .rule.mv b{color:var(--fg)}
+.rule span{display:block;font-size:12.5px;overflow-wrap:anywhere}
+.pipe{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.pipe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pb{border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card);min-width:0;position:relative}
+.pb b{display:block;font-size:13px} .pb span{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.pb.hi{border-top:3px solid var(--accent)} .pb.ok{border-top:3px solid var(--accent)} .pb.ac{background:var(--soft)}
+.tlrows{display:grid;gap:8px}
+.tlrow{display:grid;grid-template-columns:170px minmax(0,1fr);gap:10px;align-items:center}
+@media (max-width:560px){.tlrow{grid-template-columns:1fr}}
+.tln{font-size:13px;font-weight:600} .tln span{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:12px}
+.tl{display:flex;gap:3px;margin:0}
+.seg{min-width:0;border-radius:5px;padding:5px 3px;text-align:center;overflow:hidden}
+.seg b{display:block;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .seg span{font-size:10.5px;color:var(--muted);font-family:var(--mono)}
+.seg.p{background:var(--accent-soft)} .seg.mv{background:var(--soft)}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.rules{grid-template-columns:1fr}}
+.rule{border-radius:8px;padding:10px 12px;min-width:0;background:var(--card);border:1px solid var(--line)}
+.rule.p{border-top:3px solid var(--accent)} .rule.mv{border-top:3px solid var(--muted)}
+.rule b{display:block;font-size:13px;margin-bottom:4px} .rule.p b{color:var(--accent)}
+.rule span{display:block;font-size:12.5px;overflow-wrap:anywhere}
+</style>
+
+<div class="wrap">
+  <div class="crumb">Stanford Movement Lab · dex-project · week of 2026-10-17 → 10-23</div>
+  <h1>Dexterous Guitar: a Wuji Hand 2 on a Unitree G1 learns to press, shift and play</h1>
+  <p class="sub">Left-hand guitar playing learned in physics simulation (MuJoCo Warp, PPO). Every contact and force comes from the solver. Clips play at real speed and loop.</p>
+  <div class="chips">
+    <span class="chip ok">10-chord pressing</span>
+    <span class="chip ok">Shift 4→9</span>
+    <span class="chip ok">Double shift 4→9→4</span>
+    <span class="chip ok">3-note scale</span>
+    <span class="chip ok">Chord change Db1 1→3 fingers</span><span class="chip warn">Dataset mixture · training</span>
+  </div>
+  <p class="note">Green = passes acceptance: mean policy ×4 on the full robot with the guitar mounted to the torso.</p>
+
+  <h2>Results</h2>
+  <div class="grid">
+
+    <div class="card wide">
+      <div class="badge pass">PASS · 10-23</div>
+      <div class="t">3-note scale across strings: S4F4 → S3F4 → S2F4</div>
+      <div class="vids">
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/zoom_scale3_rt_learned.mp4" loop></video><figcaption>Hand close-up · view A along the neck, view B along the strings</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/scale3_S4S3S2F4_contck04_FULLF1_upperbody_rt.mp4" loop></video><figcaption>Upper body · front and front-left 45°</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/scale3_string_closeup_rt.mp4" loop></video><figcaption>String close-up · along the string and top-down · red = string touched by the hand, orange = string on the fret · forces per string</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">4/4</div><div class="k">all 5 windows</div></div>
+        <div class="tile"><div class="v">304–318 ms</div><div class="k">third note held</div></div>
+        <div class="tile"><div class="v">0 N</div><div class="k">strings during moves</div></div>
+        <div class="tile"><div class="v">3.1 s</div><div class="k">episode</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="badge pass">PASS · 10-23</div>
+      <div class="t">Shift 4 → 9: index slides 12 cm and lands</div>
+      <div class="vids">
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/zoom_shift1_rt_learned.mp4" loop></video><figcaption>Hand close-up</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/shift_B4to9_C1Wck03_FULLF1_upperbody_rt.mp4" loop></video><figcaption>Upper body</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/shift1_string_closeup_rt.mp4" loop></video><figcaption>String close-up</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">4/4</div><div class="k">hold · move · land</div></div>
+        <div class="tile"><div class="v">346 ms</div><div class="k">landing held</div></div>
+        <div class="tile"><div class="v">0.002 mm</div><div class="k">guitar penetration</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="badge pass">PASS · 10-23</div>
+      <div class="t">Double shift 4 → 9 → 4: five events in 3.9 s</div>
+      <div class="vids">
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/zoom_shift2_rt_learned.mp4" loop></video><figcaption>Hand close-up</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/shift_B4to9to4_2fck04_FULLF1_upperbody_rt.mp4" loop></video><figcaption>Upper body</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/shift2_string_closeup_rt.mp4" loop></video><figcaption>String close-up</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">4/4</div><div class="k">all 5 windows</div></div>
+        <div class="tile"><div class="v">288–304 ms</div><div class="k">press at F9</div></div>
+        <div class="tile"><div class="v">168 ms</div><div class="k">back at F4</div></div>
+      </div>
+    </div>
+
+    <div class="card wide">
+      <div class="badge pass">PASS · 10-22</div>
+      <div class="t">One policy presses 10 chords (4 single-finger · 5 three-finger · 1 four-finger)</div>
+      <div class="vids">
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/press10_armfree_fullmodel_hand_rt.mp4" loop></video><figcaption>Hand close-up, all 10 chords</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/press10_armfree_fullmodel_string_closeup_rt.mp4" loop></video><figcaption>String close-up: per-string contact and fret-wire force</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">10/10</div><div class="k">full model</div></div>
+        <div class="tile ok"><div class="v">40/40</div><div class="k">±2 mm perturbation</div></div>
+        <div class="tile"><div class="v">18–26°</div><div class="k">fingertip angle</div></div>
+        <div class="tile"><div class="v">24</div><div class="k">updates, no prior</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="badge pass">PASS · 10-23 13:50</div>
+      <div class="t">Chord change: Db1 one finger → three fingers</div>
+      <div class="vids">
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/zoom_chord_v5ck03_rt_learned.mp4" loop></video><figcaption>Hand close-up, real time: hold the single note, move with the thumb bracing the neck, land all three fingers (S4 / S5 / S3) and hold</figcaption></figure>
+        <figure class="one"><img class="diag" style="border-radius:6px;border:1px solid var(--line)" src="../assets/guitar-hub/figures/shape3.png" alt="Three-finger landing shape, three views"><figcaption>New landing shape: each finger 4–5.5 mm behind its fret · holds all three strings 398 ms in open loop</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">4/4</div><div class="k">hold 380–388 ms</div></div>
+        <div class="tile ok"><div class="v">4/4</div><div class="k">move · 0 N on strings</div></div>
+        <div class="tile ok"><div class="v">4/4</div><div class="k">3 fingers land · 334–478 ms</div></div>
+        <div class="tile"><div class="v">5</div><div class="k">reference versions</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="badge prog">TRAINING · 10-23</div>
+      <div class="t">Dataset mixture: four melodic segments in one policy</div>
+      <div class="vids">
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/melodic_4segments_rt.mp4" loop></video><figcaption>The four reference segments (two recordings each of two 3-note runs), mocap timing at half speed · policy training on them now</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">73 %</div><div class="k">press slots held ≥50 ms · was 40 %</div></div>
+        <div class="tile ok"><div class="v">91 %</div><div class="k">run 1 (B start) · 465/512</div></div>
+        <div class="tile warn"><div class="v">55 %</div><div class="k">run 2 (B♭ start) · 284/512</div></div>
+        <div class="tile warn"><div class="v">12 %</div><div class="k">run 2 first note · training</div></div>
+      </div>
+      <p class="note" style="margin:8px 0 0">Training statistics after 4 updates (21 min each); mean-policy evaluation follows when it plateaus. The B♭ start was never seen by the warm-start policy.</p>
+    </div>
+
+    <div class="card">
+      <div class="badge design">DESIGN · 10-22</div>
+      <div class="t">Guitar mount: back bracket to the torso</div>
+      <div class="vids">
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/design_world_press_F9_rt.mp4" loop></video><figcaption>Press at fret 9 · left camera on the guitar, right camera on the torso · curves: press force and neck motion (dashed = unmounted)</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">0.2 mm</div><div class="k">neck motion, 25 N</div></div>
+        <div class="tile warn"><div class="v">25 mm</div><div class="k">without the bracket</div></div>
+        <div class="tile"><div class="v">484 g</div><div class="k">aluminium</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <h2>How the policy is trained</h2>
+  <div class="card">
+    <div class="flow">
+      <div class="box obs"><div class="bt">State · 231</div><div class="bl">joint pos 69 · joint vel 69</div><div class="bl">last command 69</div><div class="bl">guitar pose 12 · fingertip pads 12</div><div class="bt" style="margin-top:8px">Task · 167</div><div class="bl">5 timed events × 27</div><div class="bl">4 finger descriptors × 8</div></div>
+      <div class="arr">→</div>
+      <div class="box pol"><div class="bt">Policy</div><div class="bl">MLP · Gaussian</div><div class="bl">PPO, adaptive KL</div></div>
+      <div class="arr">→</div>
+      <div class="box act"><div class="bt">Action · 27</div><div class="bl">arm 7 + hand 20</div><div class="bl">range &amp; slew limits</div><div class="bl">PD targets · 20 Hz</div></div>
+      <div class="arr">→</div>
+      <div class="box phy"><div class="bt">Physics</div><div class="bl">MuJoCo Warp · 1024 worlds</div><div class="bl">10 kHz · string node chains</div><div class="bl">hand stiffness from sysid</div></div>
+      <div class="arr">→</div>
+      <div class="box rew"><div class="bt">Reward</div><div class="bl">string ≥2 N · fret ≥1 N</div><div class="bl">neighbours &lt;1 N</div><div class="bl">force band 2–7.5 N</div><div class="bl">move: no contact</div></div>
+    </div>
+    <div class="loops"><span class="lp">↺ next observation</span><span class="lp acc">↺ PPO update</span></div>
+    <div class="scaf">
+      <div class="st">Scaffolding · decays to zero over 3–12 updates</div>
+      <div class="scrow">
+        <div class="sc"><b>Arm BC</b><span>toward the IK or mocap wrist path</span></div>
+        <div class="sc"><b>Finger BC</b><span>release → lift → land shapes</span></div>
+        <div class="sc"><b>RSI</b><span>half of episodes start mid-trajectory</span></div>
+        <div class="sc"><b>Exploration</b><span>noise ×2 during moves</span></div>
+      </div>
+    </div>
+    <div class="models"><div class="md train">Train: body + guitar welded (C1W)</div><div class="md acc">Accept: full G1 + mounted guitar + masked frozen joints</div></div>
+  </div>
+  <div class="card" style="margin-top:16px" id="supervision">
+    <div class="badge method">SUPERVISION REFERENCES · what the arm BC and RSI follow</div>
+    <div class="vids">
+      <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/melodic_4segments_rt.mp4" loop></video><figcaption>Dataset segments (now training): human mocap wrist path → IK, anchored on the robot's own hand shapes; fingers follow release / lift / land rules; played open-loop in physics. Top: ScaleF, ScaleBb (S4F3 → S4F5 → S5F7). Bottom: ScaleE, ScaleGb (S4F4 → S4F6 → S5F8). Green = pressed, yellow = moving to the next note.</figcaption></figure>
+      <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/scale3_ref_rt.mp4" loop></video><figcaption>IK-only reference used for the 3-note scale</figcaption></figure>
+      <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/shift1_ref_rt.mp4" loop></video><figcaption>IK-only reference used for the shift 4 → 9</figcaption></figure>
+    </div>
+    <p class="note" style="margin:8px 0 0">The shifts, the 3-note scale and the chord change above were trained on IK-only references (chord timing from the dataset). Precision and press duration are never scripted: the policy has to find them in physics.</p>
+  </div>
+
+
+  <div class="card" style="margin-top:16px">
+    <div class="badge method">EPISODES &amp; WHAT COUNTS AS A PASS</div>
+    <div class="tlrows">
+      <div class="tlrow"><div class="tln">Shift 4→9 <span>2.2 s</span></div><div class="tl"><div class="seg p" style="flex:5"><b>press F4</b><span>0.5</span></div><div class="seg mv" style="flex:10"><b>move</b><span>1.0</span></div><div class="seg p" style="flex:7"><b>press F9</b><span>0.7</span></div></div></div>
+      <div class="tlrow"><div class="tln">Double shift 4→9→4 <span>3.9 s</span></div><div class="tl"><div class="seg p" style="flex:5"><b>press F4</b><span>0.5</span></div><div class="seg mv" style="flex:10"><b>move</b><span>1.0</span></div><div class="seg p" style="flex:7"><b>press F9</b><span>0.7</span></div><div class="seg mv" style="flex:10"><b>move</b><span>1.0</span></div><div class="seg p" style="flex:7"><b>press F4</b><span>0.7</span></div></div></div>
+      <div class="tlrow"><div class="tln">3-note scale <span>3.1 s</span></div><div class="tl"><div class="seg p" style="flex:5"><b>S4F4</b><span>0.5</span></div><div class="seg mv" style="flex:6"><b>move</b><span>0.6</span></div><div class="seg p" style="flex:7"><b>S3F4</b><span>0.7</span></div><div class="seg mv" style="flex:6"><b>move</b><span>0.6</span></div><div class="seg p" style="flex:7"><b>S2F4</b><span>0.7</span></div></div></div>
+      <div class="tlrow"><div class="tln">Chord change Db1 <span>1.8 s</span></div><div class="tl"><div class="seg p" style="flex:5"><b>1 finger</b><span>0.5</span></div><div class="seg mv" style="flex:6"><b>move</b><span>0.6</span></div><div class="seg p" style="flex:7"><b>3 fingers</b><span>0.7</span></div></div></div>
+      <div class="tlrow"><div class="tln">Dataset segments <span>human timing × 2</span></div><div class="tl"><div class="seg p" style="flex:5"><b>note / chord</b></div><div class="seg mv" style="flex:4"><b>move</b></div><div class="seg p" style="flex:5"><b>note / chord</b></div><div class="seg mv" style="flex:4"><b>move</b></div><div class="seg p" style="flex:5"><b>…</b></div></div></div>
+    </div>
+    <div class="rules" style="margin-top:12px">
+      <div class="rule p"><b>Press window passes</b><span>target string ≥2 N from the hand · fret wire ≥1 N · neighbours &lt;1 N · held ≥50 ms</span></div>
+      <div class="rule mv"><b>Move window passes</b><span>every 2 ms sample &lt;0.5 N on all strings · no guitar-body contact · thumb on the neck back allowed</span></div>
+    </div>
+    <p class="note" style="margin:10px 0 0">A motion passes only when every window passes, on the mean policy, in 4 of 4 repeats. Move durations are deliberately slow for now (humans shift in ≈0.35 s); the real hand tracks 2.5–4 rad/s, so speed-ups come later.</p>
+  </div>
+
+  <h2>Gallery</h2>
+  <div class="gal">
+    <figure class="span2"><img src="../assets/guitar-hub/figures/poster_press10.png" alt="10 chords pressed on the full model"><figcaption>10 chords, full model, learned policy at 0.30 s · label = longest press</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/user_hand_reference.jpg" alt="Human arched-finger hand shape reference"><figcaption>Hand-shape standard chosen from the player's own hand: arched fingertips</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/press_near_fret.jpg" alt="Press position just behind the fret"><figcaption>Press target: 4 mm behind the fret wire</figcaption></figure>
+    <figure class="span2"><img src="../assets/guitar-hub/figures/mocap_vs_ik.png" alt="Mocap reference vs IK reference during the move"><figcaption>Chord change reference: human mocap wrist path (left) vs IK (right) at 30 / 50 / 80 % of the move</figcaption></figure>
+    <figure class="span2"><img src="../assets/guitar-hub/figures/melodic_cases.png" alt="Four melodic cases from the dataset at mid-move"><figcaption>Four dataset melodic segments (two recordings each) at mid-move, all passing the gate</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/shift2_t1.8.png" alt="Double shift at 1.8 s"><figcaption>Double shift at 1.8 s: pressing F9 on the acceptance model</figcaption></figure>
+    <figure class="span2"><img src="../assets/guitar-hub/figures/bracket_still.png" alt="Guitar bracket design in five views"><figcaption>Bracket design world: guitar back plate → bar → torso plate (orange)</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/disp_vs_force.png" alt="Guitar displacement vs press force for mount options"><figcaption>Neck motion vs press force: unmounted 25 mm, bracket &lt;1 mm</figcaption></figure>
+    <figure class="span2"><img src="../assets/guitar-hub/figures/speed_table.png" alt="Training speed table"><figcaption>Training speed: 42 → 12–16 min per update</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/D_sketch_DL_t5.png" alt="Bracket build sketch"><figcaption>Bracket build sketch, aluminium 6061, 484 g</figcaption></figure>
+  </div>
+
+  <h2>Scoreboard</h2>
+  <div class="grid3">
+    <div class="card"><div class="tiles" style="margin:0"><div class="tile ok"><div class="v">10/10</div><div class="k">chords · full model</div></div><div class="tile ok"><div class="v">40/40</div><div class="k">±2 mm</div></div></div></div>
+    <div class="card"><div class="tiles" style="margin:0"><div class="tile ok"><div class="v">4/4</div><div class="k">shift 4→9</div></div><div class="tile ok"><div class="v">4/4</div><div class="k">double shift</div></div></div></div>
+    <div class="card"><div class="tiles" style="margin:0"><div class="tile ok"><div class="v">4/4</div><div class="k">3-note scale</div></div><div class="tile ok"><div class="v">4/4</div><div class="k">chord change</div></div></div></div>
+  </div>
+
+  <h2>Dataset</h2>
+  <div class="grid3">
+    <div class="card"><div class="tiles" style="margin:0"><div class="tile"><div class="v">403</div><div class="k">chord transitions</div></div><div class="tile"><div class="v">296</div><div class="k">melodic runs</div></div></div><p class="note" style="margin:10px 0 0">Pei Xu guitar mocap · 50 recordings</p></div>
+    <div class="card"><div class="tiles" style="margin:0"><div class="tile warn"><div class="v">2.7 rad/s</div><div class="k">human finger speed</div></div><div class="tile"><div class="v">0.5×</div><div class="k">first batch speed</div></div></div><p class="note" style="margin:10px 0 0">Hand limit raised to 2 rad/s (real hand tracks 2.5–4)</p></div>
+    <div class="card"><div class="tiles" style="margin:0"><div class="tile warn"><div class="v">84–116 mm</div><div class="k">human held-note stretch</div></div><div class="tile"><div class="v">53–69 mm</div><div class="k">Wuji max</div></div></div><p class="note" style="margin:10px 0 0">So only the sounding note is required</p></div>
+  </div>
+
+  <h2>Lessons</h2>
+  <div class="lessons">
+    <div class="lesson"><div class="ic">01</div><b>The reset is the lever</b><span>A pressed, settled start pose beat every reward change.</span></div>
+    <div class="lesson"><div class="ic">02</div><b>References must be feasible</b><span>Outside the policy's range or speed, the landing was one string off.</span></div>
+    <div class="lesson"><div class="ic">03</div><b>Keep the gate cheap</b><span>Collision-free move, landing ≤3 mm; precision is RL's job.</span></div>
+    <div class="lesson"><div class="ic">04</div><b>Keep the best checkpoint</b><span>After the scaffold decays, later checkpoints drift.</span></div>
+  </div>
+
+  <h2>Next</h2>
+  <div class="grid3">
+    <div class="card"><div class="badge prog">NOW</div><div class="t">Dataset mixture training</div><div class="m">Four melodic segments in one policy, then chord chains and longer runs; confirm the chord change on the full model</div></div>
+    <div class="card"><div class="badge method">NEXT</div><div class="t">Natural idle fingers, smoother motion</div><div class="m">Rest-posture and smoothness terms for the single-finger tasks; mocap-wrist chord reference</div></div>
+    <div class="card"><div class="badge design">THEN</div><div class="t">Real robot</div><div class="m">Build the bracket, measure it, press the 10 chords on G1 + Wuji Hand 2</div></div>
+  </div>
+
+  <div class="foot">Numbers from acceptance JSON files under <span class="mono">stageT_transition</span>; living record in <span class="mono">notes/GUITAR_DEX_PROJECT.md</span>. Dataset: Pei Xu et al., SIGGRAPH Asia 2024 (CC BY-NC-ND, internal use).</div>
+</div>
