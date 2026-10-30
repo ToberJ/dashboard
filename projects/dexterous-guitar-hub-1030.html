@@ -233,9 +233,9 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 
     <div class="card">
       <div class="badge method">RIGHT HAND · 10-26/27 · mocap retarget</div>
-      <div class="t">Right hand shape and motion come from the human recording, pick on the thumb</div>
+      <div class="t">Right hand: human mocap (left) vs our reference (right), same cameras</div>
       <div class="vids">
-        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/righthand_before_vs_mocap_retarget_0.5x.mp4" loop></video><figcaption>Half speed. Left: first mocap retarget (approved 10-26). Right: same, on the Strat mass with the pinch fixed: fingers stay open, blade clears the strings between picks. Before this the right hand was a static IK fist 87 mm above the strings.</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/righthand_mocap_vs_ours_rt.mp4" loop></video><figcaption>Real time, same guitar-frame cameras. Left: the human mocap skeleton (wrist → knuckle → middle → nail per finger, thumb nail red). Right: our reference on the robot with the same markers drawn. Top row from the treble side, bottom row along the strings. The current reference (v10r) adds a pinch fix on top of this.</figcaption></figure>
       </div>
     </div>
 
@@ -284,7 +284,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
     <p class="note" style="margin:8px 0 0">Pure PPO, no behaviour cloning (ablated). The 18-minute evaluation ranks checkpoints the same way as the 90-minute one.</p>
   </div>
 
-  <h2>Progress on the acceptance number</h2>
+  <h2>How the score moved this week</h2>
   <div class="card">
     <div class="tw"><table>
       <tr><th>Date</th><th>Checkpoint</th><th>Chord windows fretted / 8</th><th>Conditions</th></tr>
