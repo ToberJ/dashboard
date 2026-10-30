@@ -121,6 +121,15 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <div class="tile"><div class="v">73 %</div><div class="k">picks hit the right string</div></div>
       </div>
     </div>
+    <div class="card wide">
+      <div class="badge method">WHY THE FREE GUITAR IS HARD · 10-27</div>
+      <div class="t">Let go with the left hand: before, the guitar pivots on the thigh and falls off; after fixing its mass, the neck just sags</div>
+      <div class="vids">
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_old_lefthand_away_rt.mp4" loop></video><figcaption>Before (half speed): 3 kg lumped in the body, weightless neck, centre of mass on the bridge side of the thigh. The left hand opens at 0.3 s, the neck swings up around the thigh and the guitar is gone within a second. The left hand had been pulling the neck inward with 5.5 N the whole time just to keep it there.</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_strat35_lefthand_away_rt.mp4" loop></video><figcaption>After: Stratocaster mass distribution (3.5 kg, neck 0.9 kg, inertia from geometry; this clip also has a 5° hip variant that was later dropped). Same release: the neck sags slowly, 9 mm after 2 s, and 2–3 N at the hand holds it, like a player's. Both hands also moved to real-robot sysid gains.</figcaption></figure>
+      </div>
+    </div>
+
   </div>
 
   <h2>The four metrics</h2>
@@ -221,16 +230,6 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 
   <h2>What changed this week</h2>
   <div class="grid">
-
-    <div class="card wide">
-      <div class="badge method">ROOT CAUSE · 10-27 · guitar mass model</div>
-      <div class="t">The guitar used to flip out of the lap. Its mass was wrong, not the posture.</div>
-      <div class="vids">
-        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_old_lefthand_away_rt.mp4" loop></video><figcaption>Before: 3 kg lumped in the body, weightless neck. Left hand lets go → guitar rolls out.</figcaption></figure>
-        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_strat35_lefthand_away_rt.mp4" loop></video><figcaption>After: Stratocaster mass distribution (3.5 kg, neck 0.9). Left hand lets go → neck sags slowly; 2–3 N holds it.</figcaption></figure>
-      </div>
-      <p class="note" style="margin:8px 0 0">With the old mass the left hand pulled the neck inward with 5.5 N just to keep the guitar on the lap. Both hands also moved to real-robot sysid gains.</p>
-    </div>
 
     <div class="card">
       <div class="badge method">RIGHT HAND · 10-26/27 · mocap retarget</div>
