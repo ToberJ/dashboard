@@ -95,7 +95,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 <div class="wrap">
   <div class="crumb"><a href="dexterous-guitar-hub-1023.html">← week of 10-17 → 10-23</a> · Stanford Movement Lab · dex-project · week of 2026-10-24 → 10-30</div>
   <h1>Dexterous Guitar: both hands play <em>House of the Rising Sun</em> on a free guitar</h1>
-  <p class="sub">A Unitree G1 with two Wuji Hand 2 plays the full 21.3 s arpeggio in physics simulation (MuJoCo Warp, PPO). The guitar is not fixed: it rests on the thigh, chest and right forearm and the policy has to keep it still while the left hand frets and the right hand picks. Every contact and force comes from the solver. Clips play at real speed unless marked.</p>
+  <p class="sub">A Unitree G1 with two Wuji Hand 2 plays the full 21.3 s arpeggio in physics simulation (MuJoCo Warp, PPO). The guitar is free: it rests on the thigh, chest and right forearm. Left hand frets, right hand picks, every force comes from the solver.</p>
   <div class="chips">
     <span class="chip ok">Full piece · 21.3 s · both hands</span>
     <span class="chip ok">Guitar free, not welded</span>
@@ -103,7 +103,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
     <span class="chip warn">5.4 / 8 chord windows fretted</span>
     <span class="chip bad">C chord index finger still misses</span>
   </div>
-  <p class="note">All numbers on this page are the mean policy on 10 worlds with the guitar pose randomly offset (±5 mm, ±2°) and pushed twice (40 N at 7.0 s and 16.0 s). Training statistics are never used as results.</p>
+  <p class="note">All numbers: mean policy, 10 worlds, guitar pose offset ±5 mm / ±2° and pushed twice (40 N).</p>
 
   <h2>The piece</h2>
   <div class="grid">
@@ -111,7 +111,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="badge pass">MILESTONE · 10-30 · checkpoint s86 ck12</div>
       <div class="t">Full piece on a perturbed world (world 16): guitar offset at start, pushed at 7 s and 16 s</div>
       <div class="vids">
-        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s86_ck12_perturbed_w16_fourview_rt.mp4" loop></video><figcaption>Four views, real time, 21.3 s: left-hand close-up · front · right side upper body · right forearm and pick. This world frets 6 of the 8 chord windows (C at 8.5 s and C at 18.1 s miss on the index finger).</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s86_ck12_perturbed_w16_fourview_rt.mp4" loop></video><figcaption>Real time. Left-hand close-up · front · right side · right forearm. 6 of 8 chord windows fretted; both C chords miss on the index finger.</figcaption></figure>
       </div>
       <div class="tiles">
         <div class="tile ok"><div class="v">21.3 s</div><div class="k">Am · E7 · Am · C · E7 · Am · C · C</div></div>
@@ -123,16 +123,16 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
     </div>
 
     <div class="card wide">
-      <div class="badge method">COMPARISON · same world, no perturbation</div>
-      <div class="t">This week's policy (top) against last Sunday's (bottom), time-aligned</div>
+      <div class="badge method">BEFORE / AFTER this week's main change · same world, no perturbation</div>
+      <div class="t">Top: after (s86, 6 / 8). Bottom: before (s85, the previous night, 5 / 8)</div>
       <div class="vids">
-        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s86_vs_s85_stacked_rt.mp4" loop></video><figcaption>Top: s86 ck12 (6 / 8 windows). Bottom: s85 ck12 (5 / 8). Same physics, same start, same camera profile. The difference is the "1 cm" change described below: the reference only constrains the hands to within 1 cm, the last centimetre is learned from the guitar geometry.</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s86_vs_s85_stacked_rt.mp4" loop></video><figcaption>Same physics, same start, time-aligned. The only change between the two: the reference constrains the hands to 1 cm, the last centimetre comes from the guitar geometry.</figcaption></figure>
       </div>
     </div>
   </div>
 
   <h2>The four metrics</h2>
-  <p class="sub">Agreed on 10-23: a run is judged on tracking, pressing when it should, not touching when it should not, and keeping the guitar still. Here is where each one stands on the milestone checkpoint.</p>
+  <p class="sub">Agreed on 10-23. Where each one stands on the milestone checkpoint.</p>
   <div class="grid">
 
     <div class="card">
@@ -150,7 +150,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <div class="tile ok"><div class="v">≤1 cm</div><div class="k">reference vs guitar geometry</div></div>
         <div class="tile ok"><div class="v">mocap</div><div class="k">both hands retargeted frame by frame</div></div>
       </div>
-      <div class="verdict"><span class="dot ok"></span><span>Wrist and finger residuals are at the noise level, so "does the policy look human" reduces to "does the reference look human": both hands are now retargeted from the Pei Xu mocap (right hand since 10-26, see below). The left-wrist 8 mm residual does not respond to a 4× tracking weight, so it is structural (guitar drift plus arm compliance), not neglect.</span></div>
+      <div class="verdict"><span class="dot ok"></span><span>Residuals are at noise level; both hands are retargeted from human mocap, so the policy looks like the reference and the reference looks like the player. The left-wrist 8 mm is structural (guitar drift + arm compliance): a 4× tracking weight did not move it.</span></div>
     </div>
 
     <div class="card">
@@ -167,7 +167,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <tr><td>press12</td><td>C</td><td class="bad">2 / 10</td><td>187 ms</td><td>10.6 N</td></tr>
         <tr><td>press14</td><td>C (2 fingers)</td><td class="ok">8 / 10</td><td>227 ms</td><td>5.1 N</td></tr>
       </table></div>
-      <div class="verdict"><span class="dot warn"></span><span>Am and E7 are solid. Both C windows fail on the index finger at S5F1: after the Am → C move the index lands about 10 mm short. Measured decomposition: 6 mm guitar drift + 4 mm left-arm compliance (arm gains match the real G1 controller) + 1 mm hand. Press forces stay inside the human band (p99 ≤10 N) except press12.</span></div>
+      <div class="verdict"><span class="dot warn"></span><span>Am and E7 solid. Both C chords miss on the index finger by ≈10 mm: 6 mm guitar drift + 4 mm arm compliance + 1 mm hand. Forces inside the human band.</span></div>
     </div>
 
     <div class="card">
@@ -184,7 +184,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <tr><th>Move window</th><th>1</th><th>3</th><th>5</th><th>7</th><th>9</th><th>11</th><th>13</th></tr>
         <tr><td>Scrape peak, N</td><td>4.9</td><td>3.2</td><td>2.5</td><td class="bad">9.6</td><td>3.2</td><td class="ok">0.6</td><td class="ok">0.0</td></tr>
       </table></div>
-      <div class="verdict"><span class="dot warn"></span><span>Scraping is slightly better than last week (impulse 5.1 → 4.9 N·s) and the late moves are clean, but the Am → C and C → E7 changes still drag fingers across strings. The strict rule (every 2 ms sample &lt;0.5 N on all strings) passes on none of the moves; this metric is the furthest from done.</span></div>
+      <div class="verdict"><span class="dot warn"></span><span>Late moves are clean; Am → C and C → E7 still drag fingers across strings. The furthest of the four from done.</span></div>
     </div>
 
     <div class="card">
@@ -197,7 +197,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <div class="tile ok"><div class="v">47 · 20 · 15 N</div><div class="k">thigh · chest · forearm, holds</div></div>
         <div class="tile ok"><div class="v">10 N</div><div class="k">left hand on the neck, holds</div></div>
       </div>
-      <div class="verdict"><span class="dot warn"></span><span>The guitar neither falls nor flips under 40 N pushes, and the right arm now carries 15 N on the top; a player would call 12 mm "a little wobbly". It is the main reason the C chord misses: the drift between Am and C is 6 mm in the wrong direction and the arm does not yet follow it. The guitar-pose observation is in the policy input, so this is a learning target, not a sensing gap.</span></div>
+      <div class="verdict"><span class="dot warn"></span><span>Never falls or flips under the pushes; 12 mm is "a little wobbly" to a player and is the main reason the C chord misses. Guitar pose is observed, so this is a learning target.</span></div>
     </div>
 
   </div>
@@ -218,7 +218,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         </div>
       </div>
     </div>
-    <p class="note" style="margin:8px 0 0">Tab at half speed (human timing × 2). Green = ≥8 of 10 worlds pass, amber = 6, red = ≤2. Am = index S5F1, middle S3F2, ring S4F2 · E7 = index S4F1, middle S2F2 · C = index S5F1, middle S3F2, ring S2F3.</p>
+    <p class="note" style="margin:8px 0 0">Tab at half speed. Green = ≥8 of 10 worlds, amber = 6, red = ≤2.</p>
     <div class="rules" style="margin-top:12px">
       <div class="rule p"><b>Press window passes</b><span>target string ≥2 N from the hand · fret wire ≥1 N · neighbours &lt;1 N · held ≥50 ms · presser force p99 ≤10 N</span></div>
       <div class="rule mv"><b>Move window</b><span>reported as release / scrape / landing impulse; scrape peak &lt;1 N is ignored (the player's rule); staying fingers exempt</span></div>
@@ -234,17 +234,17 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="badge method">ROOT CAUSE · 10-27 · guitar mass model</div>
       <div class="t">The guitar used to flip out of the lap. Its mass was wrong, not the posture.</div>
       <div class="vids">
-        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_old_lefthand_away_rt.mp4" loop></video><figcaption>Before: 3 kg lumped in the body, weightless neck, centre of mass bridge-side of the thigh. Left hand lets go → neck rises and the guitar rolls out.</figcaption></figure>
-        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_strat35_lefthand_away_rt.mp4" loop></video><figcaption>After: Stratocaster mass distribution (3.5 kg: neck + head 0.9, body 2.6, inertia from geometry). Left hand lets go → neck sags slowly, 2–3 N at the hand holds it.</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_old_lefthand_away_rt.mp4" loop></video><figcaption>Before: 3 kg lumped in the body, weightless neck. Left hand lets go → guitar rolls out.</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_strat35_lefthand_away_rt.mp4" loop></video><figcaption>After: Stratocaster mass distribution (3.5 kg, neck 0.9). Left hand lets go → neck sags slowly; 2–3 N holds it.</figcaption></figure>
       </div>
-      <p class="note" style="margin:8px 0 0">With the old mass the left hand had learned to pull the neck inward with 5.5 N just to keep the guitar on the lap. Both hands' actuators were also moved to the real-robot sysid gains (the right hand had been 7–12× too soft).</p>
+      <p class="note" style="margin:8px 0 0">With the old mass the left hand pulled the neck inward with 5.5 N just to keep the guitar on the lap. Both hands also moved to real-robot sysid gains.</p>
     </div>
 
     <div class="card">
       <div class="badge method">RIGHT HAND · 10-26/27 · mocap retarget</div>
       <div class="t">Right hand shape and motion come from the human recording, pick on the thumb</div>
       <div class="vids">
-        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/righthand_before_vs_mocap_retarget_0.5x.mp4" loop></video><figcaption>4–10 s at half speed, forearm view (top) and treble-side view (bottom). Left: first frame-by-frame mocap retarget (v8b, approved 10-26, old guitar mass). Right: the same retarget on the Strat mass with the pinch fixed (v10r): fingers stay open like the player's, the blade clears the strings between picks. Before this, the right hand was an IK pose with the wrist 87 mm above the strings and a closed fist.</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/righthand_before_vs_mocap_retarget_0.5x.mp4" loop></video><figcaption>Half speed. Left: first mocap retarget (approved 10-26). Right: same, on the Strat mass with the pinch fixed: fingers stay open, blade clears the strings between picks. Before this the right hand was a static IK fist 87 mm above the strings.</figcaption></figure>
       </div>
     </div>
 
@@ -257,16 +257,16 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <div class="tile ok"><div class="v">0.1 rad · 5 mm</div><div class="k">new finger / fingertip tracking dead-bands</div></div>
         <div class="tile ok"><div class="v">3.5 mm</div><div class="k">new pressing shaping scale, on guitar geometry</div></div>
       </div>
-      <p class="note" style="margin:8px 0 0">Tested first on a 1-hour focused window (7.5–15 s, 6 updates, control run on the other GPU): C-window hold 8 → 50–58 ms vs control 10–20 ms, four checkpoints in a row. Then on the full piece: 4.2 → 5.4 windows, all 10 worlds at or above the control mean. Cost: +0.7 mm guitar motion, −0.05 pick hit rate.</p>
+      <p class="note" style="margin:8px 0 0">Verified on a 1-hour focused window with a control run first, then on the full piece: 4.2 → 5.4 windows, all 10 worlds at or above the control mean.</p>
     </div>
 
     <div class="card wide">
       <div class="badge fail">OPEN · the C chord index finger</div>
       <div class="t">Why press6 is 0 / 10: index lands 10 mm short of S5F1 after the Am → C change</div>
       <div class="vids">
-        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/press6_index_closeup_0.5x.mp4" loop></video><figcaption>7.5–10.5 s at half speed, index finger and S5 close-up (earlier checkpoint s80c, the failure mode is unchanged): the ring finger stretches to S2F3, the guitar drifts 6 mm, the arm gives 4 mm, the index tip ends up on the wrong side of the string.</figcaption></figure>
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/press6_index_closeup_0.5x.mp4" loop></video><figcaption>7.5–10.5 s at half speed, index finger on S5. Ring stretches to S2F3, guitar drifts 6 mm, arm gives 4 mm, index lands on the wrong side of the string.</figcaption></figure>
       </div>
-      <p class="note" style="margin:8px 0 0">Everything at the finger or wrist level has been tried as single variables with controls this week (finger tracking weight, wrist tracking weight ×4, dead-bands): the index success fraction in this window stays at 0.19–0.21 in every run. The fix has to come from the arm following the guitar or the guitar moving less; arm-level single variables are running now (left-arm tracking weight 0.5 → 0.1 on the full piece, arm dead-band 0.015 → 0.05 rad).</p>
+      <p class="note" style="margin:8px 0 0">Finger- and wrist-level changes (tracking weights, dead-bands) all leave this window at 0.19–0.21, with controls. The fix has to come from the arm following the guitar; arm-level single variables are running now.</p>
     </div>
 
   </div>
@@ -290,7 +290,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="tile ok"><div class="v">18 min</div><div class="k">per checkpoint evaluation (was 90)</div></div>
       <div class="tile ok"><div class="v">10 worlds</div><div class="k">perturbed acceptance on every checkpoint</div></div>
     </div>
-    <p class="note" style="margin:8px 0 0">Pure PPO: no behaviour-cloning pre-training or auxiliary loss (ablated 10-23, no benefit). Fast evaluation uses a coarser solver and a segmented, parallel roll-out; its ranking matched the 90-minute full-model evaluation on every checkpoint it was checked against.</p>
+    <p class="note" style="margin:8px 0 0">Pure PPO, no behaviour cloning (ablated). The 18-minute evaluation ranks checkpoints the same way as the 90-minute one.</p>
   </div>
 
   <h2>Progress on the acceptance number</h2>
@@ -302,7 +302,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <tr><td>10-30 00:30</td><td>s85 ck12</td><td>4.2 ± 0.4</td><td>reward-patch line: rejected</td></tr>
       <tr><td>10-30 10:36</td><td class="ok">s86 ck12</td><td class="ok">5.4 ± 0.7</td><td>1 cm dead-bands + guitar-geometry shaping, same 10 perturbed worlds</td></tr>
     </table></div>
-    <p class="note" style="margin:8px 0 0">The 10-27 number is not comparable: it was measured before the guitar was perturbed and before its mass was fixed. The number went down and came back up under harder conditions.</p>
+    <p class="note" style="margin:8px 0 0">The 10-27 number was measured before the guitar was perturbed or its mass fixed; the number went down and came back up under harder conditions.</p>
   </div>
 
   <h2>Keyframes · world 16</h2>
