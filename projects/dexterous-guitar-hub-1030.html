@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dexterous Guitar Hub</title>
+<meta name="description" content="Weekly hub 2026-10-30: both hands play House of the Rising Sun (21.3 s) on a free guitar, scored on four metrics under guitar perturbation.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#f4f4f2; --fg:#1a1a19; --muted:#6b6b66; --line:#dcdcd7; --card:#ffffff; --soft:#ecece9;
+  --accent:#1f4e8c; --accent-soft:#e9eff7; --ok:#1f6f4a; --ok-soft:#e8f1ec; --warn:#8a5a00; --warn-soft:#f5efdf; --bad:#9b2c2c; --bad-soft:#f7e6e6;
+  --sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#161615; --fg:#ebeae6; --muted:#a3a29c; --line:#2e2e2b; --card:#1e1e1c; --soft:#262624; --accent:#8fb3e6; --accent-soft:#1d2838; --ok:#7fcfa0; --ok-soft:#1c2f25; --warn:#e0b45a; --warn-soft:#352c16; --bad:#e08a8a; --bad-soft:#3a1f1f; color-scheme:dark } }
+:root[data-theme="dark"]{ --bg:#161615; --fg:#ebeae6; --muted:#a3a29c; --line:#2e2e2b; --card:#1e1e1c; --soft:#262624; --accent:#8fb3e6; --accent-soft:#1d2838; --ok:#7fcfa0; --ok-soft:#1c2f25; --warn:#e0b45a; --warn-soft:#352c16; --bad:#e08a8a; --bad-soft:#3a1f1f; color-scheme:dark }
+body{background:var(--bg);color:var(--fg);font:16px/1.5 var(--sans);margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-block:32px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font-size:30px;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+h2{font-size:21px;margin:40px 0 12px;text-wrap:balance}
+.sub{color:var(--muted);font-size:15px;margin:0 0 14px;max-width:72ch}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:12px;font-family:var(--mono)}
+.crumb a{color:var(--accent);text-decoration:none}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:var(--card)}
+.chip.ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.chip.warn{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.chip.bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:860px){.grid4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.grid,.grid3{grid-template-columns:1fr}}
+@media (max-width:480px){.grid4{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;min-width:0}
+.card.wide{grid-column:1/-1}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.6px;padding:2px 8px;border-radius:5px;margin-bottom:8px;font-family:var(--mono)}
+.badge.pass{background:var(--ok-soft);color:var(--ok)} .badge.prog{background:var(--warn-soft);color:var(--warn)} .badge.fail{background:var(--bad-soft);color:var(--bad)} .badge.method{background:var(--soft);color:var(--muted)}
+.t{font-size:17px;font-weight:600;margin-bottom:8px;text-wrap:balance}
+.m{color:var(--muted);font-size:14px}
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:4px}
+@media (max-width:560px){.vids{grid-template-columns:1fr}}
+.vids figure{margin:0;min-width:0}
+.vids video,.vids img{width:100%;max-width:100%;border-radius:6px;background:#000;display:block}
+.vids figcaption,.gal figcaption{font-size:12.5px;color:var(--muted);margin-top:4px}
+.vids .one{grid-column:1/-1}
+.tiles{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.tile{flex:1 1 120px;min-width:0;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--card)}
+.tile .v{font-family:var(--mono);font-weight:600;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums}
+.tile .k{font-size:11.5px;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;margin-top:2px}
+.tile.ok .v{color:var(--ok)} .tile.warn .v{color:var(--warn)} .tile.bad .v{color:var(--bad)}
+.gal{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:480px){.gal{grid-template-columns:1fr}}
+.gal figure{margin:0;min-width:0} .gal img{width:100%;max-width:100%;border-radius:6px;border:1px solid var(--line);display:block;background:#111}
+.note{font-size:13px;color:var(--muted)}
+.foot{margin-top:44px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12.5px}
+.mono{font-family:var(--mono);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal}
+th{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.3px;text-transform:uppercase}
+.tw{overflow-x:auto}
+td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} td.warn{color:var(--warn);font-weight:600}
+.tlrows{display:grid;gap:8px}
+.tlrow{display:grid;grid-template-columns:170px minmax(0,1fr);gap:10px;align-items:center}
+@media (max-width:560px){.tlrow{grid-template-columns:1fr}}
+.tln{font-size:13px;font-weight:600} .tln span{display:block;font-weight:400;color:var(--muted);font-family:var(--mono);font-size:12px}
+.tl{display:flex;gap:3px;margin:0}
+.seg{min-width:0;border-radius:5px;padding:5px 3px;text-align:center;overflow:hidden}
+.seg b{display:block;font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .seg span{font-size:10.5px;color:var(--muted);font-family:var(--mono)}
+.seg.p{background:var(--accent-soft)} .seg.mv{background:var(--soft)} .seg.p.ok{background:var(--ok-soft)} .seg.p.bad{background:var(--bad-soft)} .seg.p.warn{background:var(--warn-soft)}
+.rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.rules{grid-template-columns:1fr}}
+.rule{border-radius:8px;padding:10px 12px;min-width:0;background:var(--card);border:1px solid var(--line)}
+.rule.p{border-top:3px solid var(--accent)} .rule.mv{border-top:3px solid var(--muted)}
+.rule b{display:block;font-size:13px;margin-bottom:4px} .rule.p b{color:var(--accent)}
+.rule span{display:block;font-size:12.5px;overflow-wrap:anywhere}
+.lessons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:860px){.lessons{grid-template-columns:repeat(2,minmax(0,1fr))}} @media (max-width:480px){.lessons{grid-template-columns:1fr}}
+.lesson{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--card);min-width:0}
+.lesson .ic{font-family:var(--mono);font-weight:600;color:var(--muted);font-size:13px;letter-spacing:.5px;margin-bottom:4px}
+.lesson b{display:block;margin-bottom:2px}
+.lesson span{font-size:13.5px;color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.box{flex:1 1 150px;min-width:0;border-radius:10px;padding:10px 12px;border:1px solid var(--line);background:var(--card)}
+.box .bt{font-weight:700;font-size:14px;margin-bottom:6px}
+.box .bl{font-size:12.5px;color:var(--muted);line-height:1.35;overflow-wrap:anywhere}
+.box.pol,.box.phy,.box.rew{border-top:3px solid var(--accent)} .box.pol .bt,.box.phy .bt,.box.rew .bt{color:var(--accent)}
+.arr{align-self:center;color:var(--accent);font-size:20px;flex:0 0 auto}
+@media (max-width:760px){.arr{display:none}.box{flex-basis:45%}}
+.verdict{display:flex;align-items:flex-start;gap:10px;margin-top:10px;font-size:14px}
+.verdict .dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%;margin-top:7px}
+.dot.ok{background:var(--ok)} .dot.warn{background:var(--warn)} .dot.bad{background:var(--bad)}
+</style>
+
+<div class="wrap">
+  <div class="crumb"><a href="dexterous-guitar-hub-1023.html">← week of 10-17 → 10-23</a> · Stanford Movement Lab · dex-project · week of 2026-10-24 → 10-30</div>
+  <h1>Dexterous Guitar: both hands play <em>House of the Rising Sun</em> on a free guitar</h1>
+  <p class="sub">A Unitree G1 with two Wuji Hand 2 plays the full 21.3 s arpeggio in physics simulation (MuJoCo Warp, PPO). The guitar is not fixed: it rests on the thigh, chest and right forearm and the policy has to keep it still while the left hand frets and the right hand picks. Every contact and force comes from the solver. Clips play at real speed unless marked.</p>
+  <div class="chips">
+    <span class="chip ok">Full piece · 21.3 s · both hands</span>
+    <span class="chip ok">Guitar free, not welded</span>
+    <span class="chip ok">10-world perturbed acceptance</span>
+    <span class="chip warn">5.4 / 8 chord windows fretted</span>
+    <span class="chip bad">C chord index finger still misses</span>
+  </div>
+  <p class="note">All numbers on this page are the mean policy on 10 worlds with the guitar pose randomly offset (±5 mm, ±2°) and pushed twice (40 N at 7.0 s and 16.0 s). Training statistics are never used as results.</p>
+
+  <h2>The piece</h2>
+  <div class="grid">
+    <div class="card wide">
+      <div class="badge pass">MILESTONE · 10-30 · checkpoint s86 ck12</div>
+      <div class="t">Full piece on a perturbed world (world 16): guitar offset at start, pushed at 7 s and 16 s</div>
+      <div class="vids">
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s86_ck12_perturbed_w16_fourview_rt.mp4" loop></video><figcaption>Four views, real time, 21.3 s: left-hand close-up · front · right side upper body · right forearm and pick. This world frets 6 of the 8 chord windows (C at 8.5 s and C at 18.1 s miss on the index finger).</figcaption></figure>
+      </div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">21.3 s</div><div class="k">Am · E7 · Am · C · E7 · Am · C · C</div></div>
+        <div class="tile ok"><div class="v">5.4 ± 0.7 / 8</div><div class="k">chord windows fretted · 10 worlds</div></div>
+        <div class="tile ok"><div class="v">4.2 → 5.4</div><div class="k">vs previous best (s85)</div></div>
+        <div class="tile warn"><div class="v">11.7 mm</div><div class="k">max guitar motion</div></div>
+        <div class="tile"><div class="v">73 %</div><div class="k">picks hit the right string</div></div>
+      </div>
+    </div>
+
+    <div class="card wide">
+      <div class="badge method">COMPARISON · same world, no perturbation</div>
+      <div class="t">This week's policy (top) against last Sunday's (bottom), time-aligned</div>
+      <div class="vids">
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s86_vs_s85_stacked_rt.mp4" loop></video><figcaption>Top: s86 ck12 (6 / 8 windows). Bottom: s85 ck12 (5 / 8). Same physics, same start, same camera profile. The difference is the "1 cm" change described below: the reference only constrains the hands to within 1 cm, the last centimetre is learned from the guitar geometry.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <h2>The four metrics</h2>
+  <p class="sub">Agreed on 10-23: a run is judged on tracking, pressing when it should, not touching when it should not, and keeping the guitar still. Here is where each one stands on the milestone checkpoint.</p>
+  <div class="grid">
+
+    <div class="card">
+      <div class="badge pass">1 · TRACKING</div>
+      <div class="t">Follows the reference; the reference follows the human</div>
+      <div class="tw"><table>
+        <tr><th>Policy vs reference</th><th>Left</th><th>Right</th></tr>
+        <tr><td>Wrist position, mean / p90</td><td>7.6 / 11.2 mm</td><td>4.1 / 6.4 mm</td></tr>
+        <tr><td>Wrist rotation, mean / p90</td><td>1.9 / 2.6°</td><td>1.5 / 2.8°</td></tr>
+        <tr><td>Arm joints, mean</td><td>0.49°</td><td>0.40°</td></tr>
+        <tr><td>Finger joints, mean</td><td>1.44°</td><td>0.63°</td></tr>
+        <tr><td>Fingertips / pick tip, mean</td><td>6.9 mm</td><td>4.6 mm</td></tr>
+      </table></div>
+      <div class="tiles">
+        <div class="tile ok"><div class="v">≤1 cm</div><div class="k">reference vs guitar geometry</div></div>
+        <div class="tile ok"><div class="v">mocap</div><div class="k">both hands retargeted frame by frame</div></div>
+      </div>
+      <div class="verdict"><span class="dot ok"></span><span>Wrist and finger residuals are at the noise level, so "does the policy look human" reduces to "does the reference look human": both hands are now retargeted from the Pei Xu mocap (right hand since 10-26, see below). The left-wrist 8 mm residual does not respond to a 4× tracking weight, so it is structural (guitar drift plus arm compliance), not neglect.</span></div>
+    </div>
+
+    <div class="card">
+      <div class="badge prog">2 · PRESS WHEN IT SHOULD</div>
+      <div class="t">8 chord windows: string ≥2 N, fret wire ≥1 N, neighbours &lt;1 N, ≥50 ms</div>
+      <div class="tw"><table>
+        <tr><th>Window</th><th>Chord</th><th>Worlds pass</th><th>Longest hold</th><th>Force p99</th></tr>
+        <tr><td>hold</td><td>Am</td><td class="ok">8 / 10</td><td>964 ms</td><td>9.7 N</td></tr>
+        <tr><td>press2</td><td>E7</td><td class="ok">10 / 10</td><td>414 ms</td><td>8.6 N</td></tr>
+        <tr><td>press4</td><td>Am</td><td class="ok">10 / 10</td><td>152 ms</td><td>6.4 N</td></tr>
+        <tr><td>press6</td><td>C</td><td class="bad">0 / 10</td><td>0 ms</td><td>4.6 N</td></tr>
+        <tr><td>press8</td><td>E7</td><td class="ok">10 / 10</td><td>968 ms</td><td>7.5 N</td></tr>
+        <tr><td>press10</td><td>Am</td><td class="warn">6 / 10</td><td>109 ms</td><td>9.7 N</td></tr>
+        <tr><td>press12</td><td>C</td><td class="bad">2 / 10</td><td>187 ms</td><td>10.6 N</td></tr>
+        <tr><td>press14</td><td>C (2 fingers)</td><td class="ok">8 / 10</td><td>227 ms</td><td>5.1 N</td></tr>
+      </table></div>
+      <div class="verdict"><span class="dot warn"></span><span>Am and E7 are solid. Both C windows fail on the index finger at S5F1: after the Am → C move the index lands about 10 mm short. Measured decomposition: 6 mm guitar drift + 4 mm left-arm compliance (arm gains match the real G1 controller) + 1 mm hand. Press forces stay inside the human band (p99 ≤10 N) except press12.</span></div>
+    </div>
+
+    <div class="card">
+      <div class="badge prog">3 · NO CONTACT WHEN IT SHOULD NOT</div>
+      <div class="t">Chord changes: release, travel, land. Staying fingers may keep pressing.</div>
+      <div class="tiles">
+        <div class="tile"><div class="v">7.5 N</div><div class="k">scrape peak during moves (median of 3)</div></div>
+        <div class="tile"><div class="v">4.9 N·s</div><div class="k">scrape impulse, whole piece</div></div>
+        <div class="tile"><div class="v">1.9 N·s</div><div class="k">release impulse</div></div>
+        <div class="tile warn"><div class="v">3.1 N·s</div><div class="k">landing impulse (was 2.7)</div></div>
+        <div class="tile bad"><div class="v">28 %</div><div class="k">moves with scrape &lt;1 N</div></div>
+      </div>
+      <div class="tw" style="margin-top:10px"><table>
+        <tr><th>Move window</th><th>1</th><th>3</th><th>5</th><th>7</th><th>9</th><th>11</th><th>13</th></tr>
+        <tr><td>Scrape peak, N</td><td>4.9</td><td>3.2</td><td>2.5</td><td class="bad">9.6</td><td>3.2</td><td class="ok">0.6</td><td class="ok">0.0</td></tr>
+      </table></div>
+      <div class="verdict"><span class="dot warn"></span><span>Scraping is slightly better than last week (impulse 5.1 → 4.9 N·s) and the late moves are clean, but the Am → C and C → E7 changes still drag fingers across strings. The strict rule (every 2 ms sample &lt;0.5 N on all strings) passes on none of the moves; this metric is the furthest from done.</span></div>
+    </div>
+
+    <div class="card">
+      <div class="badge prog">4 · GUITAR STAYS STILL (and the hands follow it)</div>
+      <div class="t">Free guitar on thigh + chest + right forearm; pose offset and pushed in every world</div>
+      <div class="tiles">
+        <div class="tile warn"><div class="v">11.7 ± 0.8 mm</div><div class="k">max displacement</div></div>
+        <div class="tile"><div class="v">9.4 mm</div><div class="k">during press windows</div></div>
+        <div class="tile"><div class="v">1.6°</div><div class="k">max rotation</div></div>
+        <div class="tile ok"><div class="v">47 · 20 · 15 N</div><div class="k">thigh · chest · forearm, holds</div></div>
+        <div class="tile ok"><div class="v">10 N</div><div class="k">left hand on the neck, holds</div></div>
+      </div>
+      <div class="verdict"><span class="dot warn"></span><span>The guitar neither falls nor flips under 40 N pushes, and the right arm now carries 15 N on the top; a player would call 12 mm "a little wobbly". It is the main reason the C chord misses: the drift between Am and C is 6 mm in the wrong direction and the arm does not yet follow it. The guitar-pose observation is in the policy input, so this is a learning target, not a sensing gap.</span></div>
+    </div>
+
+  </div>
+
+  <h2>Episode and what counts as a pass</h2>
+  <div class="card">
+    <div class="tlrows">
+      <div class="tlrow"><div class="tln">House of the Rising Sun <span>21.3 s · 60 picks</span></div>
+        <div class="tl">
+          <div class="seg p ok" style="flex:33"><b>Am</b><span>0.0</span></div><div class="seg mv" style="flex:8"><b>→</b></div>
+          <div class="seg p ok" style="flex:6"><b>E7</b><span>4.1</span></div><div class="seg mv" style="flex:18"><b>→</b></div>
+          <div class="seg p ok" style="flex:4"><b>Am</b><span>6.5</span></div><div class="seg mv" style="flex:16"><b>→</b></div>
+          <div class="seg p bad" style="flex:20"><b>C</b><span>8.5</span></div><div class="seg mv" style="flex:10"><b>→</b></div>
+          <div class="seg p ok" style="flex:42"><b>E7</b><span>11.5</span></div><div class="seg mv" style="flex:4"><b>→</b></div>
+          <div class="seg p warn" style="flex:4"><b>Am</b><span>16.1</span></div><div class="seg mv" style="flex:16"><b>→</b></div>
+          <div class="seg p bad" style="flex:6"><b>C</b><span>18.1</span></div><div class="seg mv" style="flex:18"><b>→</b></div>
+          <div class="seg p ok" style="flex:4"><b>C₂</b><span>20.5</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="note" style="margin:8px 0 0">Tab at half speed (human timing × 2). Green = ≥8 of 10 worlds pass, amber = 6, red = ≤2. Am = index S5F1, middle S3F2, ring S4F2 · E7 = index S4F1, middle S2F2 · C = index S5F1, middle S3F2, ring S2F3.</p>
+    <div class="rules" style="margin-top:12px">
+      <div class="rule p"><b>Press window passes</b><span>target string ≥2 N from the hand · fret wire ≥1 N · neighbours &lt;1 N · held ≥50 ms · presser force p99 ≤10 N</span></div>
+      <div class="rule mv"><b>Move window</b><span>reported as release / scrape / landing impulse; scrape peak &lt;1 N is ignored (the player's rule); staying fingers exempt</span></div>
+      <div class="rule p"><b>Right hand</b><span>each of 60 picks: did the pick cross the written string (hit), only that string (clean), within the beat (synced)</span></div>
+      <div class="rule mv"><b>Guitar</b><span>max displacement and rotation over the piece; support forces at thigh, chest, forearm, left hand</span></div>
+    </div>
+  </div>
+
+  <h2>What changed this week</h2>
+  <div class="grid">
+
+    <div class="card wide">
+      <div class="badge method">ROOT CAUSE · 10-27 · guitar mass model</div>
+      <div class="t">The guitar used to flip out of the lap. Its mass was wrong, not the posture.</div>
+      <div class="vids">
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_old_lefthand_away_rt.mp4" loop></video><figcaption>Before: 3 kg lumped in the body, weightless neck, centre of mass bridge-side of the thigh. Left hand lets go → neck rises and the guitar rolls out.</figcaption></figure>
+        <figure><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/guitar_mass_strat35_lefthand_away_rt.mp4" loop></video><figcaption>After: Stratocaster mass distribution (3.5 kg: neck + head 0.9, body 2.6, inertia from geometry). Left hand lets go → neck sags slowly, 2–3 N at the hand holds it.</figcaption></figure>
+      </div>
+      <p class="note" style="margin:8px 0 0">With the old mass the left hand had learned to pull the neck inward with 5.5 N just to keep the guitar on the lap. Both hands' actuators were also moved to the real-robot sysid gains (the right hand had been 7–12× too soft).</p>
+    </div>
+
+    <div class="card">
+      <div class="badge method">RIGHT HAND · 10-26/27 · mocap retarget</div>
+      <div class="t">Right hand shape and motion come from the human recording, pick on the thumb</div>
+      <div class="vids">
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/righthand_before_vs_mocap_retarget_0.5x.mp4" loop></video><figcaption>4–10 s at half speed, forearm view (top) and treble-side view (bottom). Left: first frame-by-frame mocap retarget (v8b, approved 10-26, old guitar mass). Right: the same retarget on the Strat mass with the pinch fixed (v10r): fingers stay open like the player's, the blade clears the strings between picks. Before this, the right hand was an IK pose with the wrist 87 mm above the strings and a closed fist.</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="badge method">PRINCIPLE · 10-30 · the last centimetre is the policy's job</div>
+      <div class="t">Audit of the whole chain found the training signal, not the reference, was the bottleneck</div>
+      <div class="tiles">
+        <div class="tile bad"><div class="v">4.5 %</div><div class="k">share of the advantage from pressing (15 reward heads, per-head normalised)</div></div>
+        <div class="tile bad"><div class="v">2 cm</div><div class="k">pressing shaping scale: no gradient inside 1 cm</div></div>
+        <div class="tile ok"><div class="v">0.1 rad · 5 mm</div><div class="k">new finger / fingertip tracking dead-bands</div></div>
+        <div class="tile ok"><div class="v">3.5 mm</div><div class="k">new pressing shaping scale, on guitar geometry</div></div>
+      </div>
+      <p class="note" style="margin:8px 0 0">Tested first on a 1-hour focused window (7.5–15 s, 6 updates, control run on the other GPU): C-window hold 8 → 50–58 ms vs control 10–20 ms, four checkpoints in a row. Then on the full piece: 4.2 → 5.4 windows, all 10 worlds at or above the control mean. Cost: +0.7 mm guitar motion, −0.05 pick hit rate.</p>
+    </div>
+
+    <div class="card wide">
+      <div class="badge fail">OPEN · the C chord index finger</div>
+      <div class="t">Why press6 is 0 / 10: index lands 10 mm short of S5F1 after the Am → C change</div>
+      <div class="vids">
+        <figure class="one"><video controls muted playsinline preload="metadata" src="../assets/guitar-hub/videos/press6_index_closeup_0.5x.mp4" loop></video><figcaption>7.5–10.5 s at half speed, index finger and S5 close-up (earlier checkpoint s80c, the failure mode is unchanged): the ring finger stretches to S2F3, the guitar drifts 6 mm, the arm gives 4 mm, the index tip ends up on the wrong side of the string.</figcaption></figure>
+      </div>
+      <p class="note" style="margin:8px 0 0">Everything at the finger or wrist level has been tried as single variables with controls this week (finger tracking weight, wrist tracking weight ×4, dead-bands): the index success fraction in this window stays at 0.19–0.21 in every run. The fix has to come from the arm following the guitar or the guitar moving less; arm-level single variables are running now (left-arm tracking weight 0.5 → 0.1 on the full piece, arm dead-band 0.015 → 0.05 rad).</p>
+    </div>
+
+  </div>
+
+  <h2>How the policy is trained now</h2>
+  <div class="card">
+    <div class="flow">
+      <div class="box"><div class="bt">State</div><div class="bl">joint pos / vel / last command, both arms + hands</div><div class="bl">guitar pose in the robot frame</div><div class="bl">fingertip pads and pick tip in the guitar frame</div><div class="bt" style="margin-top:8px">Task</div><div class="bl">timed chord cells and picks from the tab</div></div>
+      <div class="arr">→</div>
+      <div class="box pol"><div class="bt">Policy</div><div class="bl">MLP · Gaussian · PPO</div><div class="bl">adaptive KL 0.015 / 0.03</div><div class="bl">warm start from last best</div></div>
+      <div class="arr">→</div>
+      <div class="box"><div class="bt">Action · 54</div><div class="bl">2 × (arm 7 + hand 20)</div><div class="bl">PD targets · 20 Hz</div></div>
+      <div class="arr">→</div>
+      <div class="box phy"><div class="bt">Physics</div><div class="bl">MuJoCo Warp · 1024 worlds</div><div class="bl">free guitar, Strat mass, sysid hands</div><div class="bl">guitar pose offset + pushes in training</div></div>
+      <div class="arr">→</div>
+      <div class="box rew"><div class="bt">Reward</div><div class="bl">track mocap reference with 1 cm dead-band</div><div class="bl">per-string press / no-press heads</div><div class="bl">pick heads · guitar stability · force band</div></div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="v">12.5 min</div><div class="k">per PPO update (1.5 s windows, 1024 worlds)</div></div>
+      <div class="tile"><div class="v">50 %</div><div class="k">episodes continue from the policy's own states</div></div>
+      <div class="tile ok"><div class="v">18 min</div><div class="k">per checkpoint evaluation (was 90)</div></div>
+      <div class="tile ok"><div class="v">10 worlds</div><div class="k">perturbed acceptance on every checkpoint</div></div>
+    </div>
+    <p class="note" style="margin:8px 0 0">Pure PPO: no behaviour-cloning pre-training or auxiliary loss (ablated 10-23, no benefit). Fast evaluation uses a coarser solver and a segmented, parallel roll-out; its ranking matched the 90-minute full-model evaluation on every checkpoint it was checked against.</p>
+  </div>
+
+  <h2>Progress on the acceptance number</h2>
+  <div class="card">
+    <div class="tw"><table>
+      <tr><th>Date</th><th>Checkpoint</th><th>Chord windows fretted / 8</th><th>Conditions</th></tr>
+      <tr><td>10-27</td><td>A+lat ck04</td><td>7.2</td><td>old guitar mass, 5 worlds, guitar barely perturbed; 0 / 8 once the guitar was truly offset 3–4 mm</td></tr>
+      <tr><td>10-29</td><td>s80c ck12</td><td>5.1 ± 0.6</td><td>Strat mass, sysid gains, mocap right hand, 10 perturbed worlds: the honest baseline</td></tr>
+      <tr><td>10-30 00:30</td><td>s85 ck12</td><td>4.2 ± 0.4</td><td>reward-patch line: rejected</td></tr>
+      <tr><td>10-30 10:36</td><td class="ok">s86 ck12</td><td class="ok">5.4 ± 0.7</td><td>1 cm dead-bands + guitar-geometry shaping, same 10 perturbed worlds</td></tr>
+    </table></div>
+    <p class="note" style="margin:8px 0 0">The 10-27 number is not comparable: it was measured before the guitar was perturbed and before its mass was fixed. The number went down and came back up under harder conditions.</p>
+  </div>
+
+  <h2>Keyframes · world 16</h2>
+  <div class="gal">
+    <figure><img src="../assets/guitar-hub/figures/house_w16_t4.25.png" alt="E7 at 4.25 s"><figcaption>4.25 s · E7 (press2) · fretted</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/house_w16_t8.5.png" alt="C at 8.5 s"><figcaption>8.5 s · C (press6) · index misses S5F1</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/house_w16_t16.25.png" alt="Am at 16.25 s"><figcaption>16.25 s · Am (press10) · just after the second 40 N push</figcaption></figure>
+    <figure><img src="../assets/guitar-hub/figures/house_w16_t20.5.png" alt="C two-finger at 20.5 s"><figcaption>20.5 s · C with two fingers (press14) · fretted</figcaption></figure>
+  </div>
+
+  <h2>Ruled out this week</h2>
+  <div class="lessons">
+    <div class="lesson"><div class="ic">01</div><b>Fixing the reference at mm level</b><span>Three days of retarget tuning did not move the acceptance number. 1 cm is enough; the rest is learned.</span></div>
+    <div class="lesson"><div class="ic">02</div><b>Friction pads, strap, pre-load, wedge</b><span>None of them was the stabilisation bottleneck; the mass model was.</span></div>
+    <div class="lesson"><div class="ic">03</div><b>More tracking weight on the wrist</b><span>×4 weight: wrist error 8.22 vs 8.24 mm, identical. The residual is structural.</span></div>
+    <div class="lesson"><div class="ic">04</div><b>BC pre-training, KL tuning, auxiliary heads</b><span>Ablated with controls; no effect on left-hand pressing.</span></div>
+  </div>
+
+  <h2>Next</h2>
+  <div class="grid3">
+    <div class="card"><div class="badge prog">NOW</div><div class="t">Arm-level single variables</div><div class="m">Left-arm tracking weight on the full piece (result today), finger tracking weight, arm dead-band; then combine the winners into the next full-piece recipe</div></div>
+    <div class="card"><div class="badge method">NEXT</div><div class="t">Advantage composition</div><div class="m">Pressing is 4.5 % of the advantage today. Re-weight the heads or move to per-string independent advantages (Pei Xu); clean up idle fingers pressing wrong strings in the reference</div></div>
+    <div class="card"><div class="badge method">THEN</div><div class="t">Sharpa W02 hand</div><div class="m">URDF requested. What transfers is the method: the four metrics as reward targets, staying-finger pressing, 1 cm reference rule, 10-world perturbed acceptance on every checkpoint</div></div>
+  </div>
+
+  <div class="foot">Numbers from <span class="mono">pieceaccept_cli_movesplit.json</span> of <span class="mono">eval_perturb10o_checkpoint12_fast_x10</span> (s86 ck12) and the s85 ck12 control; videos are kinematic replays of the stored evaluation states on the D1b render model. Living record in <span class="mono">notes/GUITAR_DEX_PROJECT.md</span>, daily notes <span class="mono">notes/daily/D01–D04</span>. Dataset: Pei Xu et al., SIGGRAPH Asia 2024 (CC BY-NC-ND, internal use).</div>
+</div>
+</html>
