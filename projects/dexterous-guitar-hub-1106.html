@@ -138,11 +138,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/scale_s231_press_by_string_1106.png" alt="share of notes fretted per string" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
       </div>
-      <div class="lessons" style="grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px">
-        <div class="lesson"><div class="ic">WHAT THE MOCAP DOES</div><b>The player's wrist moves 3.5 mm per string change and 1–2 mm per finger</b><span>that motion is in our reference.</span></div>
-        <div class="lesson"><div class="ic">WHAT THE POLICY DOES</div><b>It parks the wrist 3.4 mm to the bass side and keeps it there</b><span>the tracking reward barely notices a sideways offset.</span></div>
-        <div class="lesson"><div class="ic">FIX</div><b>Make the wrist tracking bind sideways</b><span>per-axis wrist term; one switch, next run.</span></div>
-      </div>
+      <p class="m" style="margin:12px 0 0">The player's wrist moves about 3.5 mm per string change; the policy parks it 3.4 mm to the bass side because the tracking reward barely sees a sideways offset. Next run: make the wrist tracking bind sideways.</p>
     </div>
     <div class="card blk b2">
       <div class="t">Right hand: rushes and misses</div>
