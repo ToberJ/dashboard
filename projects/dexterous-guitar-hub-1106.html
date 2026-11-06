@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dexterous Guitar Hub</title>
-<meta name="description" content="Weekly hub 2026-11-06: House of the Rising Sun plays end to end (8/8 presses, note F1 0.51); the G-major scale presses 16/70. Key blocker: too few training iterations. Two open problems: left-hand lateral landing, right-hand timing. GPU ask.">
+<meta name="description" content="Weekly hub 2026-11-06: House plays (8/8, F1 0.51); the scale presses 16/70; key blocker: too few iterations; GPU ask.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
@@ -73,140 +73,124 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 
 <div class="wrap">
   <div class="crumb"><a href="dexterous-guitar-hub-1030.html">← week of 10-24 → 10-30</a> · Stanford Movement Lab · dex-project · week of 2026-10-31 → 11-06</div>
-  <h1>Dexterous Guitar: <em>House</em> is a finished piece; the scale is blocked by where the left hand lands</h1>
-  <p class="sub">Same setup as last week: Unitree G1, two Wuji Hand 2, MuJoCo Warp + PPO, free guitar, every force from the solver. New this week: a note-level music score (physics → notes → compared with the tab, 50 ms tolerance), the G-major scale as a second piece, and a root-cause pass on why the scale does not press.</p>
+  <h1>House plays. The scale does not press yet. We need more iterations.</h1>
   <div class="chips">
     <span class="chip ok">House · 8 / 8 presses · note F1 0.51</span>
     <span class="chip warn">Scale · 16 / 70 presses · note F1 0.05</span>
-    <span class="chip bad">Blocker: 5 GPU-hours per experiment, 2 a day</span>
-    <span class="chip warn">Open: index lands one string off</span>
+    <span class="chip bad">Blocker · 5 GPU-hours per experiment</span>
   </div>
-  <p class="note">All numbers: mean policy, 10 worlds, guitar pose offset ±5 mm / ±2°, pushed twice with 40 N, whole piece from t = 0. Videos carry the sound the policy actually produced.</p>
+  <p class="note">Mean policy · 10 worlds · guitar offset ±5 mm / ±2° · pushed twice with 40 N · whole piece from t = 0 · sound = what the policy played.</p>
 
   <h2>The pieces</h2>
   <div class="grid">
     <div class="card">
-      <div class="badge pass">HOUSE · 21.3 s · s197 ck12 · world 13 (perturbed)</div>
-      <div class="t">8 chord windows, both hands, with the audio the policy played</div>
-      <div class="vids">
-        <figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s197_ck12_perturbed_w13_fourview_played_audio_rt.mp4"></video><figcaption>Real time, sound on. Guitar pulled 3.5 / 4.2 mm off at the start, pushed with 40 N at 7 s and 16 s. This world: 6 of 8 windows fretted, note F1 0.53.</figcaption></figure>
-      </div>
+      <div class="badge pass">HOUSE · 21 s · s197</div>
+      <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s197_ck12_perturbed_w13_fourview_played_audio_rt.mp4"></video><figcaption>Perturbed world. Sound on.</figcaption></figure></div>
       <div class="tiles">
-        <div class="tile ok"><div class="v">8.00 / 8</div><div class="k">windows fretted · 10 worlds</div></div>
-        <div class="tile ok"><div class="v">0.51</div><div class="k">note F1 (best run 0.54)</div></div>
-        <div class="tile warn"><div class="v">17 mm</div><div class="k">max guitar motion</div></div>
+        <div class="tile ok"><div class="v">8 / 8</div><div class="k">presses</div></div>
+        <div class="tile ok"><div class="v">0.51</div><div class="k">note F1</div></div>
+        <div class="tile warn"><div class="v">17 mm</div><div class="k">guitar motion</div></div>
       </div>
     </div>
     <div class="card">
-      <div class="badge prog">SCALE · G major · 47.3 s · 70 notes · s231 ck12 · world 9 (perturbed)</div>
-      <div class="t">Frets 2–7 on all six strings, one note at a time — mostly the wrong notes</div>
-      <div class="vids">
-        <figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/scale_s231_ck12_perturbed_w09_fourview_played_audio_rt.mp4"></video><figcaption>Real time, sound on. The right hand reaches the strings (hit 97 %); the left hand presses 32 of 70 notes in this world, and most plucks are 50–120 ms early, so the melody is wrong. Note F1 0.04.</figcaption></figure>
-      </div>
+      <div class="badge prog">G-MAJOR SCALE · 47 s · 70 notes · s231</div>
+      <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/scale_s231_ck12_perturbed_w09_fourview_played_audio_rt.mp4"></video><figcaption>Perturbed world. Sound on: mostly wrong notes.</figcaption></figure></div>
       <div class="tiles">
-        <div class="tile warn"><div class="v">16.4 / 70</div><div class="k">notes fretted · 10 worlds (was 9.6)</div></div>
+        <div class="tile warn"><div class="v">16 / 70</div><div class="k">presses (was 10)</div></div>
         <div class="tile bad"><div class="v">0.05</div><div class="k">note F1</div></div>
-        <div class="tile ok"><div class="v">9.4 mm</div><div class="k">max guitar motion</div></div>
+        <div class="tile ok"><div class="v">9 mm</div><div class="k">guitar motion</div></div>
       </div>
     </div>
   </div>
 
-  <h2>The four metrics, one number each</h2>
-  <p class="sub">Simplified from the 10-23 list after last week's meeting: did it press what it should, did it touch what it should not, did the guitar stay put, is the force human. Tracking is not scored any more: the reference is within 1 cm of the guitar and the policy sits at noise level from it.</p>
+  <h2>Four metrics</h2>
   <div class="card">
     <div class="tw"><table>
-      <tr><th>Metric</th><th style="text-align:left">How it is counted</th><th>House s197</th><th>Scale s231</th><th>Target</th></tr>
-      <tr><td><b>Pressed what it should</b></td><td class="w">presses reaching the fret wire ≥ 50 ms, neighbour strings &lt; 1 N / notes</td><td class="ok">8 / 8</td><td class="bad">16 / 70</td><td>all</td></tr>
-      <tr><td>↳ sounds right</td><td class="w">note F1 against the tab, 50 ms onset tolerance (Ruocheng's policy → audio package + our physics → note rules)</td><td class="warn">0.51</td><td class="bad">0.05</td><td>≥ 0.8</td></tr>
-      <tr><td><b>Touched nothing it should not</b></td><td class="w">hand moves with no string scraped ≥ 1 N by a non-staying finger / all moves</td><td class="bad">14 / 70 · worst 19.8 N</td><td class="bad">5 / 69 · worst 63 N</td><td>all</td></tr>
-      <tr><td><b>Guitar stays put</b></td><td class="w">max displacement after the two pushes, press windows / whole piece</td><td class="warn">9.8 / 17.3 mm</td><td class="warn">9.4 / 9.4 mm</td><td>≤ 8 mm</td></tr>
-      <tr><td><b>Force in the human range</b></td><td class="w">p99 press force; player measured 7–15 N ideal, 6–19 N acceptable</td><td class="ok">9.7 N</td><td class="ok">7.9 N</td><td>6–19 N</td></tr>
+      <tr><th>Metric</th><th>House</th><th>Scale</th><th>Target</th></tr>
+      <tr><td><b>Pressed what it should</b></td><td class="ok">8 / 8</td><td class="bad">16 / 70</td><td>all</td></tr>
+      <tr><td>↳ sounds right (note F1)</td><td class="warn">0.51</td><td class="bad">0.05</td><td>≥ 0.8</td></tr>
+      <tr><td><b>Touched nothing it should not</b> (clean moves)</td><td class="bad">20 %</td><td class="bad">7 %</td><td>100 %</td></tr>
+      <tr><td><b>Guitar stays put</b> (max motion)</td><td class="warn">17 mm</td><td class="warn">9 mm</td><td>≤ 8 mm</td></tr>
+      <tr><td><b>Force in the human range</b> (p99)</td><td class="ok">9.7 N</td><td class="ok">7.9 N</td><td>6–19 N</td></tr>
     </table></div>
-    <div class="verdict"><span class="dot warn"></span><span>House's open items are scrapes during chord changes and guitar sway. The scale's item is the first row: the left hand does not get onto its string (open problem 1 below).</span></div>
   </div>
 
   <h2>Key blocker: not enough iterations</h2>
-  <p class="sub">One blocker: a training iteration is too slow, so there are not enough iterations to verify a fix and try the next one.</p>
   <div class="card blk b3">
-    <div class="n">ITERATION SPEED</div>
-    <div class="t">One scale experiment is 5 GPU-hours; two a day on the 4090</div>
-    <p class="m" style="margin:0">12 PPO updates × 16 min plus a 1.6 h evaluation of three checkpoints, on the one 4090. The 3090 is half as fast and shared: this week another project filled its memory and killed our run at update 11, and the machine was unreachable for a day. Evaluation shares the training card, so training stops while a checkpoint is scored. About 10 variables were tried this week; each open problem below needs 5–6 single-variable runs with a control to verify a fix — a week in series, a day in parallel. Physics is latency-bound (one step = tens of sequential kernel launches, 10 worlds cost the same as 1000), so a bigger card does not help; more cards do. Training is single-GPU and uses 4 GB of VRAM.</p>
-    <div class="tiles">
-      <div class="tile bad"><div class="v">5 h</div><div class="k">per experiment</div></div>
-      <div class="tile bad"><div class="v">2 / day</div><div class="k">experiments on the 4090</div></div>
-      <div class="tile"><div class="v">4 GB</div><div class="k">VRAM per run</div></div>
-      <div class="tile warn"><div class="v">2–4</div><div class="k">more 4090-class GPUs asked</div></div>
+    <div class="tiles" style="margin-top:0">
+      <div class="tile bad"><div class="v">5 h</div><div class="k">GPU per experiment</div></div>
+      <div class="tile bad"><div class="v">2 / day</div><div class="k">experiments (one 4090)</div></div>
+      <div class="tile"><div class="v">~10</div><div class="k">variables tried this week</div></div>
+      <div class="tile"><div class="v">4 GB</div><div class="k">VRAM per run · single GPU</div></div>
+      <div class="tile warn"><div class="v">2–4</div><div class="k">more 4090-class GPUs</div></div>
     </div>
-    <div class="verdict"><span class="dot warn"></span><span>Two things we do about it ourselves, no new hardware needed: segment training (start only from the failing 10 s segments) and segment evaluation (5 windows in parallel) cut one experiment from 5 h to 1–1.5 h. Both are queued.</span></div>
+    <p class="note" style="margin:10px 0 0">Each open problem needs 5–6 single-variable runs to verify a fix: a week in series, a day in parallel. Physics is latency-bound, so more cards help and a bigger card does not.</p>
   </div>
 
-  <h2>Open problems found this week, not yet solved</h2>
+  <h2>Open problems, not solved yet</h2>
   <div class="grid">
     <div class="card wide blk">
-      <div class="n">OPEN 1 · LEFT HAND · the scale</div>
-      <div class="t">The index finger lands a full string spacing on the bass side of its target (median −7.7 mm; House −0.2 mm)</div>
-      <p class="m" style="margin:0 0 8px">From the per-tick physics of 700 note × world cases: the policy shifts the whole hand 6–8 mm toward the bass side to rescue the ring and pinky, whose reference landings slide 5 mm treble-ward once pressed. It picks one compromise position instead of adjusting the hand note by note the way a player does. The arm tracking reward is flat at that error (0.1 rad kernel ≈ 45 mm at the hand; a 7 mm shift costs 1 %). Two reward terms that give each finger its own lateral gradient failed: in the task head no trend in 6 updates, in the string heads 13.6 / 70, worse than the 15.7 control. Pinning the arm to the reference (dead band 0, weight ×10) does not move the arm error at all over 6 updates. The candidates are in Next.</p>
-      <div class="gal">
-        <figure><img src="../assets/guitar-hub/figures/scale_s231_press_by_string_1106.png" alt="share of notes fretted per string"><figcaption>Only the low E string works.</figcaption></figure>
-        <figure><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset per finger, scale vs House"><figcaption>Where the finger pad lands relative to its string. Scale: every finger on the bass side, the index on the neighbour string. House: within 1 mm.</figcaption></figure>
+      <div class="t">1 · Left hand: the index lands one string off</div>
+      <div class="grid">
+        <figure style="margin:0"><img src="../assets/guitar-hub/figures/scale_s231_press_by_string_1106.png" alt="share of notes fretted per string" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
+        <figure style="margin:0"><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
       </div>
+      <p class="note" style="margin:10px 0 0">The whole hand shifts 6–8 mm to the bass side to help the ring and pinky; the index pays. Reward terms did not fix it (2 runs); the hand has to adjust note by note, like a player.</p>
     </div>
     <div class="card wide blk b2">
-      <div class="n">OPEN 2 · RIGHT HAND · timing and misses</div>
-      <div class="t">The right hand rushes: 33 % of scale notes are plucked 50–120 ms early or late</div>
-      <p class="m" style="margin:0">Median 25 ms early. 16 % of scale notes are never plucked; on House the right hand misses 29 % of plucks, which is why House sits at F1 0.51 with 8 / 8 presses. Not yet checked whether the rush is in the mocap reference or learned.</p>
-      <div class="tiles">
-        <div class="tile warn"><div class="v">33 %</div><div class="k">scale notes early / late</div></div>
+      <div class="t">2 · Right hand rushes and misses</div>
+      <div class="tiles" style="margin-top:0">
+        <div class="tile warn"><div class="v">33 %</div><div class="k">scale notes 50–120 ms early / late</div></div>
+        <div class="tile warn"><div class="v">25 ms</div><div class="k">median: early</div></div>
         <div class="tile warn"><div class="v">16 %</div><div class="k">scale notes not plucked</div></div>
         <div class="tile bad"><div class="v">29 %</div><div class="k">House plucks missed</div></div>
       </div>
+      <p class="note" style="margin:10px 0 0">Caps F1 near 0.5 even with a perfect left hand. Unknown yet: inherited from the mocap or learned.</p>
     </div>
   </div>
 
-  <h2>What was found this week</h2>
+  <h2>Found this week</h2>
   <div class="grid">
     <div class="card">
-      <div class="badge pass">HOUSE · recipe decision</div>
-      <div class="t">The per-note landing-offset latent δ helps the scale and hurts House</div>
+      <div class="badge pass">HOUSE · the landing-offset latent δ hurts</div>
       <div class="tw"><table>
-        <tr><th>House run</th><th>Presses / 8</th><th>Note F1</th></tr>
-        <tr><td>s197 ck12 · unified recipe</td><td class="ok">8.00</td><td class="ok">0.510</td></tr>
-        <tr><td>s233 ck12 · + δ (scale recipe)</td><td class="ok">8.00</td><td class="bad">0.442</td></tr>
-        <tr><td>s241 ck10 · + δ, mean clamped 3 mm</td><td class="ok">8.00</td><td class="warn">0.452</td></tr>
-        <tr><td>s241 ck10 · δ mean zeroed at eval</td><td class="ok">8.00</td><td class="warn">0.485</td></tr>
+        <tr><th>Run</th><th>Presses</th><th>Note F1</th></tr>
+        <tr><td>s197 · no δ</td><td class="ok">8 / 8</td><td class="ok">0.51</td></tr>
+        <tr><td>s233 · + δ</td><td class="ok">8 / 8</td><td class="bad">0.44</td></tr>
+        <tr><td>s241 · + δ, clamped</td><td class="ok">8 / 8</td><td class="warn">0.45</td></tr>
+        <tr><td>s241 · δ zeroed at eval</td><td class="ok">8 / 8</td><td class="warn">0.49</td></tr>
       </table></div>
-      <div class="verdict"><span class="dot ok"></span><span>δ costs 0.03–0.06 F1 on House whatever its clamp; House keeps the recipe without δ (confirmation run s251 in progress). The scale needs δ because its fingers never explore sideways without it (9.6 → 16.4).</span></div>
+      <p class="note" style="margin:8px 0 0">House keeps the recipe without δ. The scale needs δ (10 → 16 presses).</p>
     </div>
     <div class="card">
       <div class="badge prog">SCALE · run history</div>
-      <div class="t">Presses out of 70, 10 perturbed worlds</div>
       <div class="tw"><table>
-        <tr><th>Scale run</th><th style="text-align:left">Change</th><th>Presses</th><th>F1</th></tr>
-        <tr><td>s195</td><td class="w">unified recipe + Cv5 reference</td><td>9.6</td><td>0.025</td></tr>
-        <tr><td>s231</td><td class="w">+ landing-offset latent δ (σ 3 mm)</td><td class="ok">16.4</td><td>0.047</td></tr>
-        <tr><td>s239</td><td class="w">+ push-phase fix, δ clamp 3 mm</td><td>15.7</td><td>0.043</td></tr>
-        <tr><td>s243</td><td class="w">+ lateral term, task head</td><td class="bad">stopped, no trend</td><td>—</td></tr>
-        <tr><td>s245</td><td class="w">+ lateral term, string heads</td><td class="bad">13.6</td><td>0.029</td></tr>
+        <tr><th>Run</th><th>Presses / 70</th><th>Note F1</th></tr>
+        <tr><td>s195 · unified recipe</td><td>9.6</td><td>0.03</td></tr>
+        <tr><td>s231 · + δ</td><td class="ok">16.4</td><td>0.05</td></tr>
+        <tr><td>s239 · + push fix, δ clamp</td><td>15.7</td><td>0.04</td></tr>
+        <tr><td>s243 · + lateral term, task head</td><td class="bad">stopped</td><td>—</td></tr>
+        <tr><td>s245 · + lateral term, string heads</td><td class="bad">13.6</td><td>0.03</td></tr>
       </table></div>
-      <div class="verdict"><span class="dot warn"></span><span>Behind the 16.4: the low E string presses 66 % of its notes, the other five strings 10–23 %. Of 700 note × world cases, 4.7 % match the tab; 33 % are plucked early/late, 29 % have the wrong fret (mostly unpressed), 17 % are pressed under 6 N, 16 % are not plucked.</span></div>
+      <p class="note" style="margin:8px 0 0">Why F1 stays low: 33 % plucked early/late · 29 % wrong fret · 17 % pressed too lightly · 16 % not plucked.</p>
     </div>
   </div>
 
-  <h2>Ruled out this week</h2>
+  <h2>Ruled out</h2>
   <div class="lessons">
-    <div class="lesson"><div class="ic">01</div><b>Lateral landing terms in the reward</b><span>Task head or string heads: no effect or worse. The hand shift is a whole-hand strategy, not a per-finger error.</span></div>
-    <div class="lesson"><div class="ic">02</div><b>Pinning the left arm to the reference</b><span>Dead band 0 and tracking weight ×10: the arm error stays at 0.016 rad for 6 updates. The 7 mm offset is not something the arm tracking term can move.</span></div>
-    <div class="lesson"><div class="ic">03</div><b>δ on House</b><span>0.03–0.06 F1 lost whatever the clamp. Scale only.</span></div>
-    <div class="lesson"><div class="ic">04</div><b>Three pipeline bugs, fixed</b><span>Diet physics model missing 18 / 70 scale cells (coverage gate added); guitar push on the same updates in every world; δ mean running to 8.75 mm.</span></div>
+    <div class="lesson"><div class="ic">01</div><b>Lateral terms in the reward</b><span>Either head: no effect or worse.</span></div>
+    <div class="lesson"><div class="ic">02</div><b>Pinning the arm to the reference</b><span>×10 weight, no dead band: arm error unchanged for 6 updates.</span></div>
+    <div class="lesson"><div class="ic">03</div><b>δ on House</b><span>Costs 0.03–0.06 F1 whatever the clamp.</span></div>
+    <div class="lesson"><div class="ic">04</div><b>Three pipeline bugs</b><span>Missing scale cells in the diet model · push phase · δ mean runaway. Fixed.</span></div>
   </div>
 
   <h2>Next</h2>
   <div class="grid3">
-    <div class="card"><div class="badge prog">NOW</div><div class="t">Make the hand adjust note by note</div><div class="m">Feed each note's measured landing error (the 5 mm ring/pinky slide) back into the reference wrist as a smooth ≤ 5 mm per-note shift, the way a player moves the hand; the reference stays within 1 cm. In parallel: all training worlds play continuously (no restarts from the reference pose), since presses are 0.55 from a reference start, 0.39 when continuing, 0.23 in the sequential evaluation.</div></div>
-    <div class="card"><div class="badge method">NEXT</div><div class="t">Right-hand timing · shorter experiments</div><div class="m">Replay the mocap reference against the tab to see whether the 25 ms rush is inherited or learned, then a timing term if learned. Segment training and segment evaluation (5 windows in parallel) to take one experiment from 5 h to 1–1.5 h.</div></div>
-    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs, 4090 / A5000 class, not shared</div><div class="m">The bottleneck is parallel single-variable experiments, not the size of one card (4 GB VRAM per run). Four cards turn a week of serial probes into one day; one more card keeps evaluation off the training GPU.</div></div>
+    <div class="card"><div class="badge prog">NOW</div><div class="t">Hand adjusts note by note</div><div class="m">Per-note wrist shift from the measured landing error into the reference (≤ 5 mm) · all training worlds play continuously (running).</div></div>
+    <div class="card"><div class="badge method">NEXT</div><div class="t">Right-hand timing · 1 h experiments</div><div class="m">Mocap vs tab replay to locate the 25 ms rush · segment training and segment evaluation: 5 h → 1–1.5 h.</div></div>
+    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs</div><div class="m">4090 / A5000 class, not shared. Parallel single-variable runs; one card for evaluation.</div></div>
   </div>
 
-  <div class="foot">Numbers from <span class="mono">pieceaccept</span> and <span class="mono">rescore_groups</span> on <span class="mono">eval_perturb10o_checkpoint12</span> (s197 ck12, s231 ck12) and the note-F1 pipeline in <span class="mono">17_music_eval</span>; root cause from <span class="mono">scratch/exp_1106/scale_fail_pattern</span>. Videos are kinematic replays of stored evaluation states with the audio synthesised from the played events. Living record in <span class="mono">notes/GUITAR_DEX_PROJECT.md</span>, daily notes <span class="mono">notes/daily/D05–D09</span>. Dataset: Pei Xu et al., SIGGRAPH Asia 2024 (CC BY-NC-ND, internal use).</div>
+  <div class="foot">Numbers: <span class="mono">pieceaccept</span> / <span class="mono">rescore_groups</span> on eval_perturb10o (s197 ck12, s231 ck12); note F1 from <span class="mono">17_music_eval</span>. Videos: kinematic replays of stored evaluation states with audio synthesised from the played events. Living record: <span class="mono">notes/GUITAR_DEX_PROJECT.md</span>, <span class="mono">notes/daily/D05–D09</span>.</div>
 </div>
 </html>
