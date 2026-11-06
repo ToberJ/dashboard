@@ -124,28 +124,25 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="tile"><div class="v">4 GB</div><div class="k">VRAM per run · single GPU</div></div>
       <div class="tile warn"><div class="v">2–4</div><div class="k">more 4090-class GPUs</div></div>
     </div>
-    <p class="note" style="margin:10px 0 0">Each open problem needs 5–6 single-variable runs to verify a fix: a week in series, a day in parallel. Physics is latency-bound, so more cards help and a bigger card does not.</p>
   </div>
 
   <h2>Open problems, not solved yet</h2>
   <div class="grid">
     <div class="card wide blk">
-      <div class="t">1 · Left hand: the index lands one string off</div>
+      <div class="t">1 · Left hand: the whole hand shifts to the bass side; the index lands one string off</div>
       <div class="grid">
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/scale_s231_press_by_string_1106.png" alt="share of notes fretted per string" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
       </div>
-      <p class="note" style="margin:10px 0 0">The whole hand shifts 6–8 mm to the bass side to help the ring and pinky; the index pays. Reward terms did not fix it (2 runs); the hand has to adjust note by note, like a player.</p>
     </div>
     <div class="card wide blk b2">
-      <div class="t">2 · Right hand rushes and misses</div>
+      <div class="t">2 · Right hand: rushes and misses</div>
       <div class="tiles" style="margin-top:0">
         <div class="tile warn"><div class="v">33 %</div><div class="k">scale notes 50–120 ms early / late</div></div>
         <div class="tile warn"><div class="v">25 ms</div><div class="k">median: early</div></div>
         <div class="tile warn"><div class="v">16 %</div><div class="k">scale notes not plucked</div></div>
         <div class="tile bad"><div class="v">29 %</div><div class="k">House plucks missed</div></div>
       </div>
-      <p class="note" style="margin:10px 0 0">Caps F1 near 0.5 even with a perfect left hand. Unknown yet: inherited from the mocap or learned.</p>
     </div>
   </div>
 
@@ -160,7 +157,6 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <tr><td>s241 · + δ, clamped</td><td class="ok">8 / 8</td><td class="warn">0.45</td></tr>
         <tr><td>s241 · δ zeroed at eval</td><td class="ok">8 / 8</td><td class="warn">0.49</td></tr>
       </table></div>
-      <p class="note" style="margin:8px 0 0">House keeps the recipe without δ. The scale needs δ (10 → 16 presses).</p>
     </div>
     <div class="card">
       <div class="badge prog">SCALE · run history</div>
@@ -172,7 +168,6 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <tr><td>s243 · + lateral term, task head</td><td class="bad">stopped</td><td>—</td></tr>
         <tr><td>s245 · + lateral term, string heads</td><td class="bad">13.6</td><td>0.03</td></tr>
       </table></div>
-      <p class="note" style="margin:8px 0 0">Why F1 stays low: 33 % plucked early/late · 29 % wrong fret · 17 % pressed too lightly · 16 % not plucked.</p>
     </div>
   </div>
 
