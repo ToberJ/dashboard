@@ -52,7 +52,7 @@ h2{font-size:21px;margin:40px 0 12px;text-wrap:balance}
 .mono{font-family:var(--mono);font-size:13px}
 table{border-collapse:collapse;width:100%;font-size:13.5px;font-variant-numeric:tabular-nums}
 th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
-th:first-child,td:first-child{text-align:left;white-space:normal}
+th:first-child,td:first-child{text-align:left;white-space:normal;max-width:52ch}
 td.w{white-space:normal;text-align:left;color:var(--muted);font-size:12.5px}
 th{font-weight:600;color:var(--muted);font-size:12px;letter-spacing:.3px;text-transform:uppercase}
 .tw{overflow-x:auto}
@@ -116,10 +116,10 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
     <div class="tw"><table>
       <tr><th>Metric</th><th>G-major scale</th><th>House</th><th>Target</th></tr>
       <tr><td><b>Pressed what it should</b></td><td class="bad">16 / 70</td><td class="ok">8 / 8</td><td>all</td></tr>
-      <tr><td>↳ sounds right (note F1)</td><td class="bad">0.05</td><td class="warn">0.51</td><td>≥ 0.8</td></tr>
+      <tr><td>↳ sounds right · note F1<br><span class="m" style="font-size:12.5px">a played note counts if its pitch is right and it starts within 50 ms of the tab; F1 = harmonic mean of precision (correct / played) and recall (correct / written)</span></td><td class="bad">0.05</td><td class="warn">0.51</td><td>≥ 0.8</td></tr>
       <tr><td><b>Touched nothing it should not</b> (clean moves)</td><td class="bad">7 %</td><td class="bad">20 %</td><td>100 %</td></tr>
       <tr><td><b>Guitar stays put</b> (max motion)</td><td class="warn">9 mm</td><td class="warn">17 mm</td><td>≤ 8 mm</td></tr>
-      <tr><td><b>Force in the human range</b> (p99)</td><td class="ok">7.9 N</td><td class="ok">9.7 N</td><td>6–19 N</td></tr>
+      <tr><td><b>Force in the human range</b> · mean / peak (p99) while pressing</td><td class="ok">5.1 / 8.5 N</td><td class="ok">5.8 / 8.2 N</td><td>peak 6–19 N</td></tr>
     </table></div>
     <div class="flow" style="margin-top:12px">
       <div class="box ours"><div class="bt">Physics forces</div><div class="bl">ours</div></div>
