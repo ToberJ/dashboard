@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dexterous Guitar Hub</title>
-<meta name="description" content="Weekly hub 2026-11-06: House plays (8/8, F1 0.51); the scale presses 16/70; key blocker: too few iterations; GPU ask.">
+<meta name="description" content="Weekly hub 2026-11-06: the policy plays the G-major scale end to end (16/70 fretted); three open problems; more GPU time to iterate.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
@@ -81,18 +81,27 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 
 <div class="wrap">
   <div class="crumb"><a href="dexterous-guitar-hub-1030.html">← week of 10-24 → 10-30</a> · Stanford Movement Lab · dex-project · week of 2026-10-31 → 11-06</div>
-  <h1>House plays. The G-major scale does not press yet. We need more iterations.</h1>
+  <h1>The policy now plays the G-major scale end to end. Not well yet. We know why, and we need more GPU time to fix it.</h1>
   <div class="chips">
-    <span class="chip ok">House · 8 / 8 presses · note F1 0.51</span>
-    <span class="chip warn">G-major scale · 16 / 70 presses · note F1 0.05</span>
-    <span class="chip bad">Blocker · 5 GPU-hours per experiment</span>
+    <span class="chip ok">G-major scale · plays all 47 s · 16 / 70 notes fretted</span>
+    <span class="chip ok">House still 8 / 8 · note F1 0.51</span>
+    <span class="chip bad">5 GPU-hours per experiment · 2 a day</span>
   </div>
   <p class="note">Mean policy · 10 worlds · guitar offset ±5 mm / ±2° · pushed twice with 40 N · whole piece from t = 0 · sound = what the policy played.</p>
 
-  <h2>The pieces</h2>
+  <h2>1 · It plays</h2>
   <div class="grid">
-    <div class="card">
-      <div class="badge pass">HOUSE · 21 s</div>
+    <div class="card wide">
+      <div class="badge prog">G-MAJOR SCALE · frets 2–7, all six strings · 47 s · 70 notes</div>
+      <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/scale_reference_vs_policy_rt.mp4"></video><figcaption>Left: the reference. Right: the policy, sound on. Green = the note to press, red = where the finger pad landed.</figcaption></figure></div>
+      <div class="tiles">
+        <div class="tile warn"><div class="v">16 / 70</div><div class="k">notes fretted (was 10)</div></div>
+        <div class="tile bad"><div class="v">0.05</div><div class="k">note F1</div></div>
+        <div class="tile ok"><div class="v">9 mm</div><div class="k">guitar motion</div></div>
+      </div>
+    </div>
+    <div class="card wide">
+      <div class="badge pass">HOUSE · 21 s · same recipe, unchanged</div>
       <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s197_ck12_perturbed_w13_fourview_played_audio_rt.mp4"></video><figcaption>Perturbed world. Sound on.</figcaption></figure></div>
       <div class="tiles">
         <div class="tile ok"><div class="v">8 / 8</div><div class="k">presses</div></div>
@@ -100,32 +109,19 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
         <div class="tile warn"><div class="v">17 mm</div><div class="k">guitar motion</div></div>
       </div>
     </div>
-    <div class="card">
-      <div class="badge prog">G-MAJOR SCALE · frets 2–7, all six strings · 47 s · 70 notes</div>
-      <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/scale_reference_vs_policy_rt.mp4"></video><figcaption>Left: the reference. Right: the policy, sound on. Green = the note to press, red = where the finger pad landed.</figcaption></figure></div>
-      <div class="tiles">
-        <div class="tile warn"><div class="v">16 / 70</div><div class="k">presses (was 10)</div></div>
-        <div class="tile bad"><div class="v">0.05</div><div class="k">note F1</div></div>
-        <div class="tile ok"><div class="v">9 mm</div><div class="k">guitar motion</div></div>
-      </div>
-    </div>
   </div>
 
-  <h2>Four metrics</h2>
+  <h2>2 · How well: four metrics</h2>
   <div class="card">
     <div class="tw"><table>
-      <tr><th>Metric</th><th>House</th><th>G-major scale</th><th>Target</th></tr>
-      <tr><td><b>Pressed what it should</b></td><td class="ok">8 / 8</td><td class="bad">16 / 70</td><td>all</td></tr>
-      <tr><td>↳ sounds right (note F1)</td><td class="warn">0.51</td><td class="bad">0.05</td><td>≥ 0.8</td></tr>
-      <tr><td><b>Touched nothing it should not</b> (clean moves)</td><td class="bad">20 %</td><td class="bad">7 %</td><td>100 %</td></tr>
-      <tr><td><b>Guitar stays put</b> (max motion)</td><td class="warn">17 mm</td><td class="warn">9 mm</td><td>≤ 8 mm</td></tr>
-      <tr><td><b>Force in the human range</b> (p99)</td><td class="ok">9.7 N</td><td class="ok">7.9 N</td><td>6–19 N</td></tr>
+      <tr><th>Metric</th><th>G-major scale</th><th>House</th><th>Target</th></tr>
+      <tr><td><b>Pressed what it should</b></td><td class="bad">16 / 70</td><td class="ok">8 / 8</td><td>all</td></tr>
+      <tr><td>↳ sounds right (note F1)</td><td class="bad">0.05</td><td class="warn">0.51</td><td>≥ 0.8</td></tr>
+      <tr><td><b>Touched nothing it should not</b> (clean moves)</td><td class="bad">7 %</td><td class="bad">20 %</td><td>100 %</td></tr>
+      <tr><td><b>Guitar stays put</b> (max motion)</td><td class="warn">9 mm</td><td class="warn">17 mm</td><td>≤ 8 mm</td></tr>
+      <tr><td><b>Force in the human range</b> (p99)</td><td class="ok">7.9 N</td><td class="ok">9.7 N</td><td>6–19 N</td></tr>
     </table></div>
-  </div>
-
-  <h2>How "sounds right" is scored</h2>
-  <div class="card">
-    <div class="flow">
+    <div class="flow" style="margin-top:12px">
       <div class="box ours"><div class="bt">Physics forces</div><div class="bl">ours</div></div>
       <div class="arr">→</div>
       <div class="box ours"><div class="bt">Forces → played notes</div><div class="bl">our rules: pluck, fret, mute</div></div>
@@ -134,50 +130,50 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
     </div>
   </div>
 
-  <h2>Key blocker: not enough iterations</h2>
-  <div class="card blk b3">
-    <div class="tiles" style="margin-top:0">
-      <div class="tile bad"><div class="v">5 h</div><div class="k">GPU per experiment</div></div>
-      <div class="tile bad"><div class="v">2 / day</div><div class="k">experiments (one 4090)</div></div>
-      <div class="tile"><div class="v">~10</div><div class="k">variables tried this week</div></div>
-      <div class="tile"><div class="v">4 GB</div><div class="k">VRAM per run · single GPU</div></div>
-      <div class="tile warn"><div class="v">2–4</div><div class="k">more 4090-class GPUs</div></div>
-    </div>
-  </div>
-
-  <h2>Open problems, not solved yet</h2>
+  <h2>3 · What is not solved yet</h2>
   <div class="grid">
     <div class="card wide blk">
-      <div class="t">1 · Left hand (G-major scale): the whole hand shifts to the bass side; the index lands one string off</div>
+      <div class="t">Left hand: the whole hand sits one string too far to the bass side</div>
       <div class="grid">
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/scale_s231_press_by_string_1106.png" alt="share of notes fretted per string" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
       </div>
-    </div>
-    <div class="card wide">
-      <div class="t">Why House works and the G-major scale does not</div>
-      <div class="lessons" style="grid-template-columns:repeat(3,minmax(0,1fr))">
-        <div class="lesson"><div class="ic">SHAPE vs MOTION</div><b>House parks the hand 7 times; the scale moves it sideways every 0.5 s</b><span>70 notes, six strings, frets 2–7, pinky at fret 7.</span></div>
-        <div class="lesson"><div class="ic">REFERENCE</div><b>Played open-loop, the House reference frets 7.7 / 8; the scale reference 28 / 70</b><span>ring and pinky slide 5 mm when pressed; pad 8 mm wide, strings 7 mm apart.</span></div>
-        <div class="lesson"><div class="ic">POLICY</div><b>It parks the whole hand in one compromise spot instead of adjusting note by note</b><span>the index pays; per-finger reward terms did not change that.</span></div>
+      <div class="lessons" style="grid-template-columns:repeat(3,minmax(0,1fr));margin-top:12px">
+        <div class="lesson"><div class="ic">WHAT THE MOCAP DOES</div><b>The player's wrist moves 3.5 mm per string change and 1–2 mm per finger</b><span>that motion is in our reference.</span></div>
+        <div class="lesson"><div class="ic">WHAT THE POLICY DOES</div><b>It parks the wrist 3.4 mm to the bass side and keeps it there</b><span>the tracking reward barely notices a sideways offset.</span></div>
+        <div class="lesson"><div class="ic">FIX</div><b>Make the wrist tracking bind sideways</b><span>per-axis wrist term; one switch, next run.</span></div>
       </div>
     </div>
-    <div class="card wide blk b2">
-      <div class="t">2 · Right hand (both pieces): rushes and misses</div>
+    <div class="card blk b2">
+      <div class="t">Right hand: rushes and misses</div>
       <div class="tiles" style="margin-top:0">
-        <div class="tile warn"><div class="v">33 %</div><div class="k">G-major scale notes 50–120 ms early / late</div></div>
-        <div class="tile warn"><div class="v">25 ms</div><div class="k">median: early</div></div>
-        <div class="tile warn"><div class="v">16 %</div><div class="k">G-major scale notes not plucked</div></div>
-        <div class="tile bad"><div class="v">29 %</div><div class="k">House plucks missed</div></div>
+        <div class="tile warn"><div class="v">33 %</div><div class="k">notes 50–120 ms early / late</div></div>
+        <div class="tile warn"><div class="v">16 %</div><div class="k">notes not plucked</div></div>
+      </div>
+    </div>
+    <div class="card blk b3">
+      <div class="t">Reference: right place, but the robot's pads are wider than a player's</div>
+      <div class="tiles" style="margin-top:0">
+        <div class="tile warn"><div class="v">28 / 70</div><div class="k">fretted when played open-loop</div></div>
+        <div class="tile warn"><div class="v">5 mm</div><div class="k">ring / pinky slide when pressed</div></div>
       </div>
     </div>
   </div>
 
-  <h2>Next</h2>
-  <div class="grid3">
-    <div class="card"><div class="badge prog">NOW</div><div class="t">Make the hand move note by note, like a player.</div></div>
-    <div class="card"><div class="badge method">NEXT</div><div class="t">Fix right-hand timing. Cut one experiment from 5 h to 1 h.</div></div>
-    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs, not shared.</div></div>
+  <h2>4 · What it takes: iterations</h2>
+  <div class="card">
+    <div class="tiles" style="margin-top:0">
+      <div class="tile bad"><div class="v">5 h</div><div class="k">GPU per experiment</div></div>
+      <div class="tile bad"><div class="v">2 / day</div><div class="k">experiments on the one 4090</div></div>
+      <div class="tile"><div class="v">~10</div><div class="k">variables tried this week</div></div>
+      <div class="tile"><div class="v">4 GB</div><div class="k">VRAM per run · single GPU</div></div>
+      <div class="tile warn"><div class="v">2–4</div><div class="k">more 4090-class GPUs asked</div></div>
+    </div>
+  </div>
+  <div class="grid3" style="margin-top:14px">
+    <div class="card"><div class="badge prog">NOW</div><div class="t">Wrist tracks the mocap sideways; reference pads corrected for the robot hand.</div></div>
+    <div class="card"><div class="badge method">NEXT</div><div class="t">Right-hand timing. Cut one experiment from 5 h to 1 h.</div></div>
+    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs, not shared: one experiment per card, in parallel.</div></div>
   </div>
 
   <div class="foot">Numbers: <span class="mono">pieceaccept</span> / <span class="mono">rescore_groups</span> on eval_perturb10o (s197 ck12, s231 ck12); note F1 from <span class="mono">17_music_eval</span>. Videos: kinematic replays of stored evaluation states with audio synthesised from the played events. Living record: <span class="mono">notes/GUITAR_DEX_PROJECT.md</span>, <span class="mono">notes/daily/D05–D09</span>.</div>
