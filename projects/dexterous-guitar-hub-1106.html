@@ -84,7 +84,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
   <h2>The pieces</h2>
   <div class="grid">
     <div class="card">
-      <div class="badge pass">HOUSE · 21 s · s197</div>
+      <div class="badge pass">HOUSE · 21 s</div>
       <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s197_ck12_perturbed_w13_fourview_played_audio_rt.mp4"></video><figcaption>Perturbed world. Sound on.</figcaption></figure></div>
       <div class="tiles">
         <div class="tile ok"><div class="v">8 / 8</div><div class="k">presses</div></div>
@@ -93,7 +93,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       </div>
     </div>
     <div class="card">
-      <div class="badge prog">G-MAJOR SCALE · 47 s · 70 notes · s231</div>
+      <div class="badge prog">G-MAJOR SCALE · 47 s · 70 notes</div>
       <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/scale_s231_ck12_perturbed_w09_fourview_played_audio_rt.mp4"></video><figcaption>Perturbed world. Sound on: mostly wrong notes.</figcaption></figure></div>
       <div class="tiles">
         <div class="tile warn"><div class="v">16 / 70</div><div class="k">presses (was 10)</div></div>
@@ -149,25 +149,20 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
   <h2>Found this week</h2>
   <div class="grid">
     <div class="card">
-      <div class="badge pass">HOUSE · the landing-offset latent δ hurts</div>
-      <div class="tw"><table>
-        <tr><th>Run</th><th>Presses</th><th>Note F1</th></tr>
-        <tr><td>s197 · no δ</td><td class="ok">8 / 8</td><td class="ok">0.51</td></tr>
-        <tr><td>s233 · + δ</td><td class="ok">8 / 8</td><td class="bad">0.44</td></tr>
-        <tr><td>s241 · + δ, clamped</td><td class="ok">8 / 8</td><td class="warn">0.45</td></tr>
-        <tr><td>s241 · δ zeroed at eval</td><td class="ok">8 / 8</td><td class="warn">0.49</td></tr>
-      </table></div>
+      <div class="t">A per-note landing trick helps the scale and hurts House → each piece keeps its own setting</div>
+      <div class="tiles" style="margin-top:0">
+        <div class="tile ok"><div class="v">10 → 16</div><div class="k">scale presses, with the trick</div></div>
+        <div class="tile bad"><div class="v">0.51 → 0.44</div><div class="k">House note F1, with the trick</div></div>
+      </div>
     </div>
     <div class="card">
-      <div class="badge prog">SCALE · run history</div>
-      <div class="tw"><table>
-        <tr><th>Run</th><th>Presses / 70</th><th>Note F1</th></tr>
-        <tr><td>s195 · unified recipe</td><td>9.6</td><td>0.03</td></tr>
-        <tr><td>s231 · + δ</td><td class="ok">16.4</td><td>0.05</td></tr>
-        <tr><td>s239 · + push fix, δ clamp</td><td>15.7</td><td>0.04</td></tr>
-        <tr><td>s243 · + lateral term, task head</td><td class="bad">stopped</td><td>—</td></tr>
-        <tr><td>s245 · + lateral term, string heads</td><td class="bad">13.6</td><td>0.03</td></tr>
-      </table></div>
+      <div class="t">Why the scale sounds wrong even when a note is pressed</div>
+      <div class="tiles" style="margin-top:0">
+        <div class="tile warn"><div class="v">33 %</div><div class="k">plucked early / late</div></div>
+        <div class="tile bad"><div class="v">29 %</div><div class="k">wrong fret</div></div>
+        <div class="tile warn"><div class="v">17 %</div><div class="k">pressed too lightly</div></div>
+        <div class="tile warn"><div class="v">16 %</div><div class="k">not plucked</div></div>
+      </div>
     </div>
   </div>
 
@@ -175,15 +170,15 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
   <div class="lessons">
     <div class="lesson"><div class="ic">01</div><b>Lateral terms in the reward</b><span>Either head: no effect or worse.</span></div>
     <div class="lesson"><div class="ic">02</div><b>Pinning the arm to the reference</b><span>×10 weight, no dead band: arm error unchanged for 6 updates.</span></div>
-    <div class="lesson"><div class="ic">03</div><b>δ on House</b><span>Costs 0.03–0.06 F1 whatever the clamp.</span></div>
-    <div class="lesson"><div class="ic">04</div><b>Three pipeline bugs</b><span>Missing scale cells in the diet model · push phase · δ mean runaway. Fixed.</span></div>
+    <div class="lesson"><div class="ic">03</div><b>The landing trick on House</b><span>Costs 0.03–0.06 F1 however it is limited.</span></div>
+    <div class="lesson"><div class="ic">04</div><b>Three pipeline bugs</b><span>Found and fixed.</span></div>
   </div>
 
   <h2>Next</h2>
   <div class="grid3">
-    <div class="card"><div class="badge prog">NOW</div><div class="t">Hand adjusts note by note</div><div class="m">Per-note wrist shift from the measured landing error into the reference (≤ 5 mm) · all training worlds play continuously (running).</div></div>
-    <div class="card"><div class="badge method">NEXT</div><div class="t">Right-hand timing · 1 h experiments</div><div class="m">Mocap vs tab replay to locate the 25 ms rush · segment training and segment evaluation: 5 h → 1–1.5 h.</div></div>
-    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs</div><div class="m">4090 / A5000 class, not shared. Parallel single-variable runs; one card for evaluation.</div></div>
+    <div class="card"><div class="badge prog">NOW</div><div class="t">Hand adjusts note by note</div><div class="m">Put the per-note hand shift into the reference, like a player · train without resetting to the reference pose.</div></div>
+    <div class="card"><div class="badge method">NEXT</div><div class="t">Right-hand timing · 1 h experiments</div><div class="m">Find where the 25 ms rush comes from · train and evaluate on segments: 5 h → 1–1.5 h per experiment.</div></div>
+    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs</div><div class="m">4090-class, not shared. One experiment per card in parallel; one card for evaluation.</div></div>
   </div>
 
   <div class="foot">Numbers: <span class="mono">pieceaccept</span> / <span class="mono">rescore_groups</span> on eval_perturb10o (s197 ck12, s231 ck12); note F1 from <span class="mono">17_music_eval</span>. Videos: kinematic replays of stored evaluation states with audio synthesised from the played events. Living record: <span class="mono">notes/GUITAR_DEX_PROJECT.md</span>, <span class="mono">notes/daily/D05–D09</span>.</div>
