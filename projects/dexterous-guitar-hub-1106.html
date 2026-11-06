@@ -69,6 +69,14 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 .blk{border-left:4px solid var(--bad);padding-left:14px}
 .blk.b2{border-color:var(--warn)} .blk.b3{border-color:var(--accent)}
 .blk .n{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.5px}
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px}
+.box{flex:1 1 150px;min-width:0;border-radius:10px;padding:10px 12px;border:1px solid var(--line);background:var(--card)}
+.box .bt{font-weight:700;font-size:14px;margin-bottom:6px}
+.box .bl{font-size:12.5px;color:var(--muted);line-height:1.35;overflow-wrap:anywhere}
+.box.ours{border-top:3px solid var(--accent)} .box.ours .bt{color:var(--accent)}
+.box.rc{border-top:3px solid var(--ok)} .box.rc .bt{color:var(--ok)}
+.arr{align-self:center;color:var(--accent);font-size:20px;flex:0 0 auto}
+@media (max-width:760px){.arr{display:none}.box{flex-basis:45%}}
 </style>
 
 <div class="wrap">
@@ -113,6 +121,22 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <tr><td><b>Guitar stays put</b> (max motion)</td><td class="warn">17 mm</td><td class="warn">9 mm</td><td>≤ 8 mm</td></tr>
       <tr><td><b>Force in the human range</b> (p99)</td><td class="ok">9.7 N</td><td class="ok">7.9 N</td><td>6–19 N</td></tr>
     </table></div>
+  </div>
+
+  <h2>How "sounds right" is scored</h2>
+  <div class="card">
+    <div class="flow">
+      <div class="box ours"><div class="bt">Physics (ours)</div><div class="bl">string, fret-wire and pick forces, every 1 ms</div></div>
+      <div class="arr">→</div>
+      <div class="box ours"><div class="bt">Our rules → played notes</div><div class="bl">pluck = pick force ≥ 1 N rising edge</div><div class="bl">fret = highest wire ≥ 1 N, hand ≥ 6 N; else open string</div><div class="bl">mute = unpressed string touched ≥ 2 N</div></div>
+      <div class="arr">→</div>
+      <div class="box rc"><div class="bt">Ruocheng's package, unchanged</div><div class="bl">notes → audio (FluidSynth steel-string)</div><div class="bl">match to the tab: onset ± 50 ms, pitch ± 50 cents</div><div class="bl">→ note F1</div></div>
+    </div>
+    <div class="tiles">
+      <div class="tile"><div class="v">6 N</div><div class="k">hand force to count as fretted</div></div>
+      <div class="tile"><div class="v">50 ms</div><div class="k">timing tolerance</div></div>
+      <div class="tile"><div class="v">1 → 6</div><div class="k">string numbering flipped to match</div></div>
+    </div>
   </div>
 
   <h2>Key blocker: not enough iterations</h2>
