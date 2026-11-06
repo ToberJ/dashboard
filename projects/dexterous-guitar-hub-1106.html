@@ -45,7 +45,7 @@ h2{font-size:21px;margin:40px 0 12px;text-wrap:balance}
 .tile .v{font-family:var(--mono);font-weight:600;font-size:20px;line-height:1.1;font-variant-numeric:tabular-nums}
 .tile .k{font-size:11.5px;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;margin-top:2px}
 .tile.ok .v{color:var(--ok)} .tile.warn .v{color:var(--warn)} .tile.bad .v{color:var(--bad)}
-.gal{display:grid;grid-template-columns:1fr;gap:14px}
+.gal{display:grid;grid-template-columns:1fr;gap:14px;max-width:900px}
 .gal figure{margin:0;min-width:0} .gal img{width:100%;max-width:100%;border-radius:6px;border:1px solid var(--line);display:block;background:#fff}
 .note{font-size:13px;color:var(--muted)}
 .foot{margin-top:44px;border-top:1px solid var(--line);padding-top:12px;color:var(--muted);font-size:12.5px}
@@ -147,8 +147,8 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="t">The index finger lands a full string spacing on the bass side of its target (median −7.7 mm; House −0.2 mm)</div>
       <p class="m" style="margin:0 0 8px">From the per-tick physics of 700 note × world cases: the policy shifts the whole hand 6–8 mm toward the bass side to rescue the ring and pinky, whose reference landings slide 5 mm treble-ward once pressed. It picks one compromise position instead of adjusting the hand note by note the way a player does. The arm tracking reward is flat at that error (0.1 rad kernel ≈ 45 mm at the hand; a 7 mm shift costs 1 %). Two reward terms that give each finger its own lateral gradient failed: in the task head no trend in 6 updates, in the string heads 13.6 / 70, worse than the 15.7 control. Pinning the arm to the reference (dead band 0, weight ×10) does not move the arm error at all over 6 updates. The candidates are in Next.</p>
       <div class="gal">
-        <figure><img src="../assets/guitar-hub/figures/scale_s231_press_grid_1106.png" alt="70 notes x 10 worlds press outcome grid"><figcaption>70 notes × 10 worlds. Green = fretted; red = pressed the bass-side neighbour; amber = reached the string but never the fret wire. The low E string (dark band) works; the two passages that climb toward the treble strings fail almost everywhere.</figcaption></figure>
-        <figure><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset per finger, scale vs House"><figcaption>Lateral offset of the finger pad from the target string at landing. Scale (S2–S6 notes): every finger sits on the bass side, the index right on the neighbour string. House: within 1 mm.</figcaption></figure>
+        <figure><img src="../assets/guitar-hub/figures/scale_s231_press_by_string_1106.png" alt="share of notes fretted per string"><figcaption>Only the low E string works.</figcaption></figure>
+        <figure><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset per finger, scale vs House"><figcaption>Where the finger pad lands relative to its string. Scale: every finger on the bass side, the index on the neighbour string. House: within 1 mm.</figcaption></figure>
       </div>
     </div>
     <div class="card wide blk b2">
