@@ -73,10 +73,10 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 
 <div class="wrap">
   <div class="crumb"><a href="dexterous-guitar-hub-1030.html">← week of 10-24 → 10-30</a> · Stanford Movement Lab · dex-project · week of 2026-10-31 → 11-06</div>
-  <h1>House plays. The scale does not press yet. We need more iterations.</h1>
+  <h1>House plays. The G-major scale does not press yet. We need more iterations.</h1>
   <div class="chips">
     <span class="chip ok">House · 8 / 8 presses · note F1 0.51</span>
-    <span class="chip warn">Scale · 16 / 70 presses · note F1 0.05</span>
+    <span class="chip warn">G-major scale · 16 / 70 presses · note F1 0.05</span>
     <span class="chip bad">Blocker · 5 GPU-hours per experiment</span>
   </div>
   <p class="note">Mean policy · 10 worlds · guitar offset ±5 mm / ±2° · pushed twice with 40 N · whole piece from t = 0 · sound = what the policy played.</p>
@@ -93,7 +93,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       </div>
     </div>
     <div class="card">
-      <div class="badge prog">G-MAJOR SCALE · 47 s · 70 notes</div>
+      <div class="badge prog">G-MAJOR SCALE · frets 2–7, all six strings · 47 s · 70 notes</div>
       <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/scale_s231_ck12_perturbed_w09_fourview_played_audio_rt.mp4"></video><figcaption>Perturbed world. Sound on: mostly wrong notes.</figcaption></figure></div>
       <div class="tiles">
         <div class="tile warn"><div class="v">16 / 70</div><div class="k">presses (was 10)</div></div>
@@ -106,7 +106,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
   <h2>Four metrics</h2>
   <div class="card">
     <div class="tw"><table>
-      <tr><th>Metric</th><th>House</th><th>Scale</th><th>Target</th></tr>
+      <tr><th>Metric</th><th>House</th><th>G-major scale</th><th>Target</th></tr>
       <tr><td><b>Pressed what it should</b></td><td class="ok">8 / 8</td><td class="bad">16 / 70</td><td>all</td></tr>
       <tr><td>↳ sounds right (note F1)</td><td class="warn">0.51</td><td class="bad">0.05</td><td>≥ 0.8</td></tr>
       <tr><td><b>Touched nothing it should not</b> (clean moves)</td><td class="bad">20 %</td><td class="bad">7 %</td><td>100 %</td></tr>
@@ -129,18 +129,18 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
   <h2>Open problems, not solved yet</h2>
   <div class="grid">
     <div class="card wide blk">
-      <div class="t">1 · Left hand: the whole hand shifts to the bass side; the index lands one string off</div>
+      <div class="t">1 · Left hand (G-major scale): the whole hand shifts to the bass side; the index lands one string off</div>
       <div class="grid">
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/scale_s231_press_by_string_1106.png" alt="share of notes fretted per string" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
         <figure style="margin:0"><img src="../assets/guitar-hub/figures/lateral_offset_scale_vs_house_1106.png" alt="lateral landing offset" style="width:100%;border-radius:6px;border:1px solid var(--line)"></figure>
       </div>
     </div>
     <div class="card wide blk b2">
-      <div class="t">2 · Right hand: rushes and misses</div>
+      <div class="t">2 · Right hand (both pieces): rushes and misses</div>
       <div class="tiles" style="margin-top:0">
-        <div class="tile warn"><div class="v">33 %</div><div class="k">scale notes 50–120 ms early / late</div></div>
+        <div class="tile warn"><div class="v">33 %</div><div class="k">G-major scale notes 50–120 ms early / late</div></div>
         <div class="tile warn"><div class="v">25 ms</div><div class="k">median: early</div></div>
-        <div class="tile warn"><div class="v">16 %</div><div class="k">scale notes not plucked</div></div>
+        <div class="tile warn"><div class="v">16 %</div><div class="k">G-major scale notes not plucked</div></div>
         <div class="tile bad"><div class="v">29 %</div><div class="k">House plucks missed</div></div>
       </div>
     </div>
@@ -149,14 +149,14 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
   <h2>Found this week</h2>
   <div class="grid">
     <div class="card">
-      <div class="t">A per-note landing trick helps the scale and hurts House → each piece keeps its own setting</div>
+      <div class="t">A per-note landing trick helps the G-major scale and hurts House → each piece keeps its own setting</div>
       <div class="tiles" style="margin-top:0">
-        <div class="tile ok"><div class="v">10 → 16</div><div class="k">scale presses, with the trick</div></div>
+        <div class="tile ok"><div class="v">10 → 16</div><div class="k">G-major scale presses, with the trick</div></div>
         <div class="tile bad"><div class="v">0.51 → 0.44</div><div class="k">House note F1, with the trick</div></div>
       </div>
     </div>
     <div class="card">
-      <div class="t">Why the scale sounds wrong even when a note is pressed</div>
+      <div class="t">Why the G-major scale sounds wrong even when a note is pressed</div>
       <div class="tiles" style="margin-top:0">
         <div class="tile warn"><div class="v">33 %</div><div class="k">plucked early / late</div></div>
         <div class="tile bad"><div class="v">29 %</div><div class="k">wrong fret</div></div>
