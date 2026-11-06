@@ -168,17 +168,17 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
 
   <h2>Ruled out</h2>
   <div class="lessons">
-    <div class="lesson"><div class="ic">01</div><b>Lateral terms in the reward</b><span>Either head: no effect or worse.</span></div>
-    <div class="lesson"><div class="ic">02</div><b>Pinning the arm to the reference</b><span>×10 weight, no dead band: arm error unchanged for 6 updates.</span></div>
-    <div class="lesson"><div class="ic">03</div><b>The landing trick on House</b><span>Costs 0.03–0.06 F1 however it is limited.</span></div>
-    <div class="lesson"><div class="ic">04</div><b>Three pipeline bugs</b><span>Found and fixed.</span></div>
+    <div class="lesson"><div class="ic">01</div><b>Reward terms for where the finger lands</b><span>No effect.</span></div>
+    <div class="lesson"><div class="ic">02</div><b>Pinning the arm to the reference</b><span>Arm does not move.</span></div>
+    <div class="lesson"><div class="ic">03</div><b>The landing trick on House</b><span>Costs F1.</span></div>
+    <div class="lesson"><div class="ic">04</div><b>Three pipeline bugs</b><span>Fixed.</span></div>
   </div>
 
   <h2>Next</h2>
   <div class="grid3">
-    <div class="card"><div class="badge prog">NOW</div><div class="t">Hand adjusts note by note</div><div class="m">Put the per-note hand shift into the reference, like a player · train without resetting to the reference pose.</div></div>
-    <div class="card"><div class="badge method">NEXT</div><div class="t">Right-hand timing · 1 h experiments</div><div class="m">Find where the 25 ms rush comes from · train and evaluate on segments: 5 h → 1–1.5 h per experiment.</div></div>
-    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs</div><div class="m">4090-class, not shared. One experiment per card in parallel; one card for evaluation.</div></div>
+    <div class="card"><div class="badge prog">NOW</div><div class="t">Make the hand move note by note, like a player.</div></div>
+    <div class="card"><div class="badge method">NEXT</div><div class="t">Fix right-hand timing. Cut one experiment from 5 h to 1 h.</div></div>
+    <div class="card"><div class="badge method">ASK</div><div class="t">2–4 more GPUs, not shared.</div></div>
   </div>
 
   <div class="foot">Numbers: <span class="mono">pieceaccept</span> / <span class="mono">rescore_groups</span> on eval_perturb10o (s197 ck12, s231 ck12); note F1 from <span class="mono">17_music_eval</span>. Videos: kinematic replays of stored evaluation states with audio synthesised from the played events. Living record: <span class="mono">notes/GUITAR_DEX_PROJECT.md</span>, <span class="mono">notes/daily/D05–D09</span>.</div>
