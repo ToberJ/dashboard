@@ -3,7 +3,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Dexterous Guitar Hub</title>
-<meta name="description" content="Weekly hub 2026-11-06: the policy plays the G-major scale end to end (16/70 fretted); three open problems; more GPU time to iterate.">
+<meta name="description" content="Weekly hub 2026-11-06: the policy plays the G-major scale end to end (16/70 fretted, 5 % of notes sound right); three open problems; more GPU time to iterate.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
@@ -84,7 +84,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
   <h1>The policy now plays the G-major scale end to end. Not well yet. We know why, and we need more GPU time to fix it.</h1>
   <div class="chips">
     <span class="chip ok">G-major scale · plays all 47 s · 16 / 70 notes fretted</span>
-    <span class="chip ok">House still 8 / 8 · note F1 0.51</span>
+    <span class="chip ok">House still 8 / 8 · 51 % of notes sound right</span>
     <span class="chip bad">5 GPU-hours per experiment · 2 a day</span>
   </div>
   <p class="note">Mean policy · 10 worlds · guitar offset ±5 mm / ±2° · pushed twice with 40 N · whole piece from t = 0 · sound = what the policy played.</p>
@@ -96,7 +96,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/scale_reference_vs_policy_rt.mp4"></video><figcaption>Left: the reference. Right: the policy, sound on. Green = the note to press, red = where the finger pad landed.</figcaption></figure></div>
       <div class="tiles">
         <div class="tile warn"><div class="v">16 / 70</div><div class="k">notes fretted (was 10)</div></div>
-        <div class="tile bad"><div class="v">0.05</div><div class="k">note F1</div></div>
+        <div class="tile bad"><div class="v">5 %</div><div class="k">notes sound right (pitch + timing)</div></div>
         <div class="tile ok"><div class="v">9 mm</div><div class="k">guitar motion</div></div>
       </div>
     </div>
@@ -105,7 +105,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="vids"><figure class="one"><video controls playsinline preload="metadata" src="../assets/guitar-hub/videos/house_s197_ck12_perturbed_w13_fourview_played_audio_rt.mp4"></video><figcaption>Perturbed world. Sound on.</figcaption></figure></div>
       <div class="tiles">
         <div class="tile ok"><div class="v">8 / 8</div><div class="k">presses</div></div>
-        <div class="tile ok"><div class="v">0.51</div><div class="k">note F1</div></div>
+        <div class="tile ok"><div class="v">51 %</div><div class="k">notes sound right (pitch + timing)</div></div>
         <div class="tile warn"><div class="v">17 mm</div><div class="k">guitar motion</div></div>
       </div>
     </div>
@@ -116,7 +116,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
     <div class="tw"><table>
       <tr><th>Metric</th><th>G-major scale</th><th>House</th><th>Target</th></tr>
       <tr><td><b>Pressed what it should</b></td><td class="bad">16 / 70</td><td class="ok">8 / 8</td><td>all</td></tr>
-      <tr><td>↳ sounds right · note F1<br><span class="m" style="font-size:12.5px">a played note counts if its pitch is right and it starts within 50 ms of the tab; F1 = harmonic mean of precision (correct / played) and recall (correct / written)</span></td><td class="bad">0.05</td><td class="warn">0.51</td><td>≥ 0.8</td></tr>
+      <tr><td>↳ <b>Sounds right</b>: share of notes with the right pitch, starting within 50 ms of the tab<br><span class="m" style="font-size:12.5px">counted both ways: of the notes played, how many belong; of the notes written, how many were played (the F1 score of the two)</span></td><td class="bad">5 %</td><td class="warn">51 %</td><td>≥ 80 %</td></tr>
       <tr><td><b>Touched nothing it should not</b><br><span class="m" style="font-size:12.5px">hand moves where no non-staying finger pushed a string above 2 N (a player's light brush)</span></td><td class="bad">12 %</td><td class="bad">43 %</td><td>100 %</td></tr>
       <tr><td><b>Guitar stays put</b> (max motion)</td><td class="warn">9 mm</td><td class="warn">17 mm</td><td>≤ 8 mm</td></tr>
       <tr><td><b>Force in the human range</b> · mean / peak (p99) while pressing</td><td class="ok">5.1 / 8.5 N</td><td class="ok">5.8 / 8.2 N</td><td>peak 6–19 N</td></tr>
@@ -126,7 +126,7 @@ td.ok{color:var(--ok);font-weight:600} td.bad{color:var(--bad);font-weight:600} 
       <div class="arr">→</div>
       <div class="box ours"><div class="bt">Forces → played notes</div><div class="bl">our rules: pluck, fret, mute</div></div>
       <div class="arr">→</div>
-      <div class="box rc"><div class="bt">Notes → audio → F1 vs tab</div><div class="bl">Ruocheng's package, unchanged</div></div>
+      <div class="box rc"><div class="bt">Notes → audio → compared with the tab</div><div class="bl">Ruocheng's package, unchanged</div></div>
     </div>
   </div>
 
